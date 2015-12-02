@@ -1,1 +1,27 @@
-mains index
+<br>
+.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>. 
+
+<div class="col-md-4 col-md-offset-4 register-block">
+  <div class="row register-row1">
+    <%= link_to'Facebook 登入', mains_path,:class => "btn btn-primary btn-fb btn-lg"%>
+    <%= link_to'Email 登入', new_session_path(:user),:class => "btn btn-nomal-login btn-lg"%>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <%= link_to'一般註冊', new_registration_path(:user) %>
+      </div>
+      <div class="col-md-4">
+        <%= link_to'忘記密碼', mains_path%>
+      </div>
+      <div class="col-md-4">
+        <%= link_to'重新認證', mains_path%>
+      </div>
+    </div>
+  </div>
+</div> 
