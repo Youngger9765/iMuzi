@@ -11,13 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202100143) do
+ActiveRecord::Schema.define(version: 20151203040357) do
 
   create_table "mains", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "username",   limit: 255
+    t.integer  "user_id",    limit: 4
+    t.integer  "location",   limit: 4
+    t.string   "status",     limit: 255
+    t.string   "fb_image",   limit: 255
+    t.string   "role",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "profiles", ["location"], name: "index_profiles_on_location", using: :btree
+  add_index "profiles", ["role"], name: "index_profiles_on_role", using: :btree
+  add_index "profiles", ["status"], name: "index_profiles_on_status", using: :btree
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -32,9 +48,12 @@ ActiveRecord::Schema.define(version: 20151202100143) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "fb_uid",                 limit: 255
+    t.string   "fb_token",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
