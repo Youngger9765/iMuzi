@@ -1,36 +1,163 @@
-<br>
-.
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>. 
+<div class="container-fluid" id="head">
+<div class="row">
+  <div class="col-sm-12" style="padding: 0;">
+    <!-- Carousel -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <% if false %>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <% end %>
+      </ol>
 
-<div class="col-md-4 col-md-offset-4 register-block">
-  <div class="row register-row1">
-    <div class="btn btn-primary btn-fb btn-lg">
-      <%= link_to user_omniauth_authorize_path(:facebook) do%>
-        <div class="fa fa-facebook-square register-word"> Facebook 登入</div>
-      <%end%>
-    </div>
-
-    <div class="btn btn-nomal-login btn-lg">
-      <%= link_to new_session_path(:user) do%>
-        <div class="fa fa-get-pocket register-word"> Email 登入</div>
-      <%end%>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-4">
-        <%= link_to'一般註冊', new_registration_path(:user) %>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <%= image_tag ('start-image2.png'), class: "first-slide" %>
+          <div class="container">
+            <div class="carousel-caption" style="padding-bottom: 60px;">
+             <h1 style="color: white;">專 屬 於 你 的 圓 夢 舞 台</h1>
+              <p style="color: white;">想 一 展 歌 喉 嗎？ 想 與 音 樂 達 人 切 磋 歌 藝 嗎？</p>
+              <%= link_to '如何使用', '#want-to-learn', class: "how" %>
+              <%= link_to '立即開始', '#skills_path', class: "now" %>
+            </div>
+          </div>
+        </div>
+        <% if false %>
+        <div class="item">
+          <%= image_tag ("background-image.png"), class: "third-slide" %>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>One more for good measure.</h1>
+              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+            </div>
+          </div>
+        </div>
+        <% end %>
       </div>
-      <div class="col-md-4">
-        <%= link_to'忘記密碼', mains_path%>
-      </div>
-      <div class="col-md-4">
-        <%= link_to'重新認證', mains_path%>
+      <% if false %>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      <% end %>
+    </div><!-- /.carousel -->
+  </div>
+</div>
+</div>
+<div class="container-fluid" id="want-to-learn">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="container want-to-learn-inner">
+      <h1>有 想 唱 的 歌 曲 嗎？</h1>
+        <div>
+            <%= image_tag ('boy.gif') %>
+            <%= image_tag ('look.jpeg') %>
+            <%= image_tag ('lee.jpg') %>
+            <%= image_tag ('lucky.jpg') %>
+            <%= image_tag ('spring.jpg') %>
+        </div>
+        
+        <%= link_to '都有興趣！我想唱全部！', '#skills_path', class: "go-to-button" %>
       </div>
     </div>
   </div>
-</div> 
+</div>
+</div>
+<div class="container-fluid" id="welcome-banner">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="container">
+      <h1>在 SoundMate 你 可 以</h1>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container-fluid" id="welcome-find">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <%= image_tag ('crazysong.jpg') %>
+        </div>
+        <div class="col-sm-6">
+          <h1>快速找到想跟隨的老師</h1>
+          <p>找到好老師很難，要找到適合自己的好老師更難，在這裏，你一定有機會遇到適合你的前輩。這一次，我們不只用眼睛去看，張大你的耳朵，聽到你的心坎兒裡去！</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container-fluid" id="show">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>熱情與歌聲 用影像秀給妳看！</h1>
+          <p>無論是蕭敬騰的瘋狂嘶吼，A-lin的深情款款，或是蘇打綠的小清新，我們相信一定有適合你的領域</p>
+        </div>
+        <div class="col-sm-6">
+          <%= image_tag ('show.jpg') %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container-fluid" id="interact">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <%= image_tag ('battle.JPG') %>
+        </div>
+        <div class="col-sm-6">
+          <h1>盡情安心比賽去！</h1>
+          <p>在公開的版面上，挑選你最有自信的歌曲，每週進行挑戰賽，再也不怕唱不好，一輩子都無法站上舞台，這裡，就是你的最佳舞台！</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container-fluid" id="sign-up">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-offset-3">
+            <h1>立即註冊體驗</h1>
+            <%= link_to "Let's Go!", register_path, class: "now" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" id="about">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>About SoundMate</h1>
+            <p>文案文案，我是文案
+              
+            </p><br>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
