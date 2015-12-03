@@ -16,6 +16,5 @@
 !/log/.keep
 /tmp
 /config/*.yml
-/config/secrets.yml
 /public/system
 /public/uploads

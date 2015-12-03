@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-
+gem "font-awesome-rails"
+gem 'omniauth-facebook'
 gem 'bootstrap-sass', '~> 3.3.5'
-
 gem 'devise'
 gem 'carrierwave'
 gem 'mini_magick'

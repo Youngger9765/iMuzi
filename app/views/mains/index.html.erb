@@ -8,8 +8,17 @@
 
 <div class="col-md-4 col-md-offset-4 register-block">
   <div class="row register-row1">
-    <%= link_to'Facebook 登入', mains_path,:class => "btn btn-primary btn-fb btn-lg"%>
-    <%= link_to'Email 登入', new_session_path(:user),:class => "btn btn-nomal-login btn-lg"%>
+    <div class="btn btn-primary btn-fb btn-lg">
+      <%= link_to user_omniauth_authorize_path(:facebook) do%>
+        <div class="fa fa-facebook-square register-word"> Facebook 登入</div>
+      <%end%>
+    </div>
+
+    <div class="btn btn-nomal-login btn-lg">
+      <%= link_to new_session_path(:user) do%>
+        <div class="fa fa-get-pocket register-word"> Email 登入</div>
+      <%end%>
+    </div>
     <hr>
     <div class="row">
       <div class="col-md-4">
