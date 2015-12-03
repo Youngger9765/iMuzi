@@ -1,6 +1,14 @@
 // Place all the styles related to the mains controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+$border :#E9E9E9;
+
 .register-row1{
   margin: 0;
 }
@@ -13,10 +21,91 @@
 
 .btn-fb{
   width: 100%;
-  margin-bottom:20px; 
+  margin-bottom:20px;
 }
 
 .register-block{
   background-color: #e3d6cc;
-  padding: 30px; 
+  padding: 30px;
+}
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+// iframe
+.iframe-rwd  {
+position: relative;
+padding-bottom: 56.25%;
+padding-top: 30px;
+height: 0;
+overflow: hidden;
+}
+.iframe-rwd iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+// song
+.song{
+  margin-bottom: 20px;
+}
+
+.song-footer{
+  border: 1px solid $border;
+  padding: 15px;
+  .link-word{
+    a {
+      color: #333;
+      text-decoration: none;
+    }
+    a:hover {
+        color: #999;
+    }
+  }
+  small{
+    color: #AAA;
+  }
 }
