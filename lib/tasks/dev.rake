@@ -7,7 +7,7 @@ namespace :dev do
     20.times do |u|
       name  = Faker::Name.name
       email = "test#{u}@gmail.com"
-      nickname = "nick#{u}"
+      nickname = "nickname#{u}"
       password = "password"
       about = "hi 你好，我是#{name}，歡迎來到我的個人頁面"
       u = User.create!( name: name,
@@ -17,8 +17,6 @@ namespace :dev do
                     password:              password,
                     password_confirmation: password
                     )
-
-
       5.times do
       name  = Faker::Name.name
       singer = Faker::Name.name
