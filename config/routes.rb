@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/register" => "mains#register"
 
   resources :mains
+  resources :users
+  resources :songs
 
 
   root :to => 'mains#index'
