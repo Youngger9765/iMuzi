@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12 user-profile">
+    <h3><%=@user.name%>
+      <small><%=@user.nickname%></small>
+    </h3>
+    <p>
+      <%=@user.about%>
+      <span class="pull-right">
+        <%=link_to "新增歌曲", new_song_path, :class=> "btn btn-danger btn-xs"%>
+      </span>
+    </p>
+  </div>
+</div>
+
+<h2>已上傳歌曲</h2>
+<div class="row">
+    <%@songs.each do |s|%>
+      <div class="col-md-3 song">
+        <div class="iframe-rwd">
+          <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
+          </iframe>
+        </div>
+        <div class="song-footer">
+          <div class="link-word">
+            <%=link_to s.name, song_path(s)%>
+          </div>
+          <div class="link-word">
+            <small>by</small> <%=link_to @user.name, user_path(@user)%>
+          </div>
+          <div class="pull-right">
+            <%= time_ago_in_words(s.created_at) %> ago.
+          </div>
+          <div class="clearfix"></div>
+          <%if current_user == @user%>
+            <%=link_to "編輯", edit_song_path(s), :class=> "btn btn-primary btn-xs"%>
+            <%=link_to "刪除", song_path(s), method:"delete", :class=> "btn btn-primary btn-xs",data: { confirm: "確定刪除?" }%>
+          <%end%>
+        </div>
+      </div>
+      <%=image_tag s.picture.url%>
+    <%end%>
+</div>
