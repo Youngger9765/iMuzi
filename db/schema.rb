@@ -11,6 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20151204064711) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "song_id",    limit: 4
+    t.text     "comment",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "comments", ["song_id"], name: "index_comments_on_song_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+=======
 ActiveRecord::Schema.define(version: 20151204062922) do
 
   create_table "likings", force: :cascade do |t|
@@ -22,6 +36,7 @@ ActiveRecord::Schema.define(version: 20151204062922) do
 
   add_index "likings", ["song_id"], name: "index_likings_on_song_id", using: :btree
   add_index "likings", ["user_id"], name: "index_likings_on_user_id", using: :btree
+>>>>>>> develop
 
   create_table "mains", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -87,5 +102,7 @@ ActiveRecord::Schema.define(version: 20151204062922) do
   add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "comments", "songs"
+  add_foreign_key "comments", "users"
   add_foreign_key "songs", "users"
 end
