@@ -1,38 +1,68 @@
 <% if current_user %>
 <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%=link_to "iMuz", root_path, :class=>"navbar-brand"%>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active">
-              <%=link_to "icon", root_path%>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%=link_to "iMuz", root_path, :class=>"navbar-brand"%>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <%=link_to "icon", root_path%>
+          </li>
+        </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%=link_to "好聲 Battle", songs_path%>
+            </li>
+            <li>
+              <%=link_to "編輯個人檔案", '#'%>
+            </li>
+            <li>
+              <%=link_to "已上傳歌曲", user_path(current_user)%>
+            </li>
+            <li>
+              <%= link_to'修改密碼', edit_registration_path(:user)%>
+            </li>
+            <li>
+              <%= link_to'登出', destroy_user_session_path, :method => :delete %>
             </li>
           </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <%=link_to "編輯個人檔案", '#'%>
-              </li>
-              <li>
-                <%=link_to "已上傳歌曲", user_path(current_user)%>
-              </li>
-              <li>
-                <%= link_to'修改密碼', edit_registration_path(:user)%>
-              </li>
-              <li>
-                <%= link_to'登出', destroy_user_session_path, :method => :delete %>
-              </li>
-            </ul>
-        </div><!--/.nav-collapse -->
+<%else%>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%=link_to "iMuz", root_path, :class=>"navbar-brand"%>
       </div>
-    </nav>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <%=link_to "icon", root_path%>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>  
 <%end%>
