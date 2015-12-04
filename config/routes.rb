@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :mains
   resources :users
   resources :songs
+  resources :comments
 
 
   root :to => 'mains#index'

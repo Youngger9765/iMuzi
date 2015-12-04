@@ -11,21 +11,26 @@ class SongsController < ApplicationController
     @song = @user.songs.build
   end
 
-  def create    
+  def create
     @song = @user.songs.new(song_params)
     if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
       @song.link = song_params[:link][32,100]
     end
 
     if @song.save
-      flash[:success] = "上傳歌曲成功!"
+      flash[:success] = "上傳成功!"
       redirect_to @user
     else
+      flash[:alert] = "上傳失敗!"
       render "new"
     end
   end
 
   def show
+    @song = Song.find(params[:id])
+    @song_user = @song.user
+    @comment = current_user.comments.build
+    @comments = @song.comments
     unless cookies["view-song-#{@song.id}"]
       @song.increment!(:views_count)
       cookies["view-song-#{@song.id}"] = true
@@ -41,7 +46,7 @@ class SongsController < ApplicationController
         @song.link = song_params[:link][32,100]
         @song.save!
       end
-      flash[:success] = "編輯歌曲成功!"
+      flash[:success] = "編輯成功!"
       redirect_to @user
     else
       render "new"

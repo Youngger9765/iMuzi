@@ -1,10 +1,56 @@
-song name
+<div class="row">
+  <div class="col-md-12">
+    <div><%=@song_user.name%></div>
+    <div><%=@song_user.about%></div>
+  </div>
+</div>
 <hr>
-songs show
-<hr>
-song-youtube
-<hr>
-singer
-<hr>
-song introduce
-<hr>
+<div class="row">
+  <div class="col-md-4">
+    <div>歌曲名稱:<%=@song.name%></div>
+    <div>歌手名稱:<%=@song.singer%></div>
+    <div class="iframe-rwd">
+      <iframe src="https://www.youtube.com/embed/<%=@song.link%>" frameborder="0">
+      </iframe>
+    </div>
+    <strong>介紹(選此首歌的意義)</strong>
+    <div><%=@song.introduction%></div>
+  </div>
+
+  <div class="col-md-8">
+    <%if flash[:success].present?%>
+      <div class="alert alert-success text-center" role="alert"><%= flash[:success] %></div>
+    <%end%>
+    <%if flash[:alert].present?%>
+    <div class="alert alert-danger text-center" role="alert"><%= flash[:alert] %></div>
+    <%end%>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">評論</h3>
+      </div>
+      <%@comments.each do |c|%>
+        <div class="panel-body">
+          <span>
+            <%=c.comment%>
+          </span>
+          <span class="pull-right">
+            <%=c.user.name%>
+            <%if c.user == @user%>
+            <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-primary btn-xs"%>
+            </span>
+            <%end%>
+          </span>
+          <div class="clearfix"></div>
+        </div>
+      <%end%>
+    </div>
+
+    <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
+    <%= f.label :comment, "評論內容" %>
+    <%= f.text_area :comment, class: 'form-control' %>
+    <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+    <% end %>
+  </div>
+</div>
+

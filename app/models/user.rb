@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :songs, dependent: :destroy
   devise :omniauthable, :omniauth_providers => [:facebook]
-  has_one :profile
+  has_one :profile, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def admin?
     self.profile.role == "admin"
