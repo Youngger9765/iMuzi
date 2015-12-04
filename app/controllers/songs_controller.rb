@@ -7,8 +7,12 @@ class SongsController < ApplicationController
     @song = @user.songs.build
   end
 
-  def create
+  def create    
     @song = @user.songs.new(song_params)
+    if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
+      @song.link = song_params[:link][32,100]
+    end
+
     if @song.save
       flash[:success] = "上傳歌曲成功!"
       redirect_to @user
@@ -29,6 +33,10 @@ class SongsController < ApplicationController
 
   def update
     if @song.update(song_params)
+      if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
+        @song.link = song_params[:link][32,100]
+        @song.save!
+      end
       flash[:success] = "編輯歌曲成功!"
       redirect_to @user
     else
