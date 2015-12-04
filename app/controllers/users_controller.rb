@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
+  
+  layout "application"
+
   before_action :correct_user, only: [:edit, :update]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
+
   def index
 
   end
