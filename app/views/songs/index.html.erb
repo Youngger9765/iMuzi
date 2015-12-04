@@ -19,6 +19,15 @@ songs index
         <%= time_ago_in_words(s.created_at) %> ago.
       </div>
       <div class="clearfix"></div>
+
+      <div class="pull-right">     
+          <%= link_to like_song_path(s), :class => "btn #{song_like_class(s)}", :remote => true, :id => "like-btn-#{s.id}" do %>
+            <span id ="like_number-<%=s.id%>"><%= s.like_users.size %>人覺得讚</span>
+            <span id ="like-word-<%=s.id%>"><%= like_word(s) %></span>
+          <% end %>
+      </div>
+      
+      <div class="clearfix"></div>
     </div>
   </div>
   <%=image_tag s.picture.url%>

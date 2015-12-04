@@ -8,3 +8,8 @@ singer
 <hr>
 song introduce
 <hr>
+
+<%= link_to like_song_path(@song), :class => "btn #{song_like_class(@song)}", :remote => true, :id => "like-btn-#{@song.id}" do %>
+  <span id ="like_number-<%=@song.id%>"><%= @song.like_users.size %>人覺得讚</span>
+  <span id ="like-word-<%=@song.id%>"><%= like_word(@song) %></span>
+<% end %>
