@@ -3,6 +3,10 @@ class SongsController < ApplicationController
   before_action :find_song,  only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only:[:new, :create, :edit, :update, :destroy]
 
+  def index
+    @songs = Song.all
+  end
+
   def new
     @song = @user.songs.build
   end
@@ -56,7 +60,7 @@ class SongsController < ApplicationController
   end
 
   def find_song
-    @song = @user.songs.find(params[:id])
+    @song = Song.find(params[:id])
   end
 
   def song_params
