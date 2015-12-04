@@ -4,6 +4,9 @@ class Song < ActiveRecord::Base
   validates_presence_of :name, :link, :introduction
   validate  :picture_size
 
+  has_many :likings
+  has_many :like_users, :through => :likings , :source => :user
+
   private
 
 

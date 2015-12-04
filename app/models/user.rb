@@ -7,8 +7,15 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
   has_one :profile
 
+  has_many :likings
+  has_many :like_songs, :through => :likings, :source => :song
+
   def admin?
     self.profile.role == "admin"
+  end
+
+  def like_song?(song)
+    self.like_songs.include?(song)
   end
 
   def photo
