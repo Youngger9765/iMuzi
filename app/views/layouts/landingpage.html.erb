@@ -24,49 +24,41 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
-          <li>
-            <% if @q %>
-              <%= search_form_for @q, class: "navbar-form" do |f| %>
-                <%= f.search_field :name_or_categories_name_cont, placeholder: "搜尋技能或分類名稱", class: "form-control " %>
+            <li>
+              <%= link_to users_path  do %>
+                <i class="fa fa-plus"></i>好聲音
               <% end %>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to mains_path  do %>
-              <i class="fa fa-plus"></i>好聲音
-            <% end %>
-          </li>
-          <li>
-            <%= link_to mains_path do %><i class="fa fa-female"></i>我的頁面<% end %>
-          </li>
-          <li>
-            <%= link_to mains_path do %>
-              <span class="fa fa-archive" aria-hidden="true"></span>收藏
+            </li>
+            <li>
+              <%= link_to mains_path do %><i class="fa fa-female"></i>我的頁面<% end %>
+            </li>
+            <li>
+              <%= link_to mains_path do %>
+                <span class="fa fa-archive" aria-hidden="true"></span>收藏
+                <% end %>
+            </li>
+            <li>
+              <%= link_to mains_path  do %>
+                <span class="fa fa-comments"></span>訊息
               <% end %>
-          </li>
-          <li>
-            <%= link_to mains_path  do %>
-              <span class="fa fa-comments"></span>訊息
-            <% end %>
-          </li>
+            </li>
           <li id="nav-dropdown" class="dropdown"
-          <% if current_user.profile.created_at == current_user.profile.updated_at %>
+          <% if current_user.created_at == current_user.updated_at %>
           data-toggle="tooltip" data-placement="bottom" title="瀏覽個人頁面跟修改資料！"
           <% end %>
           >
             <a href="#" id="nav-dropdown-a" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag (current_user.profile.fb_image), style: "width: 20px; height: 20px; display: inline; border-radius: 2px;" %>
-              <span class="caret"></span>
+              <%= image_tag (current_user.photo), style: "width: 20px; height: 20px; display: inline; border-radius: 2px;" %>
             </a>
             <ul id="dropdown-menu" class="dropdown-menu" style="opacity: 0.9;">
+              <li>
+                <%= image_tag (current_user.photo), style: "width: 140px; height: 140px; display: inline; border-radius: 10px; position: relative; left: 10px;" %>
+              </li>
               <li>
                 <%= link_to mains_path  do %>
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>修改個人資料
                 <% end %>
               </li>
-              <% if current_user && current_user.admin? %>
-              <li><%= link_to '後台管理頁面', mains_path %></li>
-              <% end %>
               <li>
                 <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
               </li>

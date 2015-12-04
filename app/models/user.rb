@@ -11,6 +11,16 @@ class User < ActiveRecord::Base
     self.profile.role == "admin"
   end
 
+  def photo
+    if self.picture
+      self.picture
+    elsif self.profile && self.profile.fb_image
+      self.profile.fb_image
+    else
+      "head.jpg"
+    end
+  end
+
   def self.from_omniauth(auth)
       # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid( auth.uid )
