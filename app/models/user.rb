@@ -8,8 +8,15 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_many :likings
+  has_many :like_songs, :through => :likings, :source => :song
+
   def admin?
     self.profile.role == "admin"
+  end
+
+  def like_song?(song)
+    self.like_songs.include?(song)
   end
 
   def photo

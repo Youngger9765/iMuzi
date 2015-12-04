@@ -5,6 +5,7 @@
   </div>
 </div>
 <hr>
+
 <div class="row">
   <div class="col-md-4">
     <div>歌曲名稱:<%=@song.name%></div>
@@ -53,4 +54,9 @@
     <% end %>
   </div>
 </div>
+
+<%= link_to like_song_path(@song), :class => "btn #{song_like_class(@song)}", :remote => true, :id => "like-btn-#{@song.id}" do %>
+  <span id ="like_number-<%=@song.id%>"><%= @song.like_users.size %>人覺得讚</span>
+  <span id ="like-word-<%=@song.id%>"><%= like_word(@song) %></span>
+<% end %>
 

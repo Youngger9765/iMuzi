@@ -5,6 +5,9 @@ class Song < ActiveRecord::Base
   validate  :picture_size
   has_many :comments, dependent: :destroy
 
+  has_many :likings
+  has_many :like_users, :through => :likings , :source => :user
+
   private
   def picture_size
     if picture.size > 5.megabytes
