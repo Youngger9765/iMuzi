@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203040357) do
+ActiveRecord::Schema.define(version: 20151204062922) do
+
+  create_table "likings", force: :cascade do |t|
+    t.integer  "song_id",    limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "likings", ["song_id"], name: "index_likings_on_song_id", using: :btree
+  add_index "likings", ["user_id"], name: "index_likings_on_user_id", using: :btree
 
   create_table "mains", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -36,15 +46,16 @@ ActiveRecord::Schema.define(version: 20151203040357) do
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "songs", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "singer",       limit: 255
-    t.text     "introduction", limit: 65535
-    t.string   "link",         limit: 255
-    t.string   "picture",      limit: 255
-    t.integer  "views_count",  limit: 4
-    t.integer  "user_id",      limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",          limit: 255
+    t.string   "singer",        limit: 255
+    t.text     "introduction",  limit: 65535
+    t.string   "link",          limit: 255
+    t.string   "picture",       limit: 255
+    t.integer  "views_count",   limit: 4
+    t.integer  "user_id",       limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "likings_count", limit: 4,     default: 0
   end
 
   add_index "songs", ["user_id"], name: "index_songs_on_user_id", using: :btree
@@ -69,6 +80,7 @@ ActiveRecord::Schema.define(version: 20151203040357) do
     t.string   "address",                limit: 255
     t.string   "fb_uid",                 limit: 255
     t.string   "fb_token",               limit: 255
+    t.integer  "likings_count",          limit: 4,     default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

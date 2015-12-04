@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   before_action :correct_user
-  before_action :find_song,  only: [:show, :edit, :update, :destroy]
+  before_action :find_song,  only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, only:[:new, :create, :edit, :update, :destroy]
 
   def index
@@ -51,6 +51,28 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     redirect_to @user
+  end
+
+  def like
+    if current_user && !current_user.likings.find_by(:song_id => params[:id])
+      @like = current_user.likings.new
+      @like.song_id = params[:id]
+      @like.save
+
+      respond_to do |format|
+        format.html{ redirect_to :back}
+        format.js
+      end
+
+    else
+      @like_song = current_user.likings.find_by(:song_id => params[:id])
+      @like_song.delete
+
+      respond_to do |format|
+        format.html{ redirect_to :back}
+        format.js
+      end
+    end
   end
 
   private

@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   resources :mains
   resources :users
-  resources :songs
+  
+  resources :songs do
+    member do
+      get :like
+    end
+  end
 
 
   root :to => 'mains#index'
