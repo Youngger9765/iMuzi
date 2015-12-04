@@ -36,7 +36,7 @@ body {
 
 .register-block{
   background-color: #e3d6cc;
-  padding: 30px; 
+  padding: 30px;
 }
 
 a {
@@ -461,4 +461,9 @@ height: 100%;
   small{
     color: #AAA;
   }
+}
+
+//
+.comment{
+  border: 1px solid $border;
 }

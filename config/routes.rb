@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :mains
   resources :users
-  
+  resources :comments
   resources :songs do
     member do
       get :like

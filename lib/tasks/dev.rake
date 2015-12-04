@@ -4,7 +4,7 @@ namespace :dev do
 
   task :faker => :environment do
     puts "產生假資料"
-    20.times do |u|
+    10.times do |u|
       name  = Faker::Name.name
       email = "test#{u}@gmail.com"
       nickname = "nickname#{u}"
@@ -17,11 +17,18 @@ namespace :dev do
                     password:              password,
                     password_confirmation: password
                     )
-      5.times do
+      2.times do
       name  = Faker::Name.name
       singer = Faker::Name.name
       link = "v4yHXWvIMqM"
-      introduction = "test"
+      introduction = "Lorem ipsum dolor sit amet,
+                      consectetur adipisicing elit.
+                      Distinctio sint unde soluta,
+                      sapiente sequi amet neque. Mag
+                      nam, sit commodi, aperiam, dig
+                      nissimos reprehenderit molesti
+                      as facilis, ut dolorem ipsam i
+                      ure natus officia."
       u.songs.create!(  name: name,
                         singer: singer,
                         link: link,
