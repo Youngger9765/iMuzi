@@ -1,0 +1,27 @@
+songs index
+
+<h2>好聲音 Battle</h2>
+<div class="row">
+<%@songs.each do |s|%>
+  <div class="col-md-3 song">
+    <div class="iframe-rwd">
+      <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
+      </iframe>
+    </div>
+    <div class="song-footer">
+      <div class="link-word">
+        <%=link_to s.name, song_path(s)%>
+      </div>
+      <div class="link-word">
+        <small>by</small> <%=link_to s.user.name, user_path(s.user)%>
+      </div>
+      <div class="pull-right">
+        <%= time_ago_in_words(s.created_at) %> ago.
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <%=image_tag s.picture.url%>
+<%end%>
+
+</div>
