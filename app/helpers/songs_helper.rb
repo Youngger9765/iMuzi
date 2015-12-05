@@ -2,9 +2,9 @@ module SongsHelper
   #Like
   def song_like_class(song)
     if current_user && current_user.like_song?(song)
-      "btn-info"
+      "fa fa-heart"
     else
-      "btn-default"
+      "fa fa-heart-o"
     end    
   end
 
