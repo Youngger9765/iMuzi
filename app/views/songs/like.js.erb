@@ -1,10 +1,10 @@
-$("#like-btn-<%=@song.id%>").toggleClass('btn-default');
-$("#like-btn-<%=@song.id%>").toggleClass('btn-info');
+$("#like-btn-<%=@song.id%>").toggleClass('fa fa-heart');
+$("#like-btn-<%=@song.id%>").toggleClass('fa fa-heart-o');
 
 <% if current_user.like_song?(@song) %>
-  $("#like_number-<%=@song.id%>").text("你跟" + <%= @song.like_users.size %> + "人覺得讚，")
+  $("#like_number-<%=@song.id%>").text("<%= @song.like_users.size %>")
   $("#like-word-<%=@song.id%>").text("取消讚")
 <% else %>
-  $("#like_number-<%=@song.id%>").text(<%= @song.like_users.size %> + "人覺得讚")
+  $("#like_number-<%=@song.id%>").text("<%= @song.like_users.size %>")
   $("#like-word-<%=@song.id%>").text("按個讚吧")
 <% end %>
