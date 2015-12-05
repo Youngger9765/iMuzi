@@ -71,7 +71,7 @@ class SongsController < ApplicationController
 
     else
       @like_song = current_user.likings.find_by(:song_id => params[:id])
-      @like_song.delete
+      @like_song.destroy
 
       respond_to do |format|
         format.html{ redirect_to :back}

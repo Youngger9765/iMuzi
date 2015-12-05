@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  has_many :likings
+  has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
 
   def admin?

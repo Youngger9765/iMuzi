@@ -5,7 +5,7 @@ class Song < ActiveRecord::Base
   validate  :picture_size
   has_many :comments, dependent: :destroy
 
-  has_many :likings
+  has_many :likings, dependent: :destroy
   has_many :like_users, :through => :likings , :source => :user
 
   private
