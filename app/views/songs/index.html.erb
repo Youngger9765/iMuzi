@@ -20,10 +20,9 @@ songs index
       </div>
       <div class="clearfix"></div>
 
-      <div class="pull-right">     
-          <%= link_to like_song_path(s), :class => "btn #{song_like_class(s)}", :remote => true, :id => "like-btn-#{s.id}" do %>
-            <span id ="like_number-<%=s.id%>"><%= s.like_users.size %>人覺得讚</span>
-            <span id ="like-word-<%=s.id%>"><%= like_word(s) %></span>
+      <div class="pull-right" id="like-btn">     
+          <%= link_to like_song_path(s), :class => "#{song_like_class(s)}", :remote => true, :id => "like-btn-#{s.id}" do %>
+            <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
           <% end %>
       </div>
       
