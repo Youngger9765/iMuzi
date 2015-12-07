@@ -3,7 +3,7 @@
   <%= f.label :name, "歌曲名稱(必填)" %>
   <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :singer, "歌手名稱(必填)" %>
+  <%= f.label :singer, "原唱歌手" %>
   <%= f.text_field :singer, class: 'form-control' %>
 
   <%= f.label :link, "youtube連結(必填)" %>
@@ -11,7 +11,7 @@
   範例:www.youtube.com/watch?v=<span style="color:red">v4yHXWvIMqM</span>請貼紅色這段代碼
   <br>
   <br>
-  <%= f.label :introduction, "介紹 - 選此首歌的意義(必填)"  %>
+  <%= f.label :introduction, "介紹 - 選此首歌的意義"  %>
   <%= f.text_area :introduction, class: 'form-control' %>
 
   <%#= f.label :picture, "封面圖片200x200" %>

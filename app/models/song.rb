@@ -1,7 +1,7 @@
 class Song < ActiveRecord::Base
   belongs_to :user
   mount_uploader :picture, PictureUploader
-  validates_presence_of :name, :link, :introduction
+  validates_presence_of :name, :link
   validate  :picture_size
   has_many :comments, dependent: :destroy
 

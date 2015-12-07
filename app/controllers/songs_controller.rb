@@ -23,7 +23,7 @@ class SongsController < ApplicationController
       flash[:success] = "上傳成功!"
       redirect_to @user
     else
-      flash[:alert] = "上傳失敗!"
+      flash[:alert] = "上傳失敗! 請檢查 '歌曲名稱' 及 'youtube連結' 為必填"
       render "new"
     end
   end
