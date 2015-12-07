@@ -11,6 +11,14 @@ class User < ActiveRecord::Base
   has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
 
+  def role
+    if self.profile != nil
+      self.profile.role
+    elsif self.profile.nil? == true
+      self.profile.try(:role)
+    end
+  end
+
   def admin?
     self.profile.role == "admin"
   end
