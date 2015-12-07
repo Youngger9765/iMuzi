@@ -46,12 +46,14 @@
         </div>
       <%end%>
     </div>
-
-    <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
-    <%= f.label :comment, "評論內容" %>
-    <%= f.text_area :comment, class: 'form-control' %>
-    <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
-    <% end %>
+    
+    <% if current_user %>
+      <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
+        <%= f.label :comment, "評論內容" %>
+        <%= f.text_area :comment, class: 'form-control' %>
+        <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+      <% end %>
+    <%end%>
   </div>
 </div>
 

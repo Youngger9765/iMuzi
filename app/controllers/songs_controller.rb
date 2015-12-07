@@ -31,7 +31,11 @@ class SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
     @song_user = @song.user
-    @comment = current_user.comments.build
+
+    if current_user
+      @comment = current_user.comments.build
+    end
+    
     @comments = @song.comments
     unless cookies["view-song-#{@song.id}"]
       @song.increment!(:views_count)
