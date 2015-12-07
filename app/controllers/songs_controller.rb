@@ -3,6 +3,8 @@ class SongsController < ApplicationController
   before_action :find_song,  only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, only:[:new, :create, :edit, :update, :destroy]
 
+  impressionist
+
   def index
     @songs = Song.all
   end

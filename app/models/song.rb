@@ -8,6 +8,12 @@ class Song < ActiveRecord::Base
   has_many :likings, dependent: :destroy
   has_many :like_users, :through => :likings , :source => :user
 
+  def view_counts
+    song_record = Impression.where("impressionable_type =? AND impressionable_id=?","song",self.id)   
+    song_view_size = song_record.size
+  end 
+
+
   private
   def picture_size
     if picture.size > 5.megabytes
