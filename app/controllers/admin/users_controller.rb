@@ -12,8 +12,8 @@ class Admin::UsersController < ApplicationController
       profile.role = params[:user][:role]
       profile.save!
 
-    elsif @user.profile.nil? ==true
-      profile = Profile.new(:user_id => @user.id, :role => "normal")
+    elsif @user.profile.nil? == true
+      profile = Profile.new(:user_id => @user.id, :role => params[:user][:role])
       profile.save!
     end
     
