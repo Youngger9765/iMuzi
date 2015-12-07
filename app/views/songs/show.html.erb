@@ -30,7 +30,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">評論</h3>
       </div>
-      <%@comments.each do |c|%>
+        <%@comments.each do |c|%>
         <div class="panel-body">
           <span>
             <%=c.comment%>
@@ -47,7 +47,7 @@
       <%end%>
     </div>
     
-    <% if current_user %>
+    <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
       <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
         <%= f.label :comment, "評論內容" %>
         <%= f.text_area :comment, class: 'form-control' %>
