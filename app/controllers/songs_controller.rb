@@ -86,6 +86,13 @@ class SongsController < ApplicationController
     end
   end
 
+  def youtube_teach
+    respond_to do |format|
+      format.html{ redirect_to :back}
+      format.js
+    end
+  end
+
   private
 
   def correct_user

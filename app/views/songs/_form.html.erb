@@ -8,7 +8,12 @@
 
   <%= f.label :link, "youtube連結(必填)" %>
   <%= f.text_field :link, class: 'form-control' %>
-  範例:www.youtube.com/watch?v=<span style="color:red">v4yHXWvIMqM</span>請貼紅色這段代碼
+  範例:www.youtube.com/watch?v=<span style="color:red">v4yHXWvIMqM</span>請貼整段或紅色這段代碼，
+  <br>
+  <%= link_to "點我看教學", youtube_teach_songs_path, :class => "btn btn-info", :remote => true%>
+  <div class="hidden", id="youtube-teach">
+    <%= image_tag("youtube_copy.png") %>
+  </div>
   <br>
   <br>
   <%= f.label :introduction, "介紹 - 選此首歌的意義"  %>

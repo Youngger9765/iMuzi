@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :users
   resources :comments
   resources :songs do
+    collection do
+      get :youtube_teach
+    end
     member do
       get :like
     end
