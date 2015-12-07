@@ -50,6 +50,10 @@
     <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
     <%= f.label :comment, "評論內容" %>
     <%= f.text_area :comment, class: 'form-control' %>
+
+    <%= render "mic_recorder"%>
+
+
     <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
     <% end %>
   </div>
