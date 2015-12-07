@@ -65,6 +65,7 @@
             </ul>
           </li>
           <% else %>
+            <%= link_to '立即開始', songs_path, class: " btn btn-now btn-lg" %>
             <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
           <% end %>
         </ul>
