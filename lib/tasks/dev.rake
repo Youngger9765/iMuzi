@@ -18,6 +18,8 @@ namespace :dev do
                     password_confirmation: password
                     )
       u.build_profile
+      u.profile.username = u.name || u.email
+      u.profile.role = "normal"
       u.save
       2.times do
       name  = Faker::Name.name
