@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def create_profile
     self.build_profile
-    self.profile.username = self.name || self.email
+    self.profile.username = self.name || self.email.split("@")[0]
     self.profile.role = "normal"
   end
 
