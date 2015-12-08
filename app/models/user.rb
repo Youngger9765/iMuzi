@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
 
   has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
+  after_create :create_profile
+
+  def create_profile
+    self.build_profile
+  end
 
   def role
     if self.profile != nil
