@@ -1,12 +1,18 @@
 class Song < ActiveRecord::Base
   belongs_to :user
   mount_uploader :picture, PictureUploader
-  validates_presence_of :name, :link, :introduction
+  validates_presence_of :name, :link
   validate  :picture_size
   has_many :comments, dependent: :destroy
 
   has_many :likings, dependent: :destroy
   has_many :like_users, :through => :likings , :source => :user
+
+  def view_counts
+    song_record = Impression.where("impressionable_type =? AND impressionable_id=?","song",self.id)   
+    song_view_size = song_record.size
+  end 
+
 
   private
   def picture_size

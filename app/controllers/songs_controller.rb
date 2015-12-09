@@ -3,6 +3,8 @@ class SongsController < ApplicationController
   before_action :find_song,  only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, only:[:new, :create, :edit, :update, :destroy]
 
+  impressionist
+
   def index
     @songs = Song.all
   end
@@ -21,7 +23,7 @@ class SongsController < ApplicationController
       flash[:success] = "上傳成功!"
       redirect_to @user
     else
-      flash[:alert] = "上傳失敗!"
+      flash[:alert] = "上傳失敗! 請檢查 '歌曲名稱' 及 'youtube連結' 為必填"
       render "new"
     end
   end
@@ -29,7 +31,11 @@ class SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
     @song_user = @song.user
-    @comment = current_user.comments.build
+
+    if current_user
+      @comment = current_user.comments.build
+    end
+    
     @comments = @song.comments
     unless cookies["view-song-#{@song.id}"]
       @song.increment!(:views_count)
@@ -77,6 +83,13 @@ class SongsController < ApplicationController
         format.html{ redirect_to :back}
         format.js
       end
+    end
+  end
+
+  def youtube_teach
+    respond_to do |format|
+      format.html{ redirect_to :back}
+      format.js
     end
   end
 

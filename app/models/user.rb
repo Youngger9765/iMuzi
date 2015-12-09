@@ -10,6 +10,23 @@ class User < ActiveRecord::Base
 
   has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
+  after_create :create_profile
+
+  def create_profile
+    self.build_profile
+    self.profile.username = self.name || self.email.split("@")[0]
+    self.profile.role = "normal"
+    self.profile.save!
+    self.profile
+  end
+
+  def role
+    if self.profile != nil
+      self.profile.role
+    elsif self.profile.nil? == true
+      self.profile.try(:role)
+    end
+  end
 
   def admin?
     self.profile.role == "admin"
@@ -60,8 +77,8 @@ class User < ActiveRecord::Base
     #user.fb_raw_data = auth
     user.save!
     profile = user.create_profile
-    profile.username = auth.info.name
     profile.fb_image = auth.info.image
+    profile.username = auth.info.name
     profile.save!
     return user
   end

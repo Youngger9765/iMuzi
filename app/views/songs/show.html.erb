@@ -1,24 +1,50 @@
 <div class="row">
-  <div class="col-md-12">
-    <div><%=@song_user.name%></div>
-    <div><%=@song_user.about%></div>
-  </div>
-</div>
-<hr>
-
-<div class="row">
-  <div class="col-md-4">
-    <div>歌曲名稱:<%=@song.name%></div>
-    <div>歌手名稱:<%=@song.singer%></div>
+  <div class="col-md-8">
     <div class="iframe-rwd">
       <iframe src="https://www.youtube.com/embed/<%=@song.link%>" frameborder="0">
       </iframe>
     </div>
-    <strong>介紹(選此首歌的意義)</strong>
-    <div><%=@song.introduction%></div>
+    <br>
+    <div>作品介紹:</div>
+    <div><%=@song.introduction%></div>  
   </div>
 
-  <div class="col-md-8">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <div id="song-user-image"><%= image_tag(@song_user.picture || @song_user.profile.fb_image)%></div>
+          </div>
+          <div class="col-md-8">
+            <h3><%=link_to @song_user.name, user_path(@song_user)%></h3>
+            <div><%=@song_user.about%></div>
+          </div>
+        </div>  
+      </div>
+    </div>
+
+    <div class="row">
+      <h3>
+        <div>歌曲名稱:<%=@song.name%></div>
+        <div>原唱歌手:<%=@song.singer%></div>
+      </h3> 
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" id="song-fa-img">
+        <%= link_to '#', :class => "fa fa-eye" do %>
+            <span><%= @song.view_counts %></span>
+          <% end %>
+          <%= link_to '#', :class => "fa fa-commenting-o" do %>
+            <span><%= @song.comments.size %></span>
+          <% end %>
+          <%= link_to like_song_path(@song), :class => "#{song_like_class(@song)} ", :remote => true, :id => "like-btn-#{@song.id}" do %>
+            <span id ="like_number-<%=@song.id%>"><%= @song.like_users.size %></span>
+          <% end %>
+      </div>
+    </div>
+
     <%if flash[:success].present?%>
       <div class="alert alert-success text-center" role="alert"><%= flash[:success] %></div>
     <%end%>
@@ -28,9 +54,9 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">評論</h3>
+        <h3 class="panel-title">老師評論</h3>
       </div>
-      <%@comments.each do |c|%>
+        <%@comments.each do |c|%>
         <div class="panel-body">
           <span>
             <%=c.comment%>
@@ -47,20 +73,50 @@
       <%end%>
     </div>
 
-    <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
-    <%= f.label :comment, "評論內容" %>
-    <%= f.text_area :comment, class: 'form-control' %>
-
-    <%= render "mic_recorder"%>
-
-
-    <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
-    <% end %>
+    <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
+      <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
+        <%= f.label :comment, "評論內容" %>
+        <%= f.text_area :comment, class: 'form-control' %>
+        <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+      <% end %>
+    <%end%>
   </div>
 </div>
 
-<%= link_to like_song_path(@song), :class => "btn #{song_like_class(@song)}", :remote => true, :id => "like-btn-#{@song.id}" do %>
-  <span id ="like_number-<%=@song.id%>"><%= @song.like_users.size %>人覺得讚</span>
-  <span id ="like-word-<%=@song.id%>"><%= like_word(@song) %></span>
-<% end %>
+<br>
+
+<div class="col-md-8">
+    <%if flash[:success].present?%>
+      <div class="alert alert-success text-center" role="alert"><%= flash[:success] %></div>
+    <%end%>
+    <%if flash[:alert].present?%>
+    <div class="alert alert-danger text-center" role="alert"><%= flash[:alert] %></div>
+    <%end%>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"> 觀眾評論</h3>
+      </div>
+        <%@comments.each do |c|%>
+        <div class="panel-body">
+          <span>
+            <%=c.comment%>
+          </span>
+          <span class="pull-right">
+            <%=c.user.name%>
+            <%if c.user == @user%>
+            <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-primary btn-xs"%>
+            </span>
+            <%end%>
+          </span>
+          <div class="clearfix"></div>
+        </div>
+      <%end%>
+    </div>
+      <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
+        <%= f.label :comment, "評論內容" %>
+        <%= f.text_area :comment, class: 'form-control' %>
+        <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+      <% end %>
+  </div>
 
