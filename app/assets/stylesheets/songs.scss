@@ -5,8 +5,18 @@
 #like-btn{
   a {
     text-decoration: none;
+    margin-right: 20px;
   }
 }
+
+#song-fa-img{
+  font-size: 40px;
+  a {
+    text-decoration: none;
+    margin-right: 20px;
+  }
+}
+
 
 .fa-heart{
   color: red;
@@ -22,4 +32,8 @@
 
 .fa-commenting-o{
   color: green;
+}
+
+#song-user-image img{
+  width: 100px;
 }

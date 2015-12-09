@@ -19,7 +19,7 @@
       <div class="clearfix"></div>
 
       <div class="pull-right" id="like-btn">
-        <h4>
+        <h3>
           <%= link_to song_path(s), :class => "fa fa-eye" do %>
             <span><%= s.view_counts %></span>
           <% end %>
@@ -29,7 +29,7 @@
           <%= link_to like_song_path(s), :class => "#{song_like_class(s)} ", :remote => true, :id => "like-btn-#{s.id}" do %>
             <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
           <% end %>
-        </h4>
+        </h3>
       </div>
       
       <div class="clearfix"></div>

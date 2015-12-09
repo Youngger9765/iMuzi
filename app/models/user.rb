@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
     self.build_profile
     self.profile.username = self.name || self.email.split("@")[0]
     self.profile.role = "normal"
+    self.profile.save!
+    self.profile
   end
 
   def role
@@ -75,9 +77,8 @@ class User < ActiveRecord::Base
     #user.fb_raw_data = auth
     user.save!
     profile = user.create_profile
-    profile.username = auth.info.name
     profile.fb_image = auth.info.image
-    profile.role = "normal"
+    profile.username = auth.info.name
     profile.save!
     return user
   end
