@@ -36,11 +36,13 @@ class SongsController < ApplicationController
       @comment = current_user.comments.build
     end
     
-    @comments = @song.comments
+    @comments = @song.comments.where(:status => "normal")
+    @pro_comments = @song.comments.where(:status => "professional")
     unless cookies["view-song-#{@song.id}"]
       @song.increment!(:views_count)
       cookies["view-song-#{@song.id}"] = true
     end
+
   end
 
   def edit

@@ -17,6 +17,9 @@ ActiveRecord::Schema.define(version: 20151207070751) do
     t.integer  "user_id",    limit: 4
     t.integer  "song_id",    limit: 4
     t.text     "comment",    limit: 65535
+    t.string   "link",       limit: 255
+    t.string   "role",       limit: 255
+    t.string   "status",     limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
