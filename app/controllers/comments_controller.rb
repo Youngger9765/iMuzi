@@ -2,6 +2,18 @@ class CommentsController < ApplicationController
   before_action :find_song,  only: :create
   def create
     @comment = current_user.comments.new(comment_params)
+
+    if params[:role]
+      @comment.status = "professional"
+      @comment.role = params[:role]
+    else
+      @comment.status = "normal"
+    end
+
+    if comment_params[:comment][0,32] == "https://www.youtube.com/watch?v="
+      @comment.link = comment_params[:comment][32,100]
+    end
+
     @comment.song = @song
     if @comment.save
       flash[:success] = "更新成功!"
@@ -21,7 +33,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:comment, :role, :link)
   end
 
   def find_song
