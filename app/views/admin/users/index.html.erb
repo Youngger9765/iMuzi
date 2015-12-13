@@ -1,0 +1,29 @@
+admin users
+
+<table class="table">
+  <tr>
+    <td>User Name</td>
+    <td>Email</td>
+    <td>Role</td>
+  </tr>
+  <%@users.each do |u|%>
+    <tr>
+      <td><%= u.name%></td>
+      <td><%= u.email%></td>
+      <td>
+        <%= form_for u, url: admin_user_path(u), :method => :PATCH , :class => "form" do |f|%>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <%=f.select :role, [["normal","normal"],["admin","admin"],["teacher","teacher"]], :class => "form-control"%>
+              </div>
+              <div class="col-md-6">
+                <%=f.submit "Update", :class => "btn btn-primary"%>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      </td>
+    </tr>
+  <%end%>
+</table>

@@ -8,8 +8,21 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  has_many :likings
+  has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
+  after_create :create_profile
+
+  def create_profile
+    self.build_profile
+  end
+
+  def role
+    if self.profile != nil
+      self.profile.role
+    elsif self.profile.nil? == true
+      self.profile.try(:role)
+    end
+  end
 
   def admin?
     self.profile.role == "admin"
