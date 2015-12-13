@@ -38,7 +38,7 @@
             <span class="pull-right">
               <br>
               <%if c.user == @user%>
-              <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-primary btn-xs"%>
+              <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
               </span>
               <%end%>
             </span>
@@ -116,7 +116,7 @@
           <span class="pull-right">
             <br>
             <%if c.user == @user%>
-            <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-primary btn-xs"%>
+            <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
             </span>
             <%end%>
           </span>

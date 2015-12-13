@@ -33,9 +33,28 @@
       </div>
       
       <div class="clearfix"></div>
+
+      <h3 class="panel-title">老師評論</h3>
+      <%s.comments.each do |c|%>
+        <%if c.link && c.role =="teacher" && c.status == "professional"%>
+          <div class="iframe-rwd">
+            <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0">
+            </iframe>
+          </div>
+          <br>
+        <%end%>
+      <%end%>
+
+      <%if current_user && current_user.role =="teacher"%>
+        <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
+      <%end%>
+
+      
     </div>
   </div>
   <%=image_tag s.picture.url%>
+
+  
 <%end%>
 
 </div>

@@ -7,6 +7,10 @@ class SongsController < ApplicationController
 
   def index
     @songs = Song.all
+
+    if current_user
+      @comment = current_user.comments.build
+    end
   end
 
   def new
