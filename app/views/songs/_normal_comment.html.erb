@@ -1,0 +1,35 @@
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"> 觀眾評論</h3>
+        </div>
+        <%@comments.each do |c|%>
+          <div class="panel-body">
+            <div class="pull-left">
+              <span>
+                <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+                <%=link_to c.user.name, user_path(c.user)%>
+                <%=c.comment%>
+              </span>
+            </div>
+            
+            <%if c.link%>
+              <div>
+                <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe> 
+              </div>
+            <%end%>
+            <span class="pull-right">
+              <br>
+              <%if c.user == @user%>
+              <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
+              </span>
+              <%end%>
+            </span>
+            <div class="clearfix"></div>
+          </div>
+        <%end%>
+      </div>
+        <%= form_for @comment, :url => comments_path(song: @song) do |f| %>
+          <%= f.label :comment, "評論內容" %>
+          <%= f.text_area :comment, class: 'form-control' %>
+          <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+        <% end %>
