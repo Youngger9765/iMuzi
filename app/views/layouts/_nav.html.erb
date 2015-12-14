@@ -27,6 +27,9 @@
             </li>
             <li>
               <%=link_to "已上傳歌曲", user_path(current_user)%>
+              <%if teacher_comment_alert > 0%>
+                <div class="btn btn-warning btn-xs btn-alert"><%=teacher_comment_alert%></div> 
+              <%end%>
             </li>
             <li>
               <%= link_to'修改密碼', edit_registration_path(:user)%>

@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :authenticate_user!, except: [:index]
 
+  impressionist
+
   def index
     @users = User.all
   end
