@@ -37,3 +37,14 @@
 #song-user-image img{
   width: 100px;
 }
+
+li{
+  position: relative;
+}
+
+.btn-alert{
+  position: absolute;
+  border-radius: 30px;
+  right: 3px;
+  top: 5px;
+}

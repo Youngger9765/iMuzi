@@ -13,7 +13,6 @@ class Song < ActiveRecord::Base
     song_view_size = song_record.size
   end 
 
-
   private
   def picture_size
     if picture.size > 5.megabytes
