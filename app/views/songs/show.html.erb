@@ -60,11 +60,19 @@
       </div>
       <%@pro_comments.each do |c|%>
         <div class="panel-body">
-          <span class="pull-left">
-            <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
-            <%=link_to c.user.name, user_path(c.user)%>
-            <%=c.comment%>
-          </span>
+          <%if c.role == "teacher"%>
+            <span class="pull-left">
+              <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+              <%=link_to c.user.name, user_path(c.user)%>
+              <div class="col-md-offset-6"><%=c.comment%></div>
+            </span>
+          <%else%>
+            <span class="col-md-6 col-md-offset-4">
+              <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+              <%=link_to c.user.name, user_path(c.user)%>
+              <div class="col-md-offset-2"><%=c.comment%></div>
+            </span>
+          <%end%>
           
           <%if c.link%>
             <div>
