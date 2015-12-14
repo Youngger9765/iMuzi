@@ -10,6 +10,7 @@
 $border :#E9E9E9;
 
 body {
+  background-color:ghostwhite;
   min-height: 2000px;
   padding-top: 70px;
 }
@@ -450,11 +451,15 @@ height: 100%;
 // song
 .song{
   margin-bottom: 20px;
+  height: 530px;
+
 }
 
 .song-footer{
+  background-color: cornsilk;
   border: 1px solid $border;
-  padding: 15px;
+  border-bottom: hidden;
+  padding: 5px 15px 5px 15px;
   .link-word{
     a {
       color: #333;
@@ -469,9 +474,19 @@ height: 100%;
   }
 }
 
+.comment-footer{
+  background-color: cornsilk;
+  border: 1px solid $border;
+  border-top: hidden;
+  padding: 5px 15px 5px 15px;
+}
+
 //
 .comment{
   border: 1px solid $border;
+}
+.navbar{
+  margin: 0;
 }
 
 .nav .btn-info{
