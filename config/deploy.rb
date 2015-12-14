@@ -3,7 +3,7 @@
 lock '3.4.0'
 
 set :application, 'iMuzi'
-set :repo_url, 'git@github.com:Youngger9765/imusic'
+set :repo_url, 'git@github.com:Youngger9765/imusic.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
