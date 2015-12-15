@@ -56,29 +56,31 @@
       <%end%>
           <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">老師評論</h3>
+        <h3 class="panel-title">交流區</h3>
       </div>
       <%@pro_comments.each do |c|%>
         <div class="panel-body">
-          <%if c.role == "teacher"%>
-            <span class="pull-left">
-              <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
-              <%=link_to c.user.name, user_path(c.user)%>
-              <div class="col-md-offset-6"><%=c.comment%></div>
-            </span>
-          <%else%>
-            <span class="col-md-6 col-md-offset-4">
-              <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
-              <%=link_to c.user.name, user_path(c.user)%>
-              <div class="col-md-offset-2"><%=c.comment%></div>
-            </span>
-          <%end%>
-          
-          <%if c.link%>
-            <div>
-              <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe>
-            </div> 
-          <%end%>
+          <span class=" <%=comment_class_by(c.role)%>">
+            <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+            <%=link_to c.user.name, user_path(c.user)%>
+            <%if c.role =="teacher"%>
+              <span> (老師評論)</span>
+            <%end%>
+            <div class="col-md-offset-2"><%=c.comment%></div>
+            
+            <%if c.link%>
+              <br>
+              <div>
+                <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe>
+              </div> 
+            <%end%>
+
+            <% if c.logo.exists? %>
+              <br> 
+              <%= image_tag(c.logo.url(:medium))%>
+            <%end%>
+          </span>
+
           <span class="pull-right">
             <br>
             <%if c.user == @user%>
@@ -98,8 +100,21 @@
         <% role = "teacher"%>
       <%end%>
       <%= form_for @comment, :url => comments_path(song: @song, role: role) do |f| %>
-        <%= f.label :comment, "評論內容" %>
+        <%= f.label :comment, "文字內容" %>
         <%= f.text_area :comment, class: 'form-control' %>
+
+        <%= f.label :link, "Youtube" %>
+        <%= f.text_field :link, :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+
+        <div class="form-group">
+          <%=f.label :logo, "LOGO"%>
+          <%=f.file_field :logo%>
+
+          <% if @comment.logo.exists? %>
+            <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
+          <% end %>
+        </div>
+
         <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
       <% end %>
     <%end%>
