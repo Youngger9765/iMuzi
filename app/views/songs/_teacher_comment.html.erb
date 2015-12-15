@@ -1,12 +1,15 @@
 <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
+
   <%if current_user == @song.user%>
     <% role = "student" %>
   <%else%>
     <% role = "teacher"%>
   <%end%>
+
   <%= form_for @comment, :url => comments_path(song: @song, role: role) do |f| %>
-    <%= f.label :comment, "評論內容" %>
-    <%= f.text_area :comment, class: 'form-control' %>
+    <%= f.label :link, "Youtube" %>
+    <%= f.text_field :link, :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+    
     <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
   <% end %>
 <%end%>

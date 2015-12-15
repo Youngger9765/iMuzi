@@ -1,57 +1,52 @@
 <h2>好聲音 Battle</h2>
 <div class="row">
-<%@songs.each do |s|%>
+  <%@songs.each do |s|%>
     <div class="col-md-3 song hvr-grow">
       <div class="iframe-rwd">
         <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
         </iframe>
       </div>
       
-        <div class="song-footer">
-          <%=link_to song_path(s) do%>
-            <div class="link-word">
-              <%= s.name %>
-            </div>
-            <div class="link-word">
-              <small>by</small> <%=s.user.name%>
-            </div>
-            <div class="pull-right">
-              <%= time_ago_in_words(s.created_at) %> ago.
-            </div>
-          <%end%>
-            <div class="pull-right" id="like-btn">
-              <h3>
-                <%= link_to song_path(s) do%>
-                  <span class="fa fa-eye"><%= s.view_counts %></span>
-                <%end%>
-                <%= link_to song_path(s) do%>
-                  <span class="fa fa-commenting-o"><%= s.comments.size %></span>
-                <%end%>
-                <%= link_to like_song_path(s), :class => "hvr-pulse-grow #{song_like_class(s)} ", :remote => true, :id => "like-btn-#{s.id}" do %>
-                  <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
-                <% end %>
-              </h3>
-            </div>
-            
-            <div class="clearfix"></div>
-        </div>
-      <% if s.last_teacher_comment%>
+      <div class="song-footer">
+        <%=link_to song_path(s) do%>
+          <div class="link-word">
+            <%= s.name %>
+          </div>
+          <div class="link-word">
+            <small>by</small> <%=s.user.name%>
+          </div>
+          <div class="pull-right">
+            <%= time_ago_in_words(s.created_at) %> ago.
+          </div>
+        <%end%>
+        <div class="pull-right" id="like-btn">
+          <h3>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-eye"><%= s.view_counts %></span>
+            <%end%>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-commenting-o"><%= s.comments.size %></span>
+            <%end%>
+            <%= link_to like_song_path(s), :class => "hvr-pulse-grow #{song_like_class(s)} ", :remote => true, :id => "like-btn-#{s.id}" do %>
+              <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
+            <% end %>
+          </h3>
+        </div>  
+        <div class="clearfix"></div>
+      </div>
+
+      <% if s.last_teacher_video_comment%>
         <h3 class="panel-title comment-footer">老師評論</h3>
-          
-            
-              <div class="iframe-rwd">
-                <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_comment.link%>" frameborder="0">
-                </iframe>
-              </div>
-              <br>
-          <%end%>
+        <div class="iframe-rwd">
+          <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
+          </iframe>
+        </div>
+        <br>
+      <%end%>
 
-          <%if current_user && current_user.role =="teacher"%>
-            <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
-          <%end%>
+      <% if s.last_teacher_video_comment.blank? && current_user && current_user.role =="teacher"%>
+        <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
+      <%end%>
     </div>
-
-
-<%end%>
-
+  <%end%>
 </div>
