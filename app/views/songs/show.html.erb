@@ -1,4 +1,89 @@
 <div class="row">
+  <div class="col-md-8">
+    <div class="iframe-rwd">
+      <iframe src="https://www.youtube.com/embed/<%=@song.link%>" frameborder="0">
+      </iframe>
+    </div>
+    <h3>歌曲名稱:<%=@song.name%></h3>
+    <h3>原唱歌手:<%=@song.singer%></h3>
+    <h3>作品介紹:</h3>
+    <h4><div><%=@song.introduction%></div> </h4>
+
+    <div >
+      <%if flash[:success].present?%>
+        <div class="alert alert-success text-center" role="alert"><%= flash[:success] %></div>
+      <%end%>
+
+      <%if flash[:alert].present?%>
+        <div class="alert alert-danger text-center" role="alert"><%= flash[:alert] %></div>
+      <%end%>
+      <div class="panel panel-default" id="comment-discuss-area">      
+        <div class="panel-heading">
+          <h3 class="panel-title">作品討論</h3>
+        </div>
+
+        <%@pro_comments.each do |c|%>
+          <div class="panel-body">
+            <span class=" <%=comment_class_by(c.role)%>">
+              <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+              <%=link_to c.user.name, user_path(c.user)%>
+              <%if c.role =="teacher"%>
+                <span> (老師評論)</span>
+              <%end%>
+              <div class="col-md-offset-2"><%=c.comment%></div>
+              
+              <%if c.link%>
+                <br>
+                <div>
+                  <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe>
+                </div> 
+              <%end%>
+
+              <% if c.logo.exists? %>
+                <br> 
+                <%= image_tag(c.logo.url(:medium))%>
+              <%end%>
+            </span>
+
+            <span class="pull-right">
+              <br>
+              <%if c.user == @user%>
+              <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
+              </span>
+              <%end%>
+            </span>
+            <div class="clearfix"></div>
+          </div>
+        <%end%>
+      </div>
+    
+      <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
+        <%if current_user == @song.user%>
+          <% role = "student" %>
+        <%else%>
+          <% role = "teacher"%>
+        <%end%>
+        <%= form_for @comment, :url => comments_path(song: @song, role: role) do |f| %>
+          <%= f.label :comment, "文字內容" %>
+          <%= f.text_area :comment, class: 'form-control' %>
+
+          <%= f.label :link, "Youtube" %>
+          <%= f.text_field :link, :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+
+          <div class="form-group">
+            <%=f.label :logo, "LOGO"%>
+            <%=f.file_field :logo%>
+
+            <% if @comment.logo.exists? %>
+              <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
+            <% end %>
+          </div>
+
+          <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+        <% end %>
+      <%end%>
+    </div>
+  </div>
   <div class="col-md-4">
     <div class="row">
       <div class="col-md-12">
@@ -26,100 +111,24 @@
         <%= link_to '#', :class => "fa fa-eye" do %>
             <span><%= @song.view_counts %></span>
           <% end %>
-          <%= link_to '#', :class => "fa fa-commenting-o" do %>
+          <%= link_to '#comment-discuss-area', :id =>"comment-discuss-area-btn", :class => "fa fa-commenting-o" do %>
             <span><%= @song.comments.size %></span>
           <% end %>
-          <%= link_to like_song_path(@song), :class => "#{song_like_class(@song)} ", :remote => true, :id => "like-btn-#{@song.id}" do %>
+          <%= link_to like_song_path(@song), :class => "hvr-pulse-grow #{song_like_class(@song)} ", :remote => true, :id => "like-btn-#{@song.id}" do %>
             <span id ="like_number-<%=@song.id%>"><%= @song.like_users.size %></span>
           <% end %>
       </div>
     </div>
   </div>
   
-  <div class="col-md-8">
-    <div class="iframe-rwd">
-      <iframe src="https://www.youtube.com/embed/<%=@song.link%>" frameborder="0">
-      </iframe>
-    </div>
-    <br>
-    <div>作品介紹:</div>
-    <div><%=@song.introduction%></div>  
-    <br>
-
-    <div class="col-md-12">
-      <%if flash[:success].present?%>
-        <div class="alert alert-success text-center" role="alert"><%= flash[:success] %></div>
-      <%end%>
-
-      <%if flash[:alert].present?%>
-        <div class="alert alert-danger text-center" role="alert"><%= flash[:alert] %></div>
-      <%end%>
-          <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">交流區</h3>
-      </div>
-      <%@pro_comments.each do |c|%>
-        <div class="panel-body">
-          <span class=" <%=comment_class_by(c.role)%>">
-            <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
-            <%=link_to c.user.name, user_path(c.user)%>
-            <%if c.role =="teacher"%>
-              <span> (老師評論)</span>
-            <%end%>
-            <div class="col-md-offset-2"><%=c.comment%></div>
-            
-            <%if c.link%>
-              <br>
-              <div>
-                <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe>
-              </div> 
-            <%end%>
-
-            <% if c.logo.exists? %>
-              <br> 
-              <%= image_tag(c.logo.url(:medium))%>
-            <%end%>
-          </span>
-
-          <span class="pull-right">
-            <br>
-            <%if c.user == @user%>
-            <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
-            </span>
-            <%end%>
-          </span>
-          <div class="clearfix"></div>
-        </div>
-      <%end%>
-    </div>
-    
-    <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
-      <%if current_user == @song.user%>
-        <% role = "student" %>
-      <%else%>
-        <% role = "teacher"%>
-      <%end%>
-      <%= form_for @comment, :url => comments_path(song: @song, role: role) do |f| %>
-        <%= f.label :comment, "文字內容" %>
-        <%= f.text_area :comment, class: 'form-control' %>
-
-        <%= f.label :link, "Youtube" %>
-        <%= f.text_field :link, :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
-
-        <div class="form-group">
-          <%=f.label :logo, "LOGO"%>
-          <%=f.file_field :logo%>
-
-          <% if @comment.logo.exists? %>
-            <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
-          <% end %>
-        </div>
-
-        <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
-      <% end %>
-    <%end%>
-  </div>
+  
 </div>
+
+<script>
+  
+  $('#comment-discuss-area-btn').click(function(){ $('html,body').animate({scrollTop:$('#comment-discuss-area').offset().top}, 800); }); //代表一個完整的執行區塊
+
+</script>
 
 
 
