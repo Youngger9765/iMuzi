@@ -105,18 +105,25 @@
         <div>原唱歌手:<%=@song.singer%></div>
       </h3> 
     </div>
-
+    
+    <br>
     <div class="row">
       <div class="col-md-12" id="song-fa-img">
-        <%= link_to '#', :class => "fa fa-headphones" do %>
-            <span><%= @song.view_counts %></span>
-          <% end %>
-          <%= link_to '#comment-discuss-area', :id =>"comment-discuss-area-btn", :class => "fa fa-commenting-o" do %>
-            <span><%= @song.comments.size %></span>
-          <% end %>
-          <%= link_to like_song_path(@song), :class => "hvr-pulse-grow #{song_like_class(@song)} ", :remote => true, :id => "like-btn-#{@song.id}" do %>
-            <span id ="like_number-<%=@song.id%>"><%= @song.like_users.size %></span>
-          <% end %>
+        <div>
+          <span>
+            <i class="fa fa-headphones"> <%= @song.view_counts %></i>
+          </span>
+        </div>
+        <hr>
+        <%= link_to '#comment-discuss-area', :id =>"comment-discuss-area-btn", :class => " tip hvr-box-shadow-outset " do %>
+          <span data-tooltip="">
+            <i class="fa fa-commenting-o"> <%= @song.comments.size %></i> 
+          </span>
+        <% end %>
+        <hr>
+        <%= link_to like_song_path(@song), :remote => true, :id => "like-btn-#{@song.id}" do %>
+          <span id ="like_number-<%=@song.id%>" class="hvr-pulse-grow <%=song_like_class(@song)%> "> <%= @song.like_users.size %> </span>
+        <% end %>
       </div>
     </div>
   </div>
