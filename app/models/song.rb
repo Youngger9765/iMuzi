@@ -13,7 +13,7 @@ class Song < ActiveRecord::Base
     song_view_size = song_record.size
   end 
 
-  def last_teacher_comment
+  def last_teacher_video_comment
     self.comments.where("role=? AND status=? AND link !=?","teacher","professional","").last
   end
 
