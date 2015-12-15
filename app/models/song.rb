@@ -13,6 +13,10 @@ class Song < ActiveRecord::Base
     song_view_size = song_record.size
   end 
 
+  def last_teacher_comment
+    self.comments.where("role=? AND status=? AND link !=?","teacher","professional","").last
+  end
+
   private
   def picture_size
     if picture.size > 5.megabytes
