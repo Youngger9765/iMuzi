@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "paperclip", "~> 4.3"
 gem 'impressionist'
 gem "font-awesome-rails"
 gem 'omniauth-facebook'
