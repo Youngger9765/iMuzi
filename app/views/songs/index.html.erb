@@ -20,9 +20,9 @@
           </div>
         <%end%>
         <div class="pull-right" id="like-btn">
-          <h3>
+          <h4>
             <%= link_to song_path(s) do%>
-              <span class="fa fa-eye"><%= s.view_counts %></span>
+              <span class="fa fa-headphones"><%= s.view_counts %></span>
             <%end%>
             <%= link_to song_path(s) do%>
               <span class="fa fa-commenting-o"><%= s.comments.size %></span>
@@ -30,22 +30,25 @@
             <%= link_to like_song_path(s), :class => "hvr-pulse-grow #{song_like_class(s)} ", :remote => true, :id => "like-btn-#{s.id}" do %>
               <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
             <% end %>
-          </h3>
+          </h4>
         </div>  
         <div class="clearfix"></div>
       </div>
 
       <% if s.last_teacher_video_comment%>
-        <h3 class="panel-title comment-footer">老師評論</h3>
-        <div class="iframe-rwd">
-          <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
-          </iframe>
+        <div class="panel-title comment-footer">
+        老師評論
+          <div class="iframe-rwd">
+            <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
+            </iframe>
+          </div>
         </div>
-        <br>
       <%end%>
 
       <% if s.last_teacher_video_comment.blank? && current_user && current_user.role =="teacher"%>
-        <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
+        <div class="comment-footer">
+          <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
+        </div>
       <%end%>
     </div>
   <%end%>
