@@ -18,6 +18,7 @@ class SongsController < ApplicationController
   end
 
   def create
+    raise
     @song = @user.songs.new(song_params)
     if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
       @song.link = song_params[:link][32,100]
