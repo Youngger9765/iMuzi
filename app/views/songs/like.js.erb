@@ -1,5 +1,5 @@
-$("#like-btn-<%=@song.id%>").toggleClass('fa fa-heart');
-$("#like-btn-<%=@song.id%>").toggleClass('fa fa-heart-o');
+$('#like_number-<%=@song.id%>').toggleClass('fa fa-heart');
+$('#like_number-<%=@song.id%>').toggleClass('fa fa-heart-o');
 
 <% if current_user.like_song?(@song) %>
   $("#like_number-<%=@song.id%>").text("<%= @song.like_users.size %>")
