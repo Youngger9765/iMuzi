@@ -9,11 +9,45 @@
   }
 }
 
+.iframe-rwd{
+  border-radius: 20px;
+  margin: 10px;
+}
+
 #song-fa-img{
   font-size: 40px;
   a {
     text-decoration: none;
     margin-right: 20px;
+  }
+}
+
+.song{
+  border: 2px solid gray;
+  border-radius: 30px;
+  margin: 20px;
+  background-color:cornsilk; 
+  margin-bottom: 20px;
+  height: 580px;
+  padding: 0;
+}
+
+.song-footer{
+  background-color: cornsilk;
+
+  border-bottom: hidden;
+  padding: 5px 15px 5px 15px;
+  .link-word{
+    a {
+      color: #333;
+      text-decoration: none;
+    }
+    a:hover {
+        color: #999;
+    }
+  }
+  small{
+    color: #AAA;
   }
 }
 
