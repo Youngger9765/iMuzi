@@ -1,5 +1,5 @@
 <h2>好聲音 Battle</h2>
-<div class="row">
+<div class="row col-md-12 col-md-offset-1">
   <%@songs.each do |s|%>
     <div class="col-md-3 song hvr-grow">
       <div class="iframe-rwd">
@@ -19,16 +19,17 @@
             <%= time_ago_in_words(s.created_at) %> ago.
           </div>
         <%end%>
+        <div class="clearfix"></div>
         <div class="pull-right" id="like-btn">
           <h4>
             <%= link_to song_path(s) do%>
-              <span class="fa fa-headphones"><%= s.view_counts %></span>
+              <span class=""><i class="fa fa-headphones"></i> <%= s.view_counts %></span>
             <%end%>
             <%= link_to song_path(s) do%>
               <span class="fa fa-commenting-o"><%= s.comments.size %></span>
             <%end%>
-            <%= link_to like_song_path(s), :class => "hvr-pulse-grow #{song_like_class(s)} ", :remote => true, :id => "like-btn-#{s.id}" do %>
-              <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
+            <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
+              <span id ="like_number-<%=s.id%>" class="hvr-pulse-grow <%=song_like_class(s)%> "> <%= s.like_users.size %> </span>
             <% end %>
           </h4>
         </div>  

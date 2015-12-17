@@ -1,20 +1,23 @@
+<h2>
+  已上傳歌曲
+  <span>
+    <%=link_to "新增歌曲", new_song_path, :class=> "btn btn-success"%>
+  </span>
+</h2>
+
 <div class="row">
-  <div class="col-md-12 user-profile">
-    <h3><%=@user.name%>
+  <div class="col-md-3 user-profile pull-right">
+    <h3>
+      <%= image_tag (current_user.photo), style: "width: 100px; height: 100px; display: inline; border-radius: 10px; position: relative; left: 10px; margin:10px;" %>
+      <%=@user.name%>
       <small><%=@user.nickname%></small>
-      <span>
-        <%=link_to "新增歌曲", new_song_path, :class=> "btn btn-success"%>
-      </span>
-    </h3>
-    <p class="col-md-6">
-      <%=@user.about%>
       
+    </h3>
+    <p class="col-md-12">
+      <%=@user.about%>
     </p>
   </div>
-</div>
-
-<h2>已上傳歌曲</h2>
-<div class="row">
+  <div class="row col-md-9" id="user-song">
     <%@songs.each do |s|%>
       <div class="col-md-3 song">
         <div class="iframe-rwd">
@@ -36,17 +39,17 @@
           <%end%>
         </div>
         <div class="pull-right" id="like-btn">
-          <h3>
-            <%= link_to song_path(s), :class => "fa fa-eye" do %>
-              <span><%= s.view_counts %></span>
+          <h4>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-headphones"><%= s.view_counts %></span>
+            <%end%>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-commenting-o"><%= s.comments.size %></span>
+            <%end%>
+            <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
+              <span id ="like_number-<%=s.id%>" class ="hvr-pulse-grow <%=song_like_class(s)%> "><%= s.like_users.size %></span>
             <% end %>
-            <%= link_to song_path(s), :class => "fa fa-commenting-o" do %>
-              <span><%= s.comments.size %></span>
-            <% end %>
-            <%= link_to like_song_path(s), :class => "#{song_like_class(s)} ", :remote => true, :id => "like-btn-#{s.id}" do %>
-              <span id ="like_number-<%=s.id%>"><%= s.like_users.size %></span>
-            <% end %>
-          </h3>
+          </h4>
         </div>
         <div class="clearfix"></div>
         <div class="song-footer">
@@ -56,17 +59,16 @@
           <%end%>
         </div>
         <div class="clearfix"></div>
-        <h3 class="panel-title comment-footer">老師評論
-          <%s.comments.each do |c|%>
-            <%if c.link && c.role =="teacher" && c.status == "professional"%>
-              <div class="iframe-rwd">
-                <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0">
-                </iframe>
-              </div>
-              <br>
-            <%end%>
-          <%end%>
-        </h3>        
+        <% if s.last_teacher_video_comment%>
+          <div class="panel-title comment-footer">
+          老師評論
+            <div class="iframe-rwd">
+              <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
+              </iframe>
+            </div>
+          </div>
+        <%end%>
       </div>
     <%end%>
+  </div>
 </div>
