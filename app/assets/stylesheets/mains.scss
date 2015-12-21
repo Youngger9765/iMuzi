@@ -1,16 +1,6 @@
 // Place all the styles related to the mains controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#mic-icon{
-  img{
-    width:40px;
-    margin: 5px;
-  }
-  a{
-    padding: 0px;
-  }
-}
-
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -460,7 +450,7 @@ height: 100%;
 
 .navbar{
   margin: 0;
-  background-color: #222;
+  background-color: gray;
 }
 
 .nav .btn-info{
@@ -469,7 +459,8 @@ height: 100%;
 
 #navbar .navbar-nav li a {
   font-size: 20px;
-  color: white;
+  color: black;
+  padding: 15px 15px 5px 15px;
 }
 
 #navbar .navbar-nav{ 
@@ -479,4 +470,23 @@ height: 100%;
     margin: 10px;
     color: gray;
   }
+}
+
+#nav-dropdown #nav-dropdown-a {
+  padding-top: 5px;
+}
+
+#navbar #mic-icon{
+  img{
+    width:40px;
+    height: 20px;
+    margin: 5px;
+  }
+  a{
+    padding: 0px;
+  }
+}
+
+.navbar-nav > li > .dropdown-menu{
+  background-color: gray;
 }
