@@ -1,74 +1,8 @@
+<%= render "header"%>
+
 <h2>
-  已上傳歌曲
+  個人
   <span>
     <%=link_to "新增歌曲", new_song_path, :class=> "btn btn-success"%>
   </span>
 </h2>
-
-<div class="row">
-  <div class="col-md-3 user-profile pull-right">
-    <h3>
-      <%= image_tag (current_user.photo), style: "width: 100px; height: 100px; display: inline; border-radius: 10px; position: relative; left: 10px; margin:10px;" %>
-      <%=@user.name%>
-      <small><%=@user.nickname%></small>
-      
-    </h3>
-    <p class="col-md-12">
-      <%=@user.about%>
-    </p>
-  </div>
-  <div class="row col-md-9" id="user-song">
-    <%@songs.each do |s|%>
-      <div class="col-md-3 song">
-        <div class="iframe-rwd">
-          <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
-          </iframe>
-        </div>
-        <div class="song-footer">
-          <%=link_to song_path(s) do%>
-            <div class="link-word">
-              <h3><%=s.name%></h3>  
-            </div>
-            <div class="link-word">
-              <small>by</small> <%=@user.name%>
-            </div>
-            <div class="pull-right">
-              <%= time_ago_in_words(s.created_at) %> ago.
-            </div>
-            <div class="clearfix"></div>
-          <%end%>
-        </div>
-        <div class="pull-right" id="like-btn">
-          <h4>
-            <%= link_to song_path(s) do%>
-              <span class="fa fa-headphones"><%= s.view_counts %></span>
-            <%end%>
-            <%= link_to song_path(s) do%>
-              <span class="fa fa-commenting-o"><%= s.comments.size %></span>
-            <%end%>
-            <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
-              <span id ="like_number-<%=s.id%>" class ="hvr-pulse-grow <%=song_like_class(s)%> "><%= s.like_users.size %></span>
-            <% end %>
-          </h4>
-        </div>
-        <div class="clearfix"></div>
-        <div class="song-footer">
-          <%if current_user == @user%>
-            <%=link_to "編輯", edit_song_path(s), :class=> "btn btn-primary btn-xs"%>
-            <%=link_to "刪除", song_path(s), method:"delete", :class=> "btn btn-danger btn-xs pull-right",data: { confirm: "確定刪除?" }%>
-          <%end%>
-        </div>
-        <div class="clearfix"></div>
-        <% if s.last_teacher_video_comment%>
-          <div class="panel-title comment-footer">
-          老師評論
-            <div class="iframe-rwd">
-              <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
-              </iframe>
-            </div>
-          </div>
-        <%end%>
-      </div>
-    <%end%>
-  </div>
-</div>

@@ -25,8 +25,8 @@
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li>
-              <%= link_to songs_path  do %>
-                <i class="fa fa-plus"></i>好聲音
+              <%= link_to dojo_songs_path  do %>
+                <i class="fa fa-plus"></i>聆聽好聲音
               <% end %>
             </li>
             <li>
@@ -65,7 +65,7 @@
             </ul>
           </li>
           <% else %>
-            <%= link_to '立即開始', songs_path, class: " btn btn-now btn-lg" %>
+            <%= link_to '立即開始', dojo_songs_path, class: " btn btn-now btn-lg" %>
             <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
           <% end %>
         </ul>

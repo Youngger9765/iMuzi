@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   before_action :correct_user, only: [:edit, :update]
   before_action :authenticate_user!, except: [:index]
+  before_action :find_user, only: [:show, :edit, :update, :upload, :contact]
 
   impressionist
 
@@ -12,7 +13,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @songs = @user.songs.order("created_at DESC")
   end
 
@@ -36,7 +36,19 @@ class UsersController < ApplicationController
 
   end
 
+  def upload
+    @songs = @user.songs.order("created_at DESC")
+  end
+
+  def contact
+    
+  end
+
   private
+
+  def find_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :nickname, :email, :about, :picture)
