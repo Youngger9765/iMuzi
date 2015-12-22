@@ -99,6 +99,22 @@ class SongsController < ApplicationController
     end
   end
 
+  def battle
+    @songs = Song.all
+
+    if current_user
+      @comment = current_user.comments.build
+    end
+  end
+
+  def dojo
+    @songs = Song.all
+
+    if current_user
+      @comment = current_user.comments.build
+    end
+  end
+
   private
 
   def correct_user

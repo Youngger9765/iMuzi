@@ -1,0 +1,56 @@
+<div class="row col-md-12 col-md-offset-1">
+  <h2>Battle</h2>
+  <%@songs.each do |s|%>
+    <div class="col-md-3 song hvr-grow">
+      <div class="iframe-rwd">
+        <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
+        </iframe>
+      </div>
+      
+      <div class="song-footer">
+        <%=link_to song_path(s) do%>
+          <div class="link-word">
+            <%= s.name %>
+          </div>
+          <div class="link-word">
+            <small>by</small> <%=s.user.name%>
+          </div>
+          <div class="pull-right">
+            <%= time_ago_in_words(s.created_at) %> ago.
+          </div>
+        <%end%>
+        <div class="clearfix"></div>
+        <div class="pull-right" id="like-btn">
+          <h4>
+            <%= link_to song_path(s) do%>
+              <span class=""><i class="fa fa-headphones"></i> <%= s.view_counts %></span>
+            <%end%>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-commenting-o"><%= s.comments.size %></span>
+            <%end%>
+            <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
+              <span id ="like_number-<%=s.id%>" class="hvr-pulse-grow <%=song_like_class(s)%> "> <%= s.like_users.size %> </span>
+            <% end %>
+          </h4>
+        </div>  
+        <div class="clearfix"></div>
+      </div>
+
+      <% if s.last_teacher_video_comment%>
+        <div class="panel-title comment-footer">
+        老師評論
+          <div class="iframe-rwd">
+            <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
+            </iframe>
+          </div>
+        </div>
+      <%end%>
+
+      <% if s.last_teacher_video_comment.blank? && current_user && current_user.role =="teacher"%>
+        <div class="comment-footer">
+          <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
+        </div>
+      <%end%>
+    </div>
+  <%end%>
+</div>

@@ -1,0 +1,13 @@
+<div class="col-md-3 user-profile">
+  <h3>
+    <%= link_to user_path(@user) do%>
+      <%= image_tag (current_user.photo), style: "width: 100px; height: 100px; display: inline; border-radius: 10px; position: relative; left: 10px; margin:10px;" %>
+    <%end%>
+    <%=@user.name%>
+    <small><%=@user.nickname%></small>
+    
+  </h3>
+  <p class="col-md-12">
+    <%=@user.about%>
+  </p>
+</div>
