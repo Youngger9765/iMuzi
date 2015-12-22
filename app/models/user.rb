@@ -7,10 +7,12 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
   has_one :profile, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :star_records, dependent: :destroy
 
   has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
   after_create :create_profile
+  after_create :create_user_star_record
 
   def create_profile
     self.build_profile
@@ -19,6 +21,23 @@ class User < ActiveRecord::Base
     self.profile.save!
     self.profile
   end
+
+  def create_user_star_record
+    star_record = self.star_records.new
+    star_record.action = "add_free_star"
+    star_record.free_star_count = 1
+    star_record.money_star_count = 0
+    star_record.save!
+    star_record = self.star_records.new
+    star_record.action = "add_free_star"
+    star_record.free_star_count = 2
+    star_record.money_star_count = 0
+    star_record.save!
+  end
+
+  def free_star_count
+    self.star_records.last.free_star_count   
+  end 
 
   def role
     if self.profile != nil
@@ -76,10 +95,12 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0,20]
     #user.fb_raw_data = auth
     user.save!
+
     profile = user.create_profile
     profile.fb_image = auth.info.image
     profile.username = auth.info.name
     profile.save!
+
     return user
   end
 end
