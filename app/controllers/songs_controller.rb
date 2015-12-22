@@ -25,7 +25,7 @@ class SongsController < ApplicationController
 
     if @song.save
       flash[:success] = "上傳成功!"
-      redirect_to @user
+      redirect_to upload_user_path(@user)
     else
       flash[:alert] = "上傳失敗! 請檢查 '歌曲名稱' 及 'youtube連結' 為必填"
       render "new"
@@ -59,7 +59,7 @@ class SongsController < ApplicationController
         @song.save!
       end
       flash[:success] = "編輯成功!"
-      redirect_to @user
+      redirect_to upload_user_path(@user)
     else
       render "new"
     end
@@ -67,7 +67,7 @@ class SongsController < ApplicationController
 
   def destroy
     @song.destroy
-    redirect_to @user
+    redirect_to upload_user_path(@user)
   end
 
   def like
