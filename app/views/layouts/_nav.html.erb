@@ -51,10 +51,15 @@
         <ul class="nav navbar-nav navbar-right personal-nav">
           <li>
             <%= link_to contact_users_path do %>
-              <span class="fa fa-envelope" aria-hidden="true">聯絡我們</span>
+              <span class="fa fa-envelope" aria-hidden="true"> 聯絡我們</span>
             <% end %>
           </li>
           <%if !current_user%>
+            <li>
+              <%= link_to clause_users_path  do %>
+                <span class="fa fa-file-text" aria-hidden="true"></span> 服務條款
+              <% end %>
+            </li>
             <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
           <%end%>
         </ul>
@@ -74,17 +79,17 @@
                 </li>
                 <li>
                   <%= link_to '#'  do %>
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>修改個人資料
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 修改個人資料
                   <% end %>
                 </li>
                 <li>
                   <%= link_to upload_user_path(current_user)  do %>
-                    <span class="fa fa-upload" aria-hidden="true"></span>上傳歌曲
+                    <span class="fa fa-upload" aria-hidden="true"></span> 上傳歌曲
                   <% end %>
                 </li>
                 <li>
                   <%= link_to clause_users_path  do %>
-                    <span class="fa fa-envelope" aria-hidden="true"></span>服務條款
+                    <span class="fa fa-file-text" aria-hidden="true"></span> 服務條款
                   <% end %>
                 </li>
                 <li>
