@@ -50,7 +50,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right personal-nav">
           <li>
-            <%= link_to contact_user_path(current_user)  do %>
+            <%= link_to contact_users_path do %>
               <span class="fa fa-envelope" aria-hidden="true">聯絡我們</span>
             <% end %>
           </li>
@@ -80,6 +80,11 @@
                 <li>
                   <%= link_to upload_user_path(current_user)  do %>
                     <span class="fa fa-upload" aria-hidden="true"></span>上傳歌曲
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to clause_users_path  do %>
+                    <span class="fa fa-envelope" aria-hidden="true"></span>服務條款
                   <% end %>
                 </li>
                 <li>

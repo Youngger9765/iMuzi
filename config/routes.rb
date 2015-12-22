@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   resources :mains
   resources :users do
     collection do 
-      
+      get :contact
+      get :clause
     end
     member do
       get :upload
-      get :contact
     end
   end
   resources :comments

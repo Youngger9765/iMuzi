@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   layout "application"
 
   before_action :correct_user, only: [:edit, :update]
-  before_action :authenticate_user!, except: [:index]
-  before_action :find_user, only: [:show, :edit, :update, :upload, :contact]
+  before_action :authenticate_user!, except: [:index, :contact, :clause]
+  before_action :find_user, only: [:show, :edit, :update, :upload]
 
   impressionist
 
@@ -41,7 +41,9 @@ class UsersController < ApplicationController
   end
 
   def contact
-    
+  end
+
+  def clause
   end
 
   private

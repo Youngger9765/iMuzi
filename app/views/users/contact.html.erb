@@ -1,6 +1,9 @@
 <div class="col-md-offset-2 col-md-8">
   <h1>
-  親愛的用戶<%= @user.profile.username%>
+  親愛的用戶
+    <%if current_user%>
+      <%= current_user.profile.username%>
+    <%end%>
   </h1>
   <h3>若您在使用體驗上有任何問題，麻煩不吝提供意見</h3>
 
