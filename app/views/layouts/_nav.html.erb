@@ -78,7 +78,7 @@
                   <%= image_tag (current_user.photo), style: "width: 140px; height: 140px; display: inline; border-radius: 10px; position: relative; left: 10px;" %>
                 </li>
                 <li>
-                  <%= link_to '#'  do %>
+                  <%= link_to user_path(current_user)  do %>
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 修改個人資料
                   <% end %>
                 </li>
