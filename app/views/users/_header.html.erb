@@ -10,4 +10,9 @@
   <p class="col-md-12">
     <%=@user.about%>
   </p>
+  <% (0..@user.free_star_count).each do |star_num|%>
+    <%if star_num != 0%>
+      <i class="fa fa-star"></i>
+    <%end%>
+  <%end%>
 </div>
