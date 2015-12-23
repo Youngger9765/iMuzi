@@ -1,6 +1,7 @@
 class StarRecord < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to  :user
+  belongs_to  :song
 
   def self.monthly_star
     where("created_at > ? AND action =?",  Time.current.advance(months: -1), "add_monthly_star")

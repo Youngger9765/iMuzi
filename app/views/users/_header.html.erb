@@ -15,4 +15,12 @@
       <i class="fa fa-star"></i>
     <%end%>
   <%end%>
+  <br>
+  <div id="fa-star-money">
+    <% (0..@user.money_star_count).each do |star_num|%>
+      <%if star_num != 0%>
+        <i class="fa fa-star" ></i>
+      <%end%>
+    <%end%>
+  </div>
 </div>

@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     self.star_records.last.free_star_count   
   end 
 
+  def money_star_count
+    self.star_records.last.money_star_count   
+  end 
+
   def role
     if self.profile != nil
       self.profile.role

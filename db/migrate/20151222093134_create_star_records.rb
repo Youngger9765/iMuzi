@@ -2,6 +2,7 @@ class CreateStarRecords < ActiveRecord::Migration
   def change
     create_table :star_records do |t|
       t.integer     :user_id
+      t.integer     :song_id
       t.string      :action
       t.string      :status
       t.integer     :free_star_count

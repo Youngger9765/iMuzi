@@ -16,11 +16,74 @@
   </div>
   <br>
   <br>
-  <%= f.label :introduction, "介紹 - 選此首歌的意義"  %>
+  <%= f.label :introduction, "作品介紹 (選此首歌的意義或想問的問題)"  %>
   <%= f.text_area :introduction, class: 'form-control' , :rows=>"5"%>
 
   <%#= f.label :picture, "封面圖片200x200" %>
   <%#= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'form-control'  %>
+
+
+    <p>上傳用途？</p>
+
+    <div>
+      <input type="radio" id="radio1" name="song[use]" class="switch" value="hide"
+            <%if @song.use == "hide"%>
+              checked="checked"
+            <%end%>
+      />
+      <label for="radio1">隱藏不公開</label>
+    </div>
+    <br>
+    <div>
+      <input  type="radio" id="radio2" name="song[use]" class="switch" value="study"
+              <%if @current_user && current_user.star_records.last.free_star_count == 0 && current_user.star_records.last.money_star_count == 0 %> 
+                disabled="disabled" 
+              <%end%>
+              <%if @song.use == "study"%>
+                checked="checked"
+              <%end%>
+       />
+      <label for="radio2">公開請老師幫忙評比（請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）</label>
+    </div>
+    <br>
+    <div> 
+      <input type="radio" id="radio3" name="song[use]" class="switch" value="battle"
+            <%if @song.use == "battle"%>
+              checked="checked"
+            <%end%>
+      />
+      <label for="radio3">參加<%=Time.now.month%>月比賽</label>
+    </div>
+    
+    <br>
+    <p>若公開評比，想邀請哪位老師講評？</p>
+
+    <div>
+      <input type="radio" id="teacher1" name="song[teacher_choice]" class="switch" value="小久老師"
+        <%if @song.teacher_choice == "小久老師"%>
+          checked="checked"
+        <%end%>
+      />
+      <label for="teacher1">小久老師</label>
+    </div>
+    <br>
+    <div>
+      <input type="radio" id="teacher2" name="song[teacher_choice]" class="switch" value="小龍老師" 
+        <%if @song.teacher_choice == "小龍老師"%>
+          checked="checked"
+        <%end%>
+      />
+      <label for="teacher2">小龍老師</label>
+    </div>
+    <br>
+    <div> 
+      <input type="radio" id="teacher3" name="song[teacher_choice]" class="switch" value="小胖老師"
+        <%if @song.teacher_choice == "小胖老師"%>
+          checked="checked"
+        <%end%>
+      />
+      <label for="teacher3">小胖老師</label>
+    </div>
 
   <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
 
