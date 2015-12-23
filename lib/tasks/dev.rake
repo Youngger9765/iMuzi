@@ -33,10 +33,22 @@ namespace :dev do
                       nissimos reprehenderit molesti
                       as facilis, ut dolorem ipsam i
                       ure natus officia."
+      if u.id%2 ==0
+        use = "study"
+        if u.id%3 ==0
+          teacher = "小龍老師"
+        else
+          teacher = "小久老師"
+        end
+      else
+        use = "battle"
+      end
       u.songs.create!(  name: name,
                         singer: singer,
                         link: link,
                         introduction: introduction,
+                        use: use,
+                        teacher_choice: teacher,
                     )
     end
   end
