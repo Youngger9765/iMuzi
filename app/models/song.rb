@@ -4,6 +4,7 @@ class Song < ActiveRecord::Base
   validates_presence_of :name, :link
   validate  :picture_size
   has_many :comments, dependent: :destroy
+  has_many :star_records
 
   has_many :likings, dependent: :destroy
   has_many :like_users, :through => :likings , :source => :user

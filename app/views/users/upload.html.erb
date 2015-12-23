@@ -44,10 +44,35 @@
         </div>
         <div class="clearfix"></div>
         <div class="song-footer">
-          <%if current_user == @user%>
-            <%=link_to "編輯", edit_song_path(s), :class=> "btn btn-primary btn-xs"%>
-            <%=link_to "刪除", song_path(s), method:"delete", :class=> "btn btn-danger btn-xs pull-right",data: { confirm: "確定刪除?" }%>
+          <br>
+          <%if s.use == "study"%>
+            <div class="song_teacher_choice btn btn-success">
+              <%if s.star_records.last.action == "use_free_star"%>
+                <i class="fa fa-star"></i><%=s.teacher_choice%>
+              <%elsif s.star_records.last.action == "use_money_star"%>
+                <span id="fa-star-money">
+                  <i class="fa fa-star  "></i><%=s.teacher_choice%>
+                </span>
+              <%end%>
+            </div> 
+          <%elsif s.use != "study"%>
+            <div class="song_use btn btn-success">
+              <%if s.use == "battle"%>
+                參賽用
+              <%elsif s.use == "hide"%>
+                不公開
+              <%end%>
+            </div>            
           <%end%>
+          <%if current_user == @user%>
+            <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" } do%>
+              <i class="fa fa-trash pull-right"></i>
+            <%end%>
+            <%=link_to edit_song_path(s) do%>
+              <i class="fa fa-pencil-square pull-right"></i>
+            <%end%>
+          <%end%>
+          
         </div>
         <div class="clearfix"></div>
         <% if s.last_teacher_video_comment%>
