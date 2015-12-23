@@ -156,7 +156,7 @@ class SongsController < ApplicationController
   end
 
   def battle
-    @songs = Song.all
+    @songs = Song.where(:use =>"battle")
 
     if current_user
       @comment = current_user.comments.build
@@ -164,7 +164,7 @@ class SongsController < ApplicationController
   end
 
   def dojo
-    @songs = Song.all
+    @songs = Song.where(:use =>"study")
 
     if current_user
       @comment = current_user.comments.build

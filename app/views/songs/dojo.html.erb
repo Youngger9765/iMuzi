@@ -33,6 +33,20 @@
             <% end %>
           </h4>
         </div>  
+        <br>
+          <%if s.use == "study"%>
+            <div class="song_teacher_choice btn btn-success">
+                <%=s.teacher_choice%>
+            </div> 
+          <%elsif s.use != "study"%>
+            <div class="song_use btn btn-success">
+              <%if s.use == "battle"%>
+                參賽用
+              <%elsif s.use == "hide"%>
+                不公開
+              <%end%>
+            </div>            
+          <%end%>
         <div class="clearfix"></div>
       </div>
 
