@@ -1,0 +1,46 @@
+<%= render "/users/header"%>
+
+<div class="col-md-6 ">
+  <%=form_for @profile, :url => profile_path(current_user,current_user), :method => :PATCH do |f| %>
+    <%= f.label :username, "姓名" %>
+    <%= f.text_field :username, class: 'form-control' %>
+
+    <%= f.label :nickname, "暱稱" %>
+    <%= f.text_field :nickname, class: 'form-control' %>
+
+    <%= f.label :about, "個人敘述" %>
+    <%= f.text_area :about, class: 'form-control' %>
+
+    <hr>
+    想讓大家更認識你嗎？
+    <br>
+    <br>
+    <%= f.label :age, "年齡" %>
+    <%= f.select :age,["","16以下","16~19","20~29","30~39","40~49","50以上","秘密"], class: 'form-control' %>
+
+    <%= f.label :location, "所在地" %>
+    <%= f.text_area :location, class: 'form-control' %>
+
+    <%= f.label :gender, "性別" %>
+    <%= f.select :gender,["","其他","男","女",], class: 'form-control' %>
+
+    <%= f.label :birthday, "生日" %>
+    <%= f.text_field :birthday,class: 'form-control', :"data-provide" => 'datepicker'%>
+
+    <%= f.label :job, "工作" %>
+    <%= f.text_field :job, class: 'form-control' %>
+
+    <%= f.label :fb_link, "FB連結" %>
+    <%= f.text_field :fb_link, class: 'form-control' %>
+
+    <%= f.label :locale, "語言" %>
+    <%= f.text_field :locale,class: 'form-control' %>
+
+    <%= f.submit "確認", class: "btn btn-primary form-control" %>
+  <%end%>
+</div>
+
+<script>
+  $('.input-group').datepicker({
+});
+</script>

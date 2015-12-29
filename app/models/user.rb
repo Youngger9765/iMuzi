@@ -62,8 +62,8 @@ class User < ActiveRecord::Base
   def photo
     if self.picture
       self.picture
-    elsif self.profile && self.profile.fb_image
-      self.profile.fb_image
+    elsif self.profile && self.profile.image
+      self.profile.image
     else
       "head.jpg"
     end
@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
     user.save!
 
     profile = user.create_profile
-    profile.fb_image = auth.info.image
+    profile.image = auth.info.image
     profile.username = auth.info.name
     profile.save!
 

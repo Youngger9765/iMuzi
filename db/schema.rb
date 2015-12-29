@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223044426) do
+ActiveRecord::Schema.define(version: 20151225144244) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -75,12 +75,20 @@ ActiveRecord::Schema.define(version: 20151223044426) do
   create_table "profiles", force: :cascade do |t|
     t.string   "username",   limit: 255
     t.integer  "user_id",    limit: 4
-    t.integer  "location",   limit: 4
+    t.string   "location",   limit: 255
     t.string   "status",     limit: 255
-    t.string   "fb_image",   limit: 255
+    t.string   "image",      limit: 255
     t.string   "role",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "nickname",   limit: 255
+    t.text     "about",      limit: 65535
+    t.string   "job",        limit: 255
+    t.string   "gender",     limit: 255
+    t.string   "birthday",   limit: 255
+    t.string   "age",        limit: 255
+    t.string   "locale",     limit: 255
+    t.string   "fb_link",    limit: 255
   end
 
   add_index "profiles", ["location"], name: "index_profiles_on_location", using: :btree
@@ -137,6 +145,15 @@ ActiveRecord::Schema.define(version: 20151223044426) do
     t.string   "fb_uid",                 limit: 255
     t.string   "fb_token",               limit: 255
     t.integer  "likings_count",          limit: 4,     default: 0
+    t.string   "fb_image",               limit: 255
+    t.string   "gender",                 limit: 255
+    t.string   "birthday",               limit: 255
+    t.string   "location",               limit: 255
+    t.string   "job",                    limit: 255
+    t.string   "locale",                 limit: 255
+    t.string   "fb_link",                limit: 255
+    t.text     "fb_raw",                 limit: 65535
+    t.text     "fb_extra",               limit: 65535
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

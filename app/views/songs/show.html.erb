@@ -26,7 +26,7 @@
           <div class="panel-body">
             <span class=" <%=comment_class_by(c.role)%>">
               <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
-              <%=link_to c.user.name, user_path(c.user)%>
+              <%=link_to c.user.profile.username, user_path(c.user)%>
               <%if c.role =="teacher"%>
                 <span> (老師評論)</span>
               <%end%>
@@ -89,10 +89,10 @@
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-4">
-            <div id="song-user-image"><%= image_tag(@song_user.picture || @song_user.profile.fb_image)%></div>
+            <div id="song-user-image"><%= image_tag(@song_user.picture || @song_user.profile.image)%></div>
           </div>
           <div class="col-md-8">
-            <h3><%=link_to @song_user.name, user_path(@song_user)%></h3>
+            <h3><%=link_to @song_user.profile.username, user_path(@song_user)%></h3>
             <div><%=@song_user.about%></div>
           </div>
         </div>  

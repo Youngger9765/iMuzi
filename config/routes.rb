@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get :upload
       get :upload2
+      resources :profiles
     end
   end
   resources :comments
