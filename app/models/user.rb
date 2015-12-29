@@ -60,9 +60,9 @@ class User < ActiveRecord::Base
   end
 
   def photo
-    if self.profile.logo.exists?
+    if self.profile.logo && self.profile.logo.exists?
       self.profile.logo
-    elsif self.profile.image.exists?
+    elsif self.profile.image
       self.profile.image
     else
       "head.jpg"
