@@ -11,6 +11,17 @@
     <%= f.label :about, "個人敘述" %>
     <%= f.text_area :about, class: 'form-control' %>
 
+    <%=f.label :logo, "個人logo"%>
+    <%=f.file_field :logo%>
+    
+    <% if @user.profile.logo.exists? %>
+        <%= image_tag(@user.profile.logo.url(:thumb))%>
+        <%= check_box_tag "destroy_logo", "1" %>刪除檔案
+    <% end %>
+    <br>
+    <br>
+    <%= f.submit "確認", class: "btn btn-primary form-control" %>
+
     <hr>
     想讓大家更認識你嗎？
     <br>

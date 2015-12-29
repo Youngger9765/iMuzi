@@ -8,6 +8,10 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    if params[:destroy_logo] == "1"
+      @profile.logo = nil
+    end
+
     if @profile.update(profile_params)
 
       flash[:success] = "更新成功!"
@@ -30,7 +34,7 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile).permit(:username, :nickname, :about, :image,
                                     :birthday, :gender, :location, :age, 
-                                    :job, :locale, :fb_link 
+                                    :job, :locale, :fb_link, :logo
                                 )
   end
 

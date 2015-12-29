@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225144244) do
+ActiveRecord::Schema.define(version: 20151229062546) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -73,22 +73,26 @@ ActiveRecord::Schema.define(version: 20151225144244) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "username",   limit: 255
-    t.integer  "user_id",    limit: 4
-    t.string   "location",   limit: 255
-    t.string   "status",     limit: 255
-    t.string   "image",      limit: 255
-    t.string   "role",       limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "nickname",   limit: 255
-    t.text     "about",      limit: 65535
-    t.string   "job",        limit: 255
-    t.string   "gender",     limit: 255
-    t.string   "birthday",   limit: 255
-    t.string   "age",        limit: 255
-    t.string   "locale",     limit: 255
-    t.string   "fb_link",    limit: 255
+    t.string   "username",          limit: 255
+    t.integer  "user_id",           limit: 4
+    t.string   "location",          limit: 255
+    t.string   "status",            limit: 255
+    t.string   "image",             limit: 255
+    t.string   "role",              limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "nickname",          limit: 255
+    t.text     "about",             limit: 65535
+    t.string   "job",               limit: 255
+    t.string   "gender",            limit: 255
+    t.string   "birthday",          limit: 255
+    t.string   "age",               limit: 255
+    t.string   "locale",            limit: 255
+    t.string   "fb_link",           limit: 255
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 4
+    t.datetime "logo_updated_at"
   end
 
   add_index "profiles", ["location"], name: "index_profiles_on_location", using: :btree
