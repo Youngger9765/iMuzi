@@ -25,11 +25,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    
   end
 
   def update
+    if @user.update(user_params)
 
+      flash[:success] = "更新成功!"
+      redirect_to edit_user_path(@user)
+    else
+      render "new"
+    end
   end
 
   def destroy
@@ -55,7 +61,9 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :nickname, :email, :about, :picture)
+    params.require(:user).permit(:name, :nickname, :email, :about, :picture,
+                                 :address   
+                                )
   end
 
   def correct_user

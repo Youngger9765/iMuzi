@@ -21,7 +21,7 @@
               <h3><%=s.name%></h3>  
             </div>
             <div class="link-word">
-              <small>by</small> <%=@user.name%>
+              <small>by</small> <%=@user.profile.username%>
             </div>
             <div class="pull-right">
               <%= time_ago_in_words(s.created_at) %> ago.

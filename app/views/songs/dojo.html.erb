@@ -1,5 +1,5 @@
 <div class="row col-md-12 col-md-offset-1">
-  <h2>Dojo</h2>
+  <h2>教學區</h2>
   <%@songs.each do |s|%>
     <div class="col-md-3 song hvr-grow">
       <div class="iframe-rwd">
@@ -13,7 +13,7 @@
             <%= s.name %>
           </div>
           <div class="link-word">
-            <small>by</small> <%=s.user.name%>
+            <small>by</small> <%=s.user.profile.username%>
           </div>
           <div class="pull-right">
             <%= time_ago_in_words(s.created_at) %> ago.

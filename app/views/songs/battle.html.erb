@@ -13,7 +13,7 @@
             <%= s.name %>
           </div>
           <div class="link-word">
-            <small>by</small> <%=s.user.name%>
+            <small>by</small> <%=s.user.profile.username%>
           </div>
           <div class="pull-right">
             <%= time_ago_in_words(s.created_at) %> ago.

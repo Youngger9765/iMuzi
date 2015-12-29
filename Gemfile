@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-datepicker-rails'
 gem "paperclip", "~> 4.3"
 gem 'impressionist'
 gem "font-awesome-rails"
