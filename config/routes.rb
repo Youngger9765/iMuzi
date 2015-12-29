@@ -4,11 +4,23 @@ Rails.application.routes.draw do
   get "/register" => "mains#register"
 
   resources :mains
-  resources :users
+  resources :users do
+    collection do 
+      get :contact
+      get :clause
+    end
+    member do
+      get :upload
+      get :upload2
+      resources :profiles
+    end
+  end
   resources :comments
   resources :songs do
     collection do
       get :youtube_teach
+      get :battle
+      get :dojo
     end
     member do
       get :like

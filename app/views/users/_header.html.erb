@@ -1,0 +1,60 @@
+<div class="col-md-3 user-profile">
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to user_path(@user), class: "col-md-4" do%>
+        <%= image_tag (@user.photo), style: "width: 80px; height: 80px; display: inline; border-radius: 10px; position: relative; right: 10px; margin:10px;"%>
+      <%end%>
+      <div class="col-md-8">
+        <div>
+          <% (0..@user.free_star_count).each do |star_num|%>
+            <%if star_num != 0%>
+              <i class="fa fa-star"></i>
+            <%end%>
+          <%end%>
+        </div>
+        <br>
+        <div id="fa-star-money">
+          <% (0..@user.money_star_count).each do |star_num|%>
+            <%if star_num != 0%>
+              <i class="fa fa-star" ></i>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+   
+  <h3 class="col-md-12">
+    <div>
+      <%=@user.profile.username%>
+      <br>
+      <small><%=@user.profile.nickname%></small>
+    </div>
+  </h3>
+  <p class="col-md-12">
+    <%=@user.profile.about%>
+  </p>
+  <p class="col-md-12">
+    年齡: <%= @user.profile.age%>
+  </p>
+  <p class="col-md-12">
+    所在地: <%= @user.profile.location%>
+  </p>
+  <p class="col-md-12">
+    性別: <%= @user.profile.gender%>
+  </p>
+  <p class="col-md-12">
+    生日: <%= @user.profile.birthday%>
+  </p>
+  <p class="col-md-12">
+    工作: <%= @user.profile.job%>
+  </p>
+  <p class="col-md-12">
+    FB: <%= @user.profile.fb_link%>
+  </p>
+  <p class="col-md-12">
+    語言: <%= @user.profile.locale%>
+  </p>
+  
+</div>

@@ -1,0 +1,90 @@
+<%= render "header"%>
+<h2>
+  已上傳歌曲
+  <span>
+    <%=link_to "新增歌曲", new_song_path, :class=> "btn btn-success"%>
+  </span>
+</h2>
+
+<div class="row">
+  
+  <div class="row col-md-9" id="user-song">
+    <%@songs.each do |s|%>
+      <div class="col-md-3 song">
+        <div class="iframe-rwd">
+          <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
+          </iframe>
+        </div>
+        <div class="song-footer">
+          <%=link_to song_path(s) do%>
+            <div class="link-word">
+              <h3><%=s.name%></h3>  
+            </div>
+            <div class="link-word">
+              <small>by</small> <%=@user.profile.username%>
+            </div>
+            <div class="pull-right">
+              <%= time_ago_in_words(s.created_at) %> ago.
+            </div>
+            <div class="clearfix"></div>
+          <%end%>
+        </div>
+        <div class="pull-right" id="like-btn">
+          <h4>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-headphones"><%= s.view_counts %></span>
+            <%end%>
+            <%= link_to song_path(s) do%>
+              <span class="fa fa-commenting-o"><%= s.comments.size %></span>
+            <%end%>
+            <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
+              <span id ="like_number-<%=s.id%>" class ="hvr-pulse-grow <%=song_like_class(s)%> "><%= s.like_users.size %></span>
+            <% end %>
+          </h4>
+        </div>
+        <div class="clearfix"></div>
+        <div class="song-footer">
+          <br>
+          <%if s.use == "study"%>
+            <div class="song_teacher_choice btn btn-success">
+              <%if s.star_records.last.action == "use_free_star"%>
+                <i class="fa fa-star"></i><%=s.teacher_choice%>
+              <%elsif s.star_records.last.action == "use_money_star"%>
+                <span id="fa-star-money">
+                  <i class="fa fa-star  "></i><%=s.teacher_choice%>
+                </span>
+              <%end%>
+            </div> 
+          <%elsif s.use != "study"%>
+            <div class="song_use btn btn-success">
+              <%if s.use == "battle"%>
+                參賽用
+              <%elsif s.use == "hide"%>
+                不公開
+              <%end%>
+            </div>            
+          <%end%>
+          <%if current_user == @user%>
+            <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" } do%>
+              <i class="fa fa-trash pull-right"></i>
+            <%end%>
+            <%=link_to edit_song_path(s) do%>
+              <i class="fa fa-pencil-square pull-right"></i>
+            <%end%>
+          <%end%>
+          
+        </div>
+        <div class="clearfix"></div>
+        <% if s.last_teacher_video_comment%>
+          <div class="panel-title comment-footer">
+          老師評論
+            <div class="iframe-rwd">
+              <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
+              </iframe>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+</div>

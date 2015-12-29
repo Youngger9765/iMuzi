@@ -24,8 +24,26 @@ class SongsController < ApplicationController
     end
 
     if @song.save
+      if @song.use == "study" 
+        user_star_record = @current_user.star_records.new(  :free_star_count => @user.star_records.last.free_star_count,  
+                                                            :money_star_count =>@user.star_records.last.money_star_count,
+                                                            :song_id => @song.id
+                                                          )
+        if user_star_record.free_star_count > 0
+          user_star_record.free_star_count -= 1 
+          user_star_record.action = "use_free_star"
+        elsif user_star_record.free_star_count ==0 && user_star_record.money_star_count > 0
+          user_star_record.money_star_count -= 1 
+          user_star_record.action = "use_money_star"
+        else user_star_record.money_star_count == 0 && user_star_record.free_star_count ==0
+          redirect_to :back
+        end
+
+        user_star_record.save!
+      end
+
       flash[:success] = "上傳成功!"
-      redirect_to @user
+      redirect_to upload_user_path(@user)
     else
       flash[:alert] = "上傳失敗! 請檢查 '歌曲名稱' 及 'youtube連結' 為必填"
       render "new"
@@ -53,13 +71,51 @@ class SongsController < ApplicationController
   end
 
   def update
+    before_use = @song.use
+
     if @song.update(song_params)
+
       if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
         @song.link = song_params[:link][32,100]
         @song.save!
       end
+
+      if before_use != "study" && @song.use == "study"
+        user_star_record = @current_user.star_records.new(  :free_star_count => @user.star_records.last.free_star_count,  
+                                                            :money_star_count =>@user.star_records.last.money_star_count,
+                                                            :song_id => @song.id
+                                                          )
+        if user_star_record.free_star_count > 0
+          user_star_record.free_star_count -= 1 
+          user_star_record.action = "use_free_star"
+        elsif user_star_record.free_star_count ==0 && user_star_record.money_star_count > 0
+          user_star_record.money_star_count -= 1 
+          user_star_record.action = "use_money_star"
+        else user_star_record.money_star_count == 0 && user_star_record.free_star_count ==0
+          redirect_to :back
+        end
+
+        user_star_record.save!
+      end
+
+      if before_use == "study" && @song.use != "study"
+
+        user_star_record = @current_user.star_records.new(:free_star_count => @user.star_records.last.free_star_count,  
+                                                          :money_star_count =>@user.star_records.last.money_star_count,
+                                                          :song_id => @song.id
+                                                          )
+        if @song.star_records.last.action == "use_free_star"
+          user_star_record.free_star_count += 1 
+          user_star_record.action = "use_free_star"
+        elsif @song.star_records.last.action == "use_money_star"
+          user_star_record.money_star_count += 1 
+          user_star_record.action = "use_money_star"
+        end
+        user_star_record.save!
+      end
+
       flash[:success] = "編輯成功!"
-      redirect_to @user
+      redirect_to upload_user_path(@user)
     else
       render "new"
     end
@@ -67,7 +123,7 @@ class SongsController < ApplicationController
 
   def destroy
     @song.destroy
-    redirect_to @user
+    redirect_to upload_user_path(@user)
   end
 
   def like
@@ -99,6 +155,22 @@ class SongsController < ApplicationController
     end
   end
 
+  def battle
+    @songs = Song.where(:use =>"battle")
+
+    if current_user
+      @comment = current_user.comments.build
+    end
+  end
+
+  def dojo
+    @songs = Song.where(:use =>"study")
+
+    if current_user
+      @comment = current_user.comments.build
+    end
+  end
+
   private
 
   def correct_user
@@ -110,6 +182,7 @@ class SongsController < ApplicationController
   end
 
   def song_params
-    params.require(:song).permit(:name, :singer, :introduction, :link, :picture)
+    params.require(:song).permit( :name, :singer, :introduction, :link, :picture,
+                                  :teacher_choice, :use)
   end
 end

@@ -7,7 +7,7 @@
             <div class="pull-left">
               <span>
                 <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
-                <%=link_to c.user.name, user_path(c.user)%>
+                <%=link_to c.user.profile.username, user_path(c.user)%>
                 <%=c.comment%>
               </span>
             </div>

@@ -261,5 +261,5 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   fb_config = YAML.load(File.read("#{Rails.root}/config/facebook.yml"))[Rails.env]
 
-  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"], scope: 'public_profile,email', info_fields: 'email, name, birthday, gender, hometown, is_verified, location, locale'
+  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"], scope: 'public_profile,email', info_fields: 'email, name'
 end

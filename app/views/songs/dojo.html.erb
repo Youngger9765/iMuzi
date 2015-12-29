@@ -1,5 +1,5 @@
-<h2>好聲音 Battle</h2>
 <div class="row col-md-12 col-md-offset-1">
+  <h2>教學區</h2>
   <%@songs.each do |s|%>
     <div class="col-md-3 song hvr-grow">
       <div class="iframe-rwd">
@@ -33,6 +33,20 @@
             <% end %>
           </h4>
         </div>  
+        <br>
+          <%if s.use == "study"%>
+            <div class="song_teacher_choice btn btn-success">
+                <%=s.teacher_choice%>
+            </div> 
+          <%elsif s.use != "study"%>
+            <div class="song_use btn btn-success">
+              <%if s.use == "battle"%>
+                參賽用
+              <%elsif s.use == "hide"%>
+                不公開
+              <%end%>
+            </div>            
+          <%end%>
         <div class="clearfix"></div>
       </div>
 

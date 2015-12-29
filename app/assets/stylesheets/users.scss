@@ -5,3 +5,36 @@
 #user-song .song{
   width: 240px;
 }
+
+.user-profile .fa-star{
+  font-size: 40px;
+  color: gold;
+}
+
+.user-profile #fa-star-money .fa-star{
+  font-size: 40px;
+  color: red;
+}
+
+.song_teacher_choice {
+  .fa-star{
+    font-size: 20px;
+    color: gold;
+  }
+}
+
+#fa-star-money .fa-star{
+  font-size: 20px;
+  color: red;
+}
+
+.song-footer {
+  .fa-pencil-square{
+    font-size: 30px;
+    color: blue;
+  }
+  .fa-trash{
+    font-size: 30px;
+    color: red;
+  }
+}
