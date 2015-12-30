@@ -1,0 +1,72 @@
+<h4>教師專區</h4>
+
+<table class="table">
+  <tr>
+    <td>歌名</td>
+    <td>作者</td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                上傳時間<span class="caret"></span> 
+        </button>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li><%= link_to "最新", admin_songs_path(:order => "created_at_latest") %></li>
+          <li><%= link_to "最舊", admin_songs_path(:order => "created_at_oldest")  %></li>
+        </ul>
+      </div>
+
+    </td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                指定老師<span class="caret"></span> 
+        </button>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li><%= link_to "小久老師", admin_songs_path(:teacher => "小久老師") %></li>
+          <li><%= link_to "小龍老師", admin_songs_path(:teacher => "小龍老師")  %></li>
+          <li><%= link_to "全部", admin_songs_path%></li>
+        </ul>
+      </div>
+    </td>
+    <td>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                評比<span class="caret"></span> 
+        </button>
+
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li><%= link_to "尚未回應", admin_songs_path(:reply => "no")  %></li>
+          <li><%= link_to "已回應", admin_songs_path(:reply => "yes") %></li>
+          <li><%= link_to "全部", admin_songs_path%></li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+  <% @songs.each do |s|%>
+    <tr>
+      <td><%= link_to s.name, song_path(s)%></td>
+      <td><%=s.user_name%></td>
+      <td><%=s.created_at.strftime('%F')%> <%= time_ago_in_words(s.created_at) %> ago.</td>
+      <td><%=s.teacher_choice%></td>
+      <td>
+        <%if s.last_pro_comments.nil?%>
+          <%= link_to song_path(s) do%>
+            尚未回應
+          <%end%>
+        <%elsif s.last_pro_comments.role == "teacher"%>
+          <%= link_to song_path(s) do%>
+            老師已回應
+          <%end%>
+        <%elsif s.last_pro_comments.role == "student" %>
+          <%= link_to song_path(s) do%>
+            學生已回應
+          <%end%>
+        <%end%>
+      </td>
+    </tr>
+  <%end%>
+
+
+</table>
