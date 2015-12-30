@@ -18,6 +18,14 @@ class Song < ActiveRecord::Base
     self.comments.where("role=? AND status=? AND link !=?","teacher","professional","").last
   end
 
+  def user_name
+    self.user.profile.username
+  end
+
+  def last_pro_comments
+    self.comments.where(:status => "professional").last
+  end
+
   private
   def picture_size
     if picture.size > 5.megabytes

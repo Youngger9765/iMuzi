@@ -4,18 +4,22 @@ Rails.application.routes.draw do
   get "/register" => "mains#register"
 
   resources :mains
+
   resources :users do
     collection do 
       get :contact
       get :clause
     end
+
     member do
       get :upload
       get :upload2
       resources :profiles
     end
   end
+
   resources :comments
+  
   resources :songs do
     collection do
       get :youtube_teach
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :songs
   end
 
   root :to => 'mains#index'
