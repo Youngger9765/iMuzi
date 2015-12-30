@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     self.profile.role == "admin"
   end
 
+  def teacher?
+    self.profile.role == "teacher"
+  end
+
   def like_song?(song)
     self.like_songs.include?(song)
   end

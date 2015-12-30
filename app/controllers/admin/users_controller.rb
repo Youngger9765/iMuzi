@@ -1,5 +1,8 @@
 class Admin::UsersController < ApplicationController
 
+  before_action :authenticate_user!
+  before_action :check_admin
+
   before_action :find_user, :only => [:update]
 
   def index
@@ -25,5 +28,13 @@ class Admin::UsersController < ApplicationController
   def find_user
     @user = User.find(params[:id])
   end
+
+  private
+
+  def check_admin
+    unless current_user.admin?
+        raise ActiveRecord::RecordNotFound
+    end
+  end 
 
 end
