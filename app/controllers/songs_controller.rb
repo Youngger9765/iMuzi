@@ -57,7 +57,7 @@ class SongsController < ApplicationController
     if current_user
       @comment = current_user.comments.build
     end
-    
+
     @comments = @song.comments.where(:status => "normal")
     @pro_comments = @song.comments.where(:status => "professional")
     unless cookies["view-song-#{@song.id}"]

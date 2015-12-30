@@ -15,4 +15,20 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
+//= require masonry/jquery.masonry
+//= require masonry/modernizr-transitions
+//= require masonry/box-maker
+//= require masonry/jquery.loremimages.min
 //= require_tree .
+
+$(function() {
+  $(function() {
+    return $('#masonry-container').imagesLoaded(function() {
+      return $('#masonry-container').masonry({
+        itemSelector: '.box',
+        isFitWidth: true
+      });
+    });
+  });
+
+});
