@@ -27,14 +27,22 @@
             <% end %>
           </div>
 
-          <%if current_user == "teacher"%>
+          <%if current_user.role == "teacher"%>
             <div>
-              <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
+              <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" 
+              <%if @comment.display == "public"%>
+                checked="checked"
+              <%end%>
+              />
               <label for="radio2">公開給所有學生</label>
             </div>
             <br>
             <div>
-              <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
+              <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"
+              <%if @comment.display == "hide"%>
+                checked="checked"
+              <%end%>
+              />
               <label for="radio1">除了此學生，不公開給其他學生</label>
             </div>
           <%end%>
