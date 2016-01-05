@@ -8,7 +8,8 @@
 
   <%= f.label :link, "youtube連結(必填)" %>
   <%= f.text_field :link, class: 'form-control' %>
-  範例:www.youtube.com/watch?v=<span style="color:red">v4yHXWvIMqM</span>請貼整段或紅色這段代碼，
+  請貼上youtube整段連結<br>
+  範例:<span style="color:red">www.youtube.com/watch?v=v4yHXWvIMqM</span>
   <br>
   <%= link_to "點我看教學", youtube_teach_songs_path, :class => "btn btn-info", :remote => true%>
   <div class="hidden", id="youtube-teach">
@@ -16,7 +17,7 @@
   </div>
   <br>
   <br>
-  <%= f.label :introduction, "作品介紹 (選此首歌的意義或想問的問題)"  %>
+  <%= f.label :introduction, "作品介紹-選此首歌的意義或想問的問題(必填)"  %>
   <%= f.text_area :introduction, class: 'form-control' , :rows=>"5"%>
 
   <%#= f.label :picture, "封面圖片200x200" %>
@@ -35,17 +36,18 @@
     </div>
     <br>
     <div>
-      <input  type="radio" id="radio2" name="song[use]" class="switch" value="study"
-              <%if @current_user && current_user.star_records.last.free_star_count == 0 && current_user.star_records.last.money_star_count == 0 %> 
-                disabled="disabled" 
-              <%end%>
-              <%if @song.use == "study"%>
-                checked="checked"
-              <%end%>
-       />
+      <input type="radio" id="radio2" name="song[use]" class="switch" value="study"
+        <%if @current_user && current_user.star_records.last.free_star_count == 0 && current_user.star_records.last.money_star_count == 0 %> 
+          disabled="disabled" 
+        <%end%>
+        <%if @song.use == "study"%>
+          checked="checked"
+        <%end%>
+      />
       <label for="radio2">公開請老師幫忙評比（請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）</label>
     </div>
     <br>
+    <!--
     <div> 
       <input type="radio" id="radio3" name="song[use]" class="switch" value="battle"
             <%if @song.use == "battle"%>
@@ -55,6 +57,7 @@
       <label for="radio3">參加<%=Time.now.month%>月比賽</label>
     </div>
     
+    -->
     <br>
     <p>若公開評比，想邀請哪位老師講評？</p>
 
