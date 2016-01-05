@@ -2,6 +2,7 @@ class Song < ActiveRecord::Base
   belongs_to :user
   mount_uploader :picture, PictureUploader
   validates_presence_of :name, :link
+  validates :introduction, presence: { message: "請簡單介紹你的作品或是提供明確的問題" }
   validate  :picture_size
   has_many :comments, dependent: :destroy
   has_many :star_records

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :songs
+    resources :comments
   end
 
   root :to => 'mains#index'

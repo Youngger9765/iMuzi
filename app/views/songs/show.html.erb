@@ -6,7 +6,7 @@
     </div>
     <h3>歌曲名稱:<%=@song.name%></h3>
     <h3>原唱歌手:<%=@song.singer%></h3>
-    <h3>作品介紹:</h3>
+    <h3>作品介紹-選此首歌的意義或想問的問題</h3>
     <h4><div><%=@song.introduction%></div> </h4>
 
     <div >
@@ -28,41 +28,71 @@
               <%= image_tag (c.user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
               <%=link_to c.user.profile.username, user_path(c.user)%>
               <%if c.role =="teacher"%>
-                <span> (老師評論)</span>
+                <span> -老師評論-</span>
+              <%elsif c.role =="student"%>
+                <span> -學生回覆-</span>
               <%end%>
-              <div class="col-md-offset-2"><%=c.comment%></div>
+
+              <%if current_user && current_user.role =="teacher"%>
+                <% if c.display == "hide"%>
+                  <span>(隱藏)</span>
+                <%else%>
+                  <span>(公開評論)</span>
+                <%end%>
+              <%end%>
               
-              <%if c.link%>
+              <span class="pull-right">
                 <br>
-                <div>
-                  <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe>
-                </div> 
-              <%end%>
-
-              <% if c.logo.exists? %>
-                <br> 
-                <%= image_tag(c.logo.url(:medium))%>
-              <%end%>
-            </span>
-
-            <span class="pull-right">
-              <br>
-              <%if c.user == @user%>
-              <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
+                <%if c.user == @user%>
+                  <%=link_to "編輯", edit_comment_path(c), :class=>"btn btn-info btn-xs"%>
+                  <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
+                <%end%>
               </span>
+
+              
+
+              <%if c.display == "public" || current_user == c.user || current_user == @song.user%>
+                <div class="col-md-offset-2"><%=c.comment%></div>
+                
+                <%if c.link%>
+                  <br>
+                  <div>
+                    <iframe src="https://www.youtube.com/embed/<%=c.link%>" frameborder="0"></iframe>
+                  </div> 
+                <%end%>
+
+                <% if c.logo.exists? %>
+                  <br> 
+                  <%= image_tag(c.logo.url(:medium))%>
+                <%end%>
+
+              <%elsif c.display == "hide"%>
+                <br>
+                此內容僅限作品學生及回覆老師觀看
+
               <%end%>
             </span>
+
+            
             <div class="clearfix"></div>
           </div>
         <%end%>
       </div>
+
+      <hr>
     
-      <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
+      <%if current_user && (current_user == @song.user ||(current_user.role && current_user.role == "teacher")) %>
         <%if current_user == @song.user%>
           <% role = "student" %>
         <%else%>
           <% role = "teacher"%>
         <%end%>
+        <h3>
+          發言身份
+          <%= image_tag (current_user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+              <%=current_user.profile.username%>   <small>(<%=role%>)</small>
+        </h3>
+
         <%= form_for @comment, :url => comments_path(song: @song, role: role) do |f| %>
           <%= f.label :comment, "文字內容" %>
           <%= f.text_area :comment, class: 'form-control' %>
@@ -75,10 +105,24 @@
             <%=f.file_field :logo%>
 
             <% if @comment.logo.exists? %>
+              <%= image_tag(@comment.logo.url(:thumb))%>
               <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
             <% end %>
           </div>
 
+          <%if current_user.role == "teacher"%>
+            <div>
+              <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
+              <label for="radio2">公開給所有學生</label>
+            </div>
+            <br>
+            <div>
+              <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
+              <label for="radio1">除了此學生，不公開給其他學生</label>
+            </div>
+          <%end%>
+          
+          <br>
           <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
         <% end %>
       <%end%>

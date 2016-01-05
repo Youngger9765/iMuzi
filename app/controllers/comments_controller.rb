@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :find_song,  only: :create
 
   def create
-
     @comment = current_user.comments.new(comment_params)
 
     if params[:role]
@@ -34,10 +33,37 @@ class CommentsController < ApplicationController
     redirect_to :back
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+
+    if params[:destroy_logo] == "1"
+      @comment.logo = nil
+    end
+
+    if @comment.update(comment_params)
+      if comment_params[:link][0,32] == "https://www.youtube.com/watch?v="
+        @comment.link = comment_params[:link][32,100]
+      elsif comment_params[:link][0,32] != "https://www.youtube.com/watch?v="
+        @comment.link = nil
+      end
+      @comment.save!
+
+      flash[:success] = "更新成功!"
+      redirect_to song_path(@comment.song)
+    else
+      render "new"
+    end
+  end
+
+  def edit
+    @comment = Comment.find(params[:id])
+    @song = @comment.song
+  end
+
   private
 
   def comment_params
-    params.require(:comment).permit(:comment, :role, :link, :logo)
+    params.require(:comment).permit(:comment, :role, :link, :logo, :display)
   end
 
   def find_song
