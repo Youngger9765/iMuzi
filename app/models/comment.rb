@@ -13,4 +13,10 @@ class Comment < ActiveRecord::Base
        errors[:base] << "文字，Youtube連結，照片 請擇一"
     end
   end
+
+  def link_url
+    if self.link 
+      "https://www.youtube.com/watch?v="+self.link
+    end
+  end
 end
