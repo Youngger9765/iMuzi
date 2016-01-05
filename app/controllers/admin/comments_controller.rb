@@ -7,7 +7,8 @@ class Admin::CommentsController < ApplicationController
     @comments = Comment.all
 
     if current_user.admin?
-      @comments = Comment.all.where(:role => "teacher", :status => "professional")
+      @comments = Comment.all
+      .where(:role => "teacher", :status => "professional")
     elsif current_user.teacher?
       @comments = current_user.comments.where(:role => "teacher", :status => "professional")
     end

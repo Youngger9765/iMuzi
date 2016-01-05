@@ -7,9 +7,9 @@
   <%= f.text_field :singer, class: 'form-control' %>
 
   <%= f.label :link, "youtube連結(必填)" %>
-  <%= f.text_field :link, class: 'form-control' %>
+  <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@song.link}", :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
   請貼上youtube整段連結<br>
-  範例:<span style="color:red">www.youtube.com/watch?v=v4yHXWvIMqM</span>
+  範例:<span style="color:red">https://www.youtube.com/watch?v=v4yHXWvIMqM</span>
   <br>
   <%= link_to "點我看教學", youtube_teach_songs_path, :class => "btn btn-info", :remote => true%>
   <div class="hidden", id="youtube-teach">
