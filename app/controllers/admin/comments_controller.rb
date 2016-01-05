@@ -6,7 +6,9 @@ class Admin::CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
-    if current_user.teacher?
+    if current_user.admin?
+      @comments = Comment.all.where(:role => "teacher", :status => "professional")
+    elsif current_user.teacher?
       @comments = current_user.comments.where(:role => "teacher", :status => "professional")
     end
     
