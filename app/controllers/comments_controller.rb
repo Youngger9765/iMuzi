@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :find_song,  only: :create
 
   def create
-
     @comment = current_user.comments.new(comment_params)
 
     if params[:role]
@@ -37,7 +36,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:comment, :role, :link, :logo)
+    params.require(:comment).permit(:comment, :role, :link, :logo, :display)
   end
 
   def find_song

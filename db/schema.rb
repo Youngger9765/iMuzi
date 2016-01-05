@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229062546) do
+ActiveRecord::Schema.define(version: 20160105070419) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 20151229062546) do
     t.string   "link",              limit: 255
     t.string   "role",              limit: 255
     t.string   "status",            limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "logo_file_name",    limit: 255
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+    t.string   "display",           limit: 255,   default: "public"
   end
 
   add_index "comments", ["song_id"], name: "index_comments_on_song_id", using: :btree

@@ -1,0 +1,24 @@
+<%= render "admin/teacher_nav" %>
+
+<table class="table">
+    <tr>
+      <td>老師</td>
+      <td>評語</td>
+      <td>連結</td>
+      <td>歌曲</td>
+      <td>公開</td>
+    </tr>
+  <% @comments.each do |c|%>
+    <tr>
+      <td><%= c.user.name%></td>
+      <td><%= c.comment%></td>
+      <td>
+        <% if c.link%>
+          <%= link_to "youtube", c.link_url, :target =>"blank"%>
+        <%end%>
+      </td>
+      <td><%= link_to c.song.name, song_path(c.song), :target =>"blank"%></td> 
+      <td><%= c.display%></td>
+    </tr>
+  <%end%>
+</table>
