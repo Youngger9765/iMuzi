@@ -1,0 +1,45 @@
+ <%if current_user && (current_user == @song.user ||(current_user.role && current_user.role == "teacher")) %>
+        <%if current_user == @song.user%>
+          <% role = "student" %>
+        <%else%>
+          <% role = "teacher"%>
+        <%end%>
+        <h3>
+          發言身份
+          <%= image_tag (current_user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;" %>
+              <%=current_user.profile.username%>   <small>(<%=role%>)</small>
+        </h3>
+
+        <%= form_for @comment, :url => comment_path(@comment), :method => "PATCH" do |f| %>
+          <%= f.label :comment, "文字內容" %>
+          <%= f.text_area :comment, class: 'form-control' %>
+
+          <%= f.label :link, "Youtube" %>
+          <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@comment.link}", :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+
+          <div class="form-group">
+            <%=f.label :logo, "LOGO"%>
+            <%=f.file_field :logo%>
+
+            <% if @comment.logo.exists? %>
+              <%= image_tag(@comment.logo.url(:thumb))%>
+              <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
+            <% end %>
+          </div>
+
+          <%if current_user == "teacher"%>
+            <div>
+              <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
+              <label for="radio2">公開給所有學生</label>
+            </div>
+            <br>
+            <div>
+              <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
+              <label for="radio1">除了此學生，不公開給其他學生</label>
+            </div>
+          <%end%>
+          
+          <br>
+          <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+        <% end %>
+      <%end%>

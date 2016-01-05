@@ -29,22 +29,29 @@
               <%=link_to c.user.profile.username, user_path(c.user)%>
               <%if c.role =="teacher"%>
                 <span> -老師評論-</span>
+              <%elsif c.role =="student"%>
+                <span> -學生回覆-</span>
               <%end%>
 
               <%if current_user && current_user.role =="teacher"%>
                 <% if c.display == "hide"%>
-                  <br>
-                  <span>(老師回覆不公開，僅提供此作品學生觀看)</span>
+                  <span>(隱藏)</span>
                 <%else%>
                   <span>(公開評論)</span>
                 <%end%>
               <%end%>
-
-              <% if c.display == "hide" && current_user && (current_user != c.user && current_user != @song.user)%>
+              
+              <span class="pull-right">
                 <br>
-                此內容僅限作品學生及回覆老師觀看
+                <%if c.user == @user%>
+                  <%=link_to "編輯", edit_comment_path(c), :class=>"btn btn-info btn-xs"%>
+                  <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
+                <%end%>
+              </span>
 
-              <%elsif c.display == "public"%>
+              
+
+              <%if c.display == "public" || current_user == c.user || current_user == @song.user%>
                 <div class="col-md-offset-2"><%=c.comment%></div>
                 
                 <%if c.link%>
@@ -59,16 +66,14 @@
                   <%= image_tag(c.logo.url(:medium))%>
                 <%end%>
 
+              <%elsif c.display == "hide"%>
+                <br>
+                此內容僅限作品學生及回覆老師觀看
+
               <%end%>
             </span>
 
-            <span class="pull-right">
-              <br>
-              <%if c.user == @user%>
-              <%=link_to "刪除", comment_path(c), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
-              </span>
-              <%end%>
-            </span>
+            
             <div class="clearfix"></div>
           </div>
         <%end%>
@@ -76,7 +81,7 @@
 
       <hr>
     
-      <%if current_user == @song.user||(current_user.role && current_user.role == "teacher") %>
+      <%if current_user && (current_user == @song.user ||(current_user.role && current_user.role == "teacher")) %>
         <%if current_user == @song.user%>
           <% role = "student" %>
         <%else%>
@@ -100,24 +105,24 @@
             <%=f.file_field :logo%>
 
             <% if @comment.logo.exists? %>
+              <%= image_tag(@comment.logo.url(:thumb))%>
               <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
             <% end %>
           </div>
 
-          <div>
-            <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
-            <label for="radio2">公開給所有學生</label>
-          </div>
+          <%if current_user == "teacher"%>
+            <div>
+              <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
+              <label for="radio2">公開給所有學生</label>
+            </div>
+            <br>
+            <div>
+              <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
+              <label for="radio1">除了此學生，不公開給其他學生</label>
+            </div>
+          <%end%>
           
           <br>
-
-          <div>
-            <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
-            <label for="radio1">除了此學生，不公開給其他學生</label>
-          </div>
-          <br>
-          
-
           <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
         <% end %>
       <%end%>
