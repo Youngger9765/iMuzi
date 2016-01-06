@@ -78,7 +78,11 @@ class SongsController < ApplicationController
   def update
     before_use = @song.use
 
-    if @song.update(song_params)
+    if @song.use == "study" && @song.teacher_comments?
+      flash[:alert] = "此作品已受點評，無法編輯!"
+      redirect_to upload_user_path(@user)
+
+    elsif @song.update(song_params)
 
       if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
         @song.link = song_params[:link][32,100]
@@ -86,37 +90,11 @@ class SongsController < ApplicationController
       end
 
       if before_use != "study" && @song.use == "study"
-        user_star_record = @current_user.star_records.new(  :free_star_count => @user.star_records.last.free_star_count,  
-                                                            :money_star_count =>@user.star_records.last.money_star_count,
-                                                            :song_id => @song.id
-                                                          )
-        if user_star_record.free_star_count > 0
-          user_star_record.free_star_count -= 1 
-          user_star_record.action = "use_free_star"
-        elsif user_star_record.free_star_count ==0 && user_star_record.money_star_count > 0
-          user_star_record.money_star_count -= 1 
-          user_star_record.action = "use_money_star"
-        else user_star_record.money_star_count == 0 && user_star_record.free_star_count ==0
-          redirect_to :back
-        end
-
-        user_star_record.save!
+        use_star
       end
 
       if before_use == "study" && @song.use != "study"
-
-        user_star_record = @current_user.star_records.new(:free_star_count => @user.star_records.last.free_star_count,  
-                                                          :money_star_count =>@user.star_records.last.money_star_count,
-                                                          :song_id => @song.id
-                                                          )
-        if @song.star_records.last.action == "use_free_star"
-          user_star_record.free_star_count += 1 
-          user_star_record.action = "use_free_star"
-        elsif @song.star_records.last.action == "use_money_star"
-          user_star_record.money_star_count += 1 
-          user_star_record.action = "use_money_star"
-        end
-        user_star_record.save!
+        restore_star
       end
 
       flash[:success] = "編輯成功!"
@@ -127,8 +105,17 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song.destroy
-    redirect_to upload_user_path(@user)
+    if @song.use == "study" && !@song.teacher_comments?
+      restore_star
+      @song.destroy
+      redirect_to upload_user_path(@user) 
+
+    elsif @song.use == "study" && @song.teacher_comments?
+      flash[:alert] = "此首歌曲已點評無法刪除，但可選擇隱藏或公開!"
+      redirect_to upload_user_path(@user) 
+    end
+
+    
   end
 
   def like
@@ -188,6 +175,38 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit( :name, :singer, :introduction, :link, :picture,
-                                  :teacher_choice, :use)
+                                  :teacher_choice, :use, :display)
+  end
+
+  def restore_star
+    user_star_record = @current_user.star_records.new(:free_star_count => @user.star_records.last.free_star_count,  
+                                                        :money_star_count =>@user.star_records.last.money_star_count,
+                                                        :song_id => @song.id
+                                                        )
+      if @song.star_records.last.action == "use_free_star"
+        user_star_record.free_star_count += 1 
+        user_star_record.action = "restore_free_star"
+      elsif @song.star_records.last.action == "use_money_star"
+        user_star_record.money_star_count += 1 
+        user_star_record.action = "restore_money_star"
+      end
+    user_star_record.save!
+  end
+
+  def use_star
+    user_star_record = @current_user.star_records.new(  :free_star_count => @user.star_records.last.free_star_count,  
+                                                            :money_star_count =>@user.star_records.last.money_star_count,
+                                                            :song_id => @song.id
+                                                          )
+    if user_star_record.free_star_count > 0
+      user_star_record.free_star_count -= 1 
+      user_star_record.action = "use_free_star"
+    elsif user_star_record.free_star_count ==0 && user_star_record.money_star_count > 0
+      user_star_record.money_star_count -= 1 
+      user_star_record.action = "use_money_star"
+    else user_star_record.money_star_count == 0 && user_star_record.free_star_count ==0
+      redirect_to :back
+    end
+    user_star_record.save!
   end
 end

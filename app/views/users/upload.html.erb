@@ -32,9 +32,16 @@
         </div>
         <div class="pull-right" id="like-btn">
           <h4>
-            <%= link_to song_path(s) do%>
-              <span class="fa fa-headphones"><%= s.view_counts %></span>
+            <% if s.display == "hide"%>
+              <%= link_to song_path(s) do%>
+                <span class="fa fa-lock">不公開</span>
+              <%end%>
+            <%else%>
+              <%= link_to song_path(s) do%>
+                <span class="fa fa-headphones"><%= s.view_counts %></span>
+              <%end%>
             <%end%>
+
             <%= link_to song_path(s) do%>
               <span class="fa fa-commenting-o"><%= s.comments.size %></span>
             <%end%>
@@ -56,14 +63,14 @@
                 </span>
               <%end%>
             </div> 
-          <%elsif s.use != "study"%>
-            <div class="song_use btn btn-success">
-              <%if s.use == "battle"%>
-                參賽用
-              <%elsif s.use == "hide"%>
-                不公開
-              <%end%>
-            </div>            
+          <%elsif s.use == "battle"%>
+            <div class="song_use btn btn-warning">
+              參賽用
+            </div>
+          <%elsif s.use == "hide"%>
+            <div class="song_use btn btn-info">
+              留存紀念
+            </div>           
           <%end%>
           <%if current_user == @user%>
             <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" } do%>
