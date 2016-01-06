@@ -110,7 +110,7 @@
             <% end %>
           </div>
 
-          <%if current_user.role == "teacher"%>
+          <%if role == "teacher"%>
             <div>
               <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
               <label for="radio2">公開給所有學生</label>
