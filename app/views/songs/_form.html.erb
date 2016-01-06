@@ -80,12 +80,12 @@
     </div>
     <br>
     <div> 
-      <input type="radio" id="teacher3" name="song[teacher_choice]" class="switch" value="小胖老師"
-        <%if @song.teacher_choice == "小胖老師"%>
+      <input type="radio" id="teacher3" name="song[teacher_choice]" class="switch" value="random"
+        <%if @song.teacher_choice == "random"%>
           checked="checked"
         <%end%>
       />
-      <label for="teacher3">小胖老師</label>
+      <label for="teacher3">我沒有意見，由iMuzi幫忙指派</label>
     </div>
 
   <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
