@@ -1,4 +1,5 @@
 <%= render "/users/header"%>
+<%= render "/users/nav"%>
 
 <div class="col-md-6 ">
   <%=form_for @profile, :url => profile_path(current_user,current_user), :method => :PATCH do |f| %>

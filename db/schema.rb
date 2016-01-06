@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105070419) do
+ActiveRecord::Schema.define(version: 20160106081027) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -109,11 +109,12 @@ ActiveRecord::Schema.define(version: 20160105070419) do
     t.string   "picture",        limit: 255
     t.integer  "views_count",    limit: 4
     t.integer  "user_id",        limit: 4
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "likings_count",  limit: 4,     default: 0
     t.string   "use",            limit: 255,   default: "hide"
     t.string   "teacher_choice", limit: 255
+    t.string   "display",        limit: 255,   default: "public"
   end
 
   add_index "songs", ["user_id"], name: "index_songs_on_user_id", using: :btree
