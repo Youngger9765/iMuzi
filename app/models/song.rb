@@ -27,6 +27,10 @@ class Song < ActiveRecord::Base
     self.comments.where(:status => "professional").last
   end
 
+  def teacher_comments?
+    self.comments.where(:status => "professional", :role => "teacher").size > 0
+  end
+
   private
   def picture_size
     if picture.size > 5.megabytes

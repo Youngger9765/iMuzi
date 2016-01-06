@@ -22,17 +22,35 @@
 
   <%#= f.label :picture, "封面圖片200x200" %>
   <%#= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'form-control'  %>
-
+    <p>公開</p>
+    <div>
+      <input type="radio" id="diplay2" name="song[display]" class="switch" value="public"
+        <%if @song.display == "public"%>
+          checked="checked"
+        <%end%>
+      />
+      <label for="diplay2">公開</label>
+    </div>
+    <br>
+    <div>
+      <input type="radio" id="diplay1" name="song[display]" class="switch" value="hide"
+            <%if @song.display == "hide"%>
+              checked="checked"
+            <%end%>
+      />
+      <label for="diplay1">不公開(除了指定老師外，其他人無法點閱)</label>
+    </div>
+    <br>
+    <br> 
 
     <p>上傳用途？</p>
-
     <div>
       <input type="radio" id="radio1" name="song[use]" class="switch" value="hide"
             <%if @song.use == "hide"%>
               checked="checked"
             <%end%>
       />
-      <label for="radio1">隱藏不公開</label>
+      <label for="radio1">留存紀念</label>
     </div>
     <br>
     <div>
@@ -44,7 +62,7 @@
           checked="checked"
         <%end%>
       />
-      <label for="radio2">公開請老師幫忙評比（請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）</label>
+      <label for="radio2">請老師幫忙評比（請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）</label>
     </div>
     <br>
     <!--
