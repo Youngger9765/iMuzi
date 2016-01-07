@@ -30,17 +30,17 @@
             <%end%>
           </li>
         <%end%>
-
-        <li>
-          <%=link_to battle_songs_path do%>
-            <i class="fa fa-microphone"> 比賽區</i>
-          <%end%>
-        </li>    
+           
         <li>
           <%=link_to dojo_songs_path do%>
             <i class="fa fa-graduation-cap"> 教學區</i>
           <%end%>
         </li>
+        <li>
+          <%=link_to battle_songs_path do%>
+            <i class="fa fa-microphone"> 比賽區</i>
+          <%end%>
+        </li> 
         
         <% if current_user && current_user.admin?%>
           <li>
