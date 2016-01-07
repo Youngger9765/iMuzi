@@ -8,8 +8,9 @@
 
   <%= f.label :link, "youtube連結(必填)" %>
   <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@song.link}", :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
-  請貼上youtube整段連結<br>
-  範例:<span style="color:red">https://www.youtube.com/watch?v=v4yHXWvIMqM</span>
+  <h4>請貼上youtube整段連結，範例:
+    <span style="color:red">https://www.youtube.com/watch?v=v4yHXWvIMqM</span>
+  </h4>
   <br>
   <%= link_to "點我看教學", youtube_teach_songs_path, :class => "btn btn-info", :remote => true%>
   <div class="hidden", id="youtube-teach">
@@ -22,6 +23,34 @@
 
   <%#= f.label :picture, "封面圖片200x200" %>
   <%#= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'form-control'  %>
+
+  <h3>上傳用途？</h3>
+    <div>
+      <input type="radio" id="radio1" name="song[use]" class="switch" value="hide"
+            <%if @song.use == "hide"%>
+              checked="checked"
+            <%end%>
+      />
+      <label for="radio1">我還沒想到用途，先留存紀念吧</label>
+    </div>
+    <br>
+    <br>  
+    <div>
+      <input type="radio" id="radio2" name="song[use]" class="switch" value="study"
+        <%if @current_user && current_user.star_records.last.free_star_count == 0 && current_user.star_records.last.money_star_count == 0 %> 
+          disabled="disabled" 
+        <%end%>
+        <%if @song.use == "study"%>
+          checked="checked"
+        <%end%>
+      />
+      <label for="radio2">請老師幫忙評比並上傳教學區 (請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）
+      </label>
+    </div>
+    <br>
+    <br> 
+
+  <!--
     <p>公開</p>
     <div>
       <input type="radio" id="diplay2" name="song[display]" class="switch" value="public"
@@ -42,29 +71,9 @@
     </div>
     <br>
     <br> 
+    -->
 
-    <p>上傳用途？</p>
-    <div>
-      <input type="radio" id="radio1" name="song[use]" class="switch" value="hide"
-            <%if @song.use == "hide"%>
-              checked="checked"
-            <%end%>
-      />
-      <label for="radio1">留存紀念</label>
-    </div>
-    <br>
-    <div>
-      <input type="radio" id="radio2" name="song[use]" class="switch" value="study"
-        <%if @current_user && current_user.star_records.last.free_star_count == 0 && current_user.star_records.last.money_star_count == 0 %> 
-          disabled="disabled" 
-        <%end%>
-        <%if @song.use == "study"%>
-          checked="checked"
-        <%end%>
-      />
-      <label for="radio2">請老師幫忙評比（請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）</label>
-    </div>
-    <br>
+    
     <!--
     <div> 
       <input type="radio" id="radio3" name="song[use]" class="switch" value="battle"
@@ -75,7 +84,7 @@
       <label for="radio3">參加<%=Time.now.month%>月比賽</label>
     </div>
     
-    -->
+    
     <br>
     <p>若公開評比，想邀請哪位老師講評？</p>
 
@@ -105,6 +114,7 @@
       />
       <label for="teacher3">我沒有意見，由iMuzi幫忙指派</label>
     </div>
+    -->
 
   <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
 
