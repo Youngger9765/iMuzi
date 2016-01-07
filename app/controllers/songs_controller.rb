@@ -42,6 +42,14 @@ class SongsController < ApplicationController
         user_star_record.save!
       end
 
+      if @song.user.id.to_i % 4 == 0
+        @song.teacher_choice = "小龍老師"
+        @song.save!
+      else
+        @song.teacher_choice = "小九老師"
+        @song.save!
+      end
+
       flash[:success] = "上傳成功!"
       redirect_to upload_user_path(@user)
     else
@@ -148,7 +156,7 @@ class SongsController < ApplicationController
   end
 
   def battle
-    @songs = Song.where(:use =>"battle")
+    @songs = Song.where(:use =>"battle").order("created_at DESC")
 
     if current_user
       @comment = current_user.comments.build
@@ -156,7 +164,7 @@ class SongsController < ApplicationController
   end
 
   def dojo
-    @songs = Song.where(:use =>"study")
+    @songs = Song.where(:use =>"study").order("created_at DESC")
 
     if current_user
       @comment = current_user.comments.build
