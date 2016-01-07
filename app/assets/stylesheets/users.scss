@@ -16,17 +16,22 @@
   color: red;
 }
 
-.song_teacher_choice {
+#user-upload-dropdown {
   .fa-star{
     font-size: 20px;
     color: gold;
   }
+  .fa-suitcase{
+    font-size: 20px;
+    color: black;
+  }
+  #fa-star-money .fa-star{
+    font-size: 20px;
+    color: red;
+  }
 }
 
-#fa-star-money .fa-star{
-  font-size: 20px;
-  color: red;
-}
+
 
 .song-footer {
   .fa-pencil-square{
