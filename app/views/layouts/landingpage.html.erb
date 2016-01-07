@@ -23,51 +23,8 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <% if current_user %>
-            <li>
-              <%= link_to dojo_songs_path  do %>
-                <i class="fa fa-plus"></i>聆聽好聲音
-              <% end %>
-            </li>
-            <li>
-              <%= link_to mains_path do %><i class="fa fa-female"></i>我的頁面<% end %>
-            </li>
-            <li>
-              <%= link_to mains_path do %>
-                <span class="fa fa-archive" aria-hidden="true"></span>收藏
-                <% end %>
-            </li>
-            <li>
-              <%= link_to mains_path  do %>
-                <span class="fa fa-comments"></span>訊息
-              <% end %>
-            </li>
-          <li id="nav-dropdown" class="dropdown"
-            <% if current_user.created_at == current_user.updated_at %>
-            data-toggle="tooltip" data-placement="bottom" title="瀏覽個人頁面跟修改資料！"
-            <% end %>
-          >
-            <a href="#" id="nav-dropdown-a" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag (current_user.photo), style: "width: 20px; height: 20px; display: inline; border-radius: 2px;" %>
-            </a>
-            <ul id="dropdown-menu" class="dropdown-menu" style="opacity: 0.9;">
-              <li>
-                <%= image_tag (current_user.photo), style: "width: 140px; height: 140px; display: inline; border-radius: 10px; position: relative; left: 10px;" %>
-              </li>
-              <li>
-                <%= link_to mains_path  do %>
-                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>修改個人資料
-                <% end %>
-              </li>
-              <li>
-                <%= link_to('登出', destroy_user_session_path, :method => :delete) %>
-              </li>
-            </ul>
-          </li>
-          <% else %>
-            <%= link_to '立即開始', dojo_songs_path, class: " btn btn-now btn-lg" %>
-            <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
-          <% end %>
+          <%= link_to '立即開始', dojo_songs_path, class: " btn btn-now btn-lg" %>
+          <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
         </ul>
       </div>
     </div>
