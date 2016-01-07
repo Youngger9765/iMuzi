@@ -1,0 +1,13 @@
+<%if @song.use == "study"%>
+  <%if @song.star_records.last.action == "use_free_star"%>
+    <i class="fa fa-star"></i> 教學用
+  <%elsif @song.star_records.last.action == "use_money_star"%>
+    <span id="fa-star-money">
+      <i class="fa fa-star  "></i> 教學用
+    </span>
+  <%end%>
+<%elsif @song.use == "battle"%>
+  參賽用
+<%elsif @song.use == "hide"%>
+  <i class="fa fa-suitcase"></i> 留存紀念        
+<%end%>

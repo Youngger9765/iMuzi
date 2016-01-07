@@ -55,19 +55,7 @@
         <div class="song-footer">
           <div class="dropdown pull-left" id="user-upload-dropdown">
             <div class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <%if s.use == "study"%>
-                <%if s.star_records.last.action == "use_free_star"%>
-                  <i class="fa fa-star"></i> 教學用
-                <%elsif s.star_records.last.action == "use_money_star"%>
-                  <span id="fa-star-money">
-                    <i class="fa fa-star  "></i> 教學用
-                  </span>
-                <%end%>
-              <%elsif s.use == "battle"%>
-                參賽用
-              <%elsif s.use == "hide"%>
-                <i class="fa fa-suitcase"></i> 留存紀念        
-              <%end%>
+              <%= render :partial => "/songs/song_usage", :locals => { :@song=>s}%>
 
               <span class="caret"></span>
             </div>
