@@ -84,7 +84,7 @@ class SongsController < ApplicationController
 
     elsif @song.update(song_params)
 
-      if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
+      if song_params[:link] && song_params[:link][0,32] == "https://www.youtube.com/watch?v="
         @song.link = song_params[:link][32,100]
         @song.save!
       end

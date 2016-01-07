@@ -51,27 +51,39 @@
           </h4>
         </div>
         <div class="clearfix"></div>
+
         <div class="song-footer">
-          <br>
-          <%if s.use == "study"%>
-            <div class="song_teacher_choice btn btn-success">
-              <%if s.star_records.last.action == "use_free_star"%>
-                <i class="fa fa-star"></i><%=s.teacher_choice%>
-              <%elsif s.star_records.last.action == "use_money_star"%>
-                <span id="fa-star-money">
-                  <i class="fa fa-star  "></i><%=s.teacher_choice%>
-                </span>
+          <div class="dropdown pull-left" id="user-upload-dropdown">
+            <div class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <%if s.use == "study"%>
+                <%if s.star_records.last.action == "use_free_star"%>
+                  <i class="fa fa-star"></i> 教學用
+                <%elsif s.star_records.last.action == "use_money_star"%>
+                  <span id="fa-star-money">
+                    <i class="fa fa-star  "></i> 教學用
+                  </span>
+                <%end%>
+              <%elsif s.use == "battle"%>
+                參賽用
+              <%elsif s.use == "hide"%>
+                <i class="fa fa-suitcase"></i> 留存紀念        
               <%end%>
-            </div> 
-          <%elsif s.use == "battle"%>
-            <div class="song_use btn btn-warning">
-              參賽用
+
+              <span class="caret"></span>
             </div>
-          <%elsif s.use == "hide"%>
-            <div class="song_use btn btn-info">
-              留存紀念
-            </div>           
-          <%end%>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>
+                <%= link_to song_path(s, :song => {:use =>"study"}), :method =>"PATCH" do%>
+                  <i class="fa fa-star"></i> 教學用
+                <%end%>
+              </li>
+              <li>
+                <%= link_to song_path(s, :song => {:use =>"hide"}), :method =>"PATCH" do%>
+                  <i class="fa fa-suitcase"></i> 留存紀念  
+                <%end%>
+              </li>
+            </ul>
+          </div>
           <%if current_user == @user%>
             <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" } do%>
               <i class="fa fa-trash pull-right"></i>
@@ -80,7 +92,6 @@
               <i class="fa fa-pencil-square pull-right"></i>
             <%end%>
           <%end%>
-          
         </div>
         <div class="clearfix"></div>
         <% if s.last_teacher_video_comment%>
