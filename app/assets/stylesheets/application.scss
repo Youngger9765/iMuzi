@@ -48,18 +48,20 @@
 /*** masonry ***/
   
 .box.masonry-brick {
-  background-color: white;
+  background-color: black;
+  padding: 0;
+  margin: 10px;
 }
 
 #masonry-container {
-  background: ghostwhite;
-  padding: 5px;
+  background: #eee;
+  padding: 0px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 1px;
   clear: both;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  -webkit-border-radius: 1px;
+     -moz-border-radius: 1px;
+          border-radius: 1px;
 }
 
 .clearfix:before, .clearfix:after { content: ""; display: table; }
