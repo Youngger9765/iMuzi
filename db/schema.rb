@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106081027) do
+ActiveRecord::Schema.define(version: 20160112022724) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160106081027) do
     t.string   "use",            limit: 255,   default: "hide"
     t.string   "teacher_choice", limit: 255
     t.string   "display",        limit: 255,   default: "public"
+    t.string   "study_target",   limit: 255
   end
 
   add_index "songs", ["user_id"], name: "index_songs_on_user_id", using: :btree

@@ -46,20 +46,27 @@
  */
 
 /*** masonry ***/
-  
+.box{
+  background-color: white;
+  border-radius: 0px;
+} 
+
 .box.masonry-brick {
   background-color: white;
+  padding: 0;
+  margin: 10px;
+  border-radius: 0px;
 }
 
 #masonry-container {
-  background: ghostwhite;
-  padding: 5px;
+  background: #eee;
+  padding: 0px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 0;
   clear: both;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
 }
 
 .clearfix:before, .clearfix:after { content: ""; display: table; }

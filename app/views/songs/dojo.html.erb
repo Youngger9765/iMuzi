@@ -1,12 +1,12 @@
-<div class="row col-md-12 col-md-offset-1">
-  <h2>教學區</h2>
+<h2>教學區</h2>
+<div id="masonry-container" class="transitions-enabled infinite-scroll centered clearfix">
+
   <%@songs.each do |s|%>
-    <div class="col-md-3 song hvr-grow">
+    <div class="box col2 hvr-grow">
       <div class="iframe-rwd">
         <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
         </iframe>
       </div>
-      
       <div class="song-footer">
         <%=link_to song_path(s) do%>
           <div class="link-word">
@@ -33,14 +33,6 @@
             <% end %>
           </h4>
         </div>  
-        <br>        
-        <div class="song_teacher_choice btn btn-success">
-          <%if s.teacher_choice %>
-            <%=s.teacher_choice%>
-          <%else%>
-            系統指派中
-          <%end%>
-        </div>         
         <div class="clearfix"></div>
       </div>
 
