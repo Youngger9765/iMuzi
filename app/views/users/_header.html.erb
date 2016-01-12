@@ -39,29 +39,33 @@
       <small><%=@user.profile.nickname%></small>
     </div>
   </h3>
-  <p class="col-md-12">
-    <%=@user.profile.about%>
-  </p>
-  <p class="col-md-12">
-    年齡: <%= @user.profile.age%>
-  </p>
-  <p class="col-md-12">
-    所在地: <%= @user.profile.location%>
-  </p>
-  <p class="col-md-12">
-    性別: <%= @user.profile.gender%>
-  </p>
-  <p class="col-md-12">
-    生日: <%= @user.profile.birthday%>
-  </p>
-  <p class="col-md-12">
-    工作: <%= @user.profile.job%>
-  </p>
-  <p class="col-md-12">
-    FB: <%= @user.profile.fb_link%>
-  </p>
-  <p class="col-md-12">
-    語言: <%= @user.profile.locale%>
-  </p>
+
+  <div id="profile-detail">
+    <p class="col-md-12">
+      <%=@user.profile.about%>
+    </p>
+    <p class="col-md-12">
+      年齡: <%= @user.profile.age%>
+    </p>
+    <p class="col-md-12">
+      所在地: <%= @user.profile.location%>
+    </p>
+    <p class="col-md-12">
+      性別: <%= @user.profile.gender%>
+    </p>
+    <p class="col-md-12">
+      生日: <%= @user.profile.birthday%>
+    </p>
+    <p class="col-md-12">
+      工作: <%= @user.profile.job%>
+    </p>
+    <p class="col-md-12">
+      FB: <%= @user.profile.fb_link%>
+    </p>
+    <p class="col-md-12">
+      語言: <%= @user.profile.locale%>
+    </p>
+  </div>  
+  
   
 </div>
