@@ -20,7 +20,7 @@
             <div class="carousel-caption" style="padding-bottom: 60px;">
              <h1 style="color: white;">專 屬 於 你 的 圓 夢 舞 台</h1>
               <p style="color: white;">想 一 展 歌 喉 嗎？ 想 與 音 樂 達 人 切 磋 歌 藝 嗎？</p>
-              <%= link_to '如何使用', '#want-to-learn', class: "how" %>
+              <%= link_to '如何使用', '#', class: "how", id:"how-to-use-btn" %>
               <%= link_to '立即開始', dojo_songs_path, class: "now" %>
             </div>
           </div>
@@ -65,16 +65,13 @@
             <%= image_tag ('spring.jpg') %>
         </div>
         
-        <%= link_to '都有興趣！我想唱全部！', '#skills_path', class: "go-to-button" %>
+        <%= link_to '都有興趣！我想唱全部！', '#', class: "go-to-button", id:"go-to-button"%>
       </div>
     </div>
   </div>
 </div>
 </div>
-<div class="container-fluid" id="welcome-banner">
-<div class="row">
-</div>
-</div>
+
 <div class="container-fluid" id="welcome-find">
 <div class="row">
   <div class="col-sm-12">
@@ -92,7 +89,8 @@
   </div>
 </div>
 </div>
-<div class="container-fluid" id="show">
+<div class="clearfix"></div>
+<div class="container" id="show">
 <div class="row">
   <div class="col-sm-12">
     <div class="container">
@@ -159,3 +157,7 @@
   </div>
 </div>
 
+<script>
+     $('#go-to-button').click(function(){ $('html,body').animate({scrollTop:$('#sign-up').offset().top}, 2000); });
+     $('#how-to-use-btn').click(function(){ $('html,body').animate({scrollTop:$('#want-to-learn').offset().top}, 2000); });
+</script>
