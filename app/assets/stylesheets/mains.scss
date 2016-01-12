@@ -10,11 +10,14 @@
 $border :#E9E9E9;
 
 body {
-  background-color:#eee;
+  background-color:white;
   min-height: 2000px;
   padding-top: 70px;
 }
 
+.container-fluid{
+  border: 10px;
+}
 
 .register-row1{
   margin: 0;
@@ -41,6 +44,7 @@ body {
 }
 
 a {
+  font-size: 20px;
   text-decoration: none;
   &:hover {
     text-decoration: none;
@@ -51,6 +55,9 @@ a {
 .carousel {
   h1, p {
     color: #111;
+  }
+  p{
+    font-size: 20px;
   }
   height: 100vh;
   padding: 0;
@@ -110,7 +117,6 @@ a {
 }
 
 #want-to-learn {
-  height: 75vh;
   background-color: white;
   img {
     width: 200px;
@@ -141,7 +147,7 @@ a {
 }
 
 #welcome-find, #show, #interact {
-  display: flex;
+  display:  block;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -151,12 +157,16 @@ a {
   background-image: asset-url('welcome_white.png');
   color: #E15B47;
   img {
-    width: 500px;
+    width: 100%;
     height: 400px;
+    margin: 50px auto;
     display: inline-block;
   }
   h1 {
-    margin-top: 100px;
+    margin-top: 150px;
+  }
+  p{
+    font-size: 24px;
   }
 }
 
@@ -204,6 +214,9 @@ a {
 
 
 @media (max-width: 1000px) {
+  p{
+    font-size: 20px;
+  }
   .carousel {
     height: 500px;
     padding: 0;
@@ -211,6 +224,28 @@ a {
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
     z-index: 10;
+  }
+
+  #welcome-find, #show, #interact {
+    display: block;
+    align-items: center;
+    text-align: left;
+    height: 60vh;
+    color: #E15B47;
+    img {
+      width: 100%;
+      height: 200px;
+      display: block;
+      margin: 100px auto;
+    }
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      margin-top: 100px;
+    }
+    p{
+      font-size: 24px;
+    }
   }
 
   /* Declare heights because of positioning of img element */
@@ -235,24 +270,49 @@ a {
 }
 
 @media (max-width: 768px) {
+  p{
+    font-size: 18px;
+  }
+  .col-sm-6{
+    width:100%;
+  }
+  #want-to-learn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    img {
+      width: 20%;
+      height: 20%;
+    }
+    a{
+      font-size: 20px;
+    }
+
+  }
   #welcome-find, #show, #interact {
+    margin:20px;
+    height: 200%;
     display: block;
     align-items: center;
     text-align: left;
-    height: 60vh;
     color: #E15B47;
     img {
-      width: 300px;
+      width: 100%;
+      height: 300px;
       display: block;
       margin: 50px auto;
     }
     h1 {
+      font-size: 30px;
       text-align: center;
       margin-top: 40px;
     }
   }
 
   #sign-up {
+    margin-top: 200px;
     .fb-page {
       width: 200px; height: 200;
     }
@@ -282,8 +342,14 @@ a {
 }
 
 @media (max-width: 520px) {
+  .container-fluid{
+    margin: 20px;
+  }
   h1 {
-    font-size: 25px;
+    font-size: 24px;
+  }
+  p{
+    font-size: 18px;
   }
   .carousel {
     height: 350px;
@@ -292,6 +358,7 @@ a {
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
     z-index: 10;
+    margin-top:300px; 
   }
 
   /* Declare heights because of positioning of img element */
@@ -315,10 +382,11 @@ a {
   }
   .how, .now {
     margin: 10px;
-    padding: 10px;
+    padding: 15px;
     color: white;
-    font-size: 15px;
+    font-size: 24px;
     border-radius: 5px;
+    display: block;
   }
   #want-to-learn, #welcome-banner {
     display: block;
@@ -327,7 +395,7 @@ a {
     text-align: center;
     img {
       width: 70px;
-      margin: 2px;
+      height: 70px;
     }
   }
   .go-to-button {
@@ -342,26 +410,29 @@ a {
     margin-top: 50px;
     background-color: black;
     p {
-      width: 90%;
-      font-size: 12px;
+      width: 100%;
+      font-size: 20px;
       margin: 20px auto;
     }
   }
   #want-to-learn {
-    height: 400px;
+    a{
+      font-size: 20px;
+    }
   }
   #sign-up {
-    height: 400px;
+    margin-top:400px; 
     margin: 10px auto;
     .col-sm-6 {
       margin: 20px auto;
     }
   }
   #welcome-find, #show, #interact {
-    height: 400px;
+    margin: 20px;
+    height:200%;
     img {
-    margin: 0 auto;
-      width: 200px;
+      margin: 10px;
+      width: 280px;
       display: block;
     }
   }
@@ -376,18 +447,32 @@ a {
     }
   }
   #welcome-find, #show, #interact {
-    height: 250px;
+    height: 200%;
+    margin: 10px;
+    height:200%;
     img {
-      margin: 0 auto;
-      width: 150px;
+      margin: 10px;
+      width: 200px;
+      height: 200px;
       display: block;
     }
+    p{
+      margin: 0;
+    }
+  }
+  h1{
+    font-size: 26px;
   }
   p {
-    width: 90%;
-    font-size: 10px;
+    width: 100%;
+    font-size: 16px;
+  }
+  #welcome-find img{
+    margin-top:200px; 
   }
 }
+
+
 
 
 /* forms */
