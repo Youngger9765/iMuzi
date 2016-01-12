@@ -183,7 +183,7 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit( :name, :singer, :introduction, :link, :picture,
-                                  :teacher_choice, :use, :display)
+                                  :teacher_choice, :use, :display, :study_target)
   end
 
   def restore_star

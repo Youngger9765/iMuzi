@@ -6,8 +6,10 @@
     </div>
     <h3>歌曲名稱:<%=@song.name%></h3>
     <h3>原唱歌手:<%=@song.singer%></h3>
+    <h3>學習對象或唱腔:<%=@song.study_target%></h3>
     <h3>作品介紹-選此首歌的意義或想問的問題</h3>
     <h4><div><%=@song.introduction%></div> </h4>
+
 
     <div >
       <%if flash[:success].present?%>
