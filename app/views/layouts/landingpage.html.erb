@@ -21,11 +21,11 @@
           <%= image_tag ("mic-icon2.png"), style: "width: 27px; height: 27px; display: inline-block;" %> iMuzi
         <% end %>
       </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <%= link_to '立即開始', dojo_songs_path, class: " btn btn-now btn-lg" %>
+      <div id="navbar" class=" col-md-9">
+        <div class=" col-md-offset-5">
+          <%= link_to '不登入，看看內容再說', dojo_songs_path, class: " btn btn-now btn-lg" %>
           <%= link_to '登入', register_path, class: "btn btn-info btn-lg" %>
-        </ul>
+        </div>
       </div>
     </div>
   </nav>
