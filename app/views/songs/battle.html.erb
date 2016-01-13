@@ -36,21 +36,6 @@
         <div class="clearfix"></div>
       </div>
 
-      <% if s.last_teacher_video_comment%>
-        <div class="panel-title comment-footer">
-        老師評論
-          <div class="iframe-rwd">
-            <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
-            </iframe>
-          </div>
-        </div>
-      <%end%>
-
-      <% if s.last_teacher_video_comment.blank? && current_user && current_user.role =="teacher"%>
-        <div class="comment-footer">
-          <%= render :partial => "teacher_comment", :locals => { :@song => s, :@comment => @comment} %>
-        </div>
-      <%end%>
     </div>
   <%end%>
 </div>

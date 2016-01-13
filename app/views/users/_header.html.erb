@@ -4,7 +4,7 @@
       <%= link_to user_path(@user), class: "col-md-4" do%>
         <%= image_tag (@user.photo), style: "width: 80px; height: 80px; display: inline; border-radius: 10px; position: relative; right: 10px; margin:10px;"%>
       <%end%>
-      <div class="col-md-8">
+      <div class="col-md-8" data-toggle="tooltip" data-placement="bottom" title="可用評比餘額，黃色星星為每個月補充一顆，紅色星星為付費取得">
         <%if @user.free_star_count < 4%>  
           <% (0..@user.free_star_count).each do |star_num|%>
             <%if star_num != 0%>
@@ -13,7 +13,7 @@
           <%end%>
         <%else%>
           <div>
-            <i class="fa fa-star"></i> <span> x <%=@user.free_star_count%> </span> 
+            <i class="fa fa-star" ></i> <span> x <%=@user.free_star_count%> </span> 
           </div>
         <%end%>
         <br>
@@ -39,6 +39,13 @@
       <small><%=@user.profile.nickname%></small>
     </div>
   </h3>
+  <h2>
+    <span>
+     <%=link_to "編輯個人資料", edit_profile_path(current_user,current_user.profile), :class=> "btn btn-primary"%>
+     <span class="clearfix"></span>
+     <%=link_to "我的上傳歌曲", upload_user_path(current_user), :class=> "btn btn-primary"%>
+    </span>
+  </h2>
 
   <div id="profile-detail">
     <p class="col-md-12">
