@@ -1,4 +1,4 @@
-<div class="col-md-3 user-profile">
+<div class="col-md-2 user-profile">
   <div class="row">
     <div class="col-md-12">
       <%= link_to user_path(@user), class: "col-md-4" do%>
@@ -41,9 +41,11 @@
   </h3>
   <h2>
     <span>
-     <%=link_to "編輯個人資料", edit_profile_path(current_user,current_user.profile), :class=> "btn btn-primary"%>
-     <span class="clearfix"></span>
-     <%=link_to "我的上傳歌曲", upload_user_path(current_user), :class=> "btn btn-primary"%>
+      <%=link_to "編輯個人資料", edit_profile_path(current_user,current_user.profile), :class=> "btn btn-primary"%>
+      <span class="clearfix"></span>
+      <%=link_to "我的上傳歌曲", upload_user_path(current_user), :class=> "btn btn-primary"%>
+      <span class="clearfix"></span>
+      <%=link_to "+ 新增歌曲", new_song_path, :class=> "btn btn-success"%>  
     </span>
   </h2>
 
