@@ -1,26 +1,22 @@
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
+<nav class="navbar navbar-findcond navbar-fixed-top">
+    <div class="container">
     <div class="navbar-header">
-      <button type="button" id="nav-button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <%= link_to mains_path, class: "navbar-brand" do %>
         <%= image_tag ("mic-icon2.png"), style: "width: 27px; height: 27px; display: inline-block;" %> iMuzi
       <% end %>
     </div>
-    
-
-
-    <div id="navbar" class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
         <% if current_user %>
           <li>
-            <%=link_to upload_user_path(current_user) do %>
-              <i class="fa fa-upload">上傳歌曲</i>
+            <%=link_to upload_user_path(current_user), :class=>( (current_page?(upload_user_path(current_user)))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"快速上傳自己的歌曲" do %>
+              <i class="fa fa-upload">上傳</i>
             <%end%>
             <%if teacher_comment_alert > 0 %>
               <div class="btn btn-warning btn-xs" id="btn-alert"><%=teacher_comment_alert%></div> 
@@ -29,40 +25,38 @@
         <%end%>
            
         <li>
-          <%=link_to dojo_songs_path do%>
-            <i class="fa fa-graduation-cap"> 教學區</i>
+          <%=link_to dojo_songs_path, :class=>( (current_page?(dojo_songs_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"看看別人都問些什麼問題？" do%>
+            <i class="fa fa-graduation-cap"> 教學</i>
           <%end%>
         </li>
         <li>
-          <%=link_to battle_songs_path do%>
-            <i class="fa fa-microphone"> 比賽區</i>
+          <%=link_to battle_songs_path, :class=>( (current_page?(battle_songs_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"個人秀專區"  do%>
+            <i class="fa fa-microphone"> 表演</i>
           <%end%>
         </li> 
         
         <% if current_user && current_user.admin?%>
           <li>
-            <%= link_to'後台管理', admin_users_path%>
+            <%= link_to'後台管理', admin_users_path, :class=>( (current_page?(admin_users_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"管理員使用"  %>
           </li>
         <%end%>
 
         <% if current_user && (current_user.teacher? || current_user.admin?)%>
           <li>
-            <%= link_to'教師專區', admin_songs_path%>
+            <%= link_to'教師專區', admin_songs_path, :class=>( (current_page?(admin_songs_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"教師專用"%>
           </li>
         <%end%>
-
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to contact_users_path do %>
-            <span class="fa fa-envelope" aria-hidden="true"> 聯絡我們</span>
+          <%= link_to contact_users_path, :class=>( (current_page?(contact_users_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"聯絡我們" do %>
+            <span class="fa fa-envelope" aria-hidden="true">        </span>
           <% end %>
         </li>
         
         <%if !current_user%>
           <li>
-            <%= link_to clause_users_path  do %>
+            <%= link_to clause_users_path do %>
               <span class="fa fa-file-text" aria-hidden="true"></span> 服務條款
             <% end %>
           </li>
@@ -76,7 +70,7 @@
             <li id="nav-dropdown" class="dropdown" data-toggle="tooltip" data-placement="bottom" title="瀏覽個人頁面跟修改資料！">
               <a href="#" id="nav-dropdown-a" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               
-                <%= image_tag (current_user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 2px;" %>
+                <%= image_tag (current_user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 20px;" %>
                 <% if current_user.profile.username.size > 10 %>
                   <%=current_user.profile.username[0,10]%>...
                 <%else%>
@@ -112,8 +106,10 @@
             </li>
           
         <%end%>
-      </ul>      
-    </div><!--/.nav-collapse -->
+      </ul>  
+      <form class="navbar-form navbar-right search-form" role="search">
+        <input type="text" class="form-control" placeholder="Search" />
+      </form>
+    </div>
   </div>
 </nav>
-
