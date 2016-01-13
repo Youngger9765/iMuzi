@@ -1,94 +1,88 @@
 <%= render "header"%>
-<%= render "nav"%>
 <h2>
-  個人上傳歌曲
   <span>
     <%=link_to "+ 新增歌曲", new_song_path, :class=> "btn btn-success"%>
   </span>
 </h2>
 
-<div class="row">
-  
+<div class="row" id="user-upload-card">
   <div class="row col-md-9" id="user-song">
     <%@songs.each do |s|%>
-      <div class="col-md-3 song">
-        <div class="iframe-rwd">
+      <div class="col-md-12 song">
+        <div class="iframe-rwd col-md-3">
           <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
           </iframe>
         </div>
-        <div class="song-footer">
+        <div class="song-footer col-md-6">
           <%=link_to song_path(s) do%>
             <div class="link-word">
-              <h3><%=s.name%></h3>  
-            </div>
-            <div class="link-word">
-              <small>by</small> <%=@user.profile.username%>
-            </div>
-            <div class="pull-right">
-              <%= time_ago_in_words(s.created_at) %> ago.
-            </div>
-            <div class="clearfix"></div>
+              <h4><%=s.name%> </h4> 
           <%end%>
-        </div>
-        <div class="pull-right" id="like-btn">
-          <h4>
-            <% if s.display == "hide"%>
-              <%= link_to song_path(s) do%>
-                <span class="fa fa-lock">不公開</span>
-              <%end%>
-            <%else%>
-              <%= link_to song_path(s) do%>
-                <span class="fa fa-headphones"><%= s.view_counts %></span>
-              <%end%>
-            <%end%>
-
-            <%= link_to song_path(s) do%>
-              <span class="fa fa-commenting-o"><%= s.comments.size %></span>
-            <%end%>
-            <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
-              <span id ="like_number-<%=s.id%>" class ="hvr-pulse-grow <%=song_like_class(s)%> "><%= s.like_users.size %></span>
-            <% end %>
-          </h4>
-        </div>
-        <div class="clearfix"></div>
-
-        <div class="song-footer">
-          <div class="dropdown pull-left" id="user-upload-dropdown">
-            <div class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <%= render :partial => "/songs/song_usage", :locals => { :@song=>s}%>
-
-              <span class="caret"></span>
-            </div>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li>
-                <%= link_to song_path(s, :song => {:use =>"study"}), :method =>"PATCH" do%>
-                  <i class="fa fa-star"></i> 教學用
-                <%end%>
-              </li>
-              <li>
-                <%= link_to song_path(s, :song => {:use =>"hide"}), :method =>"PATCH" do%>
-                  <i class="fa fa-suitcase"></i> 留存紀念  
-                <%end%>
-              </li>
-            </ul>
+          <span class="pull-right"><i class="fa fa-clock-o"></i> <%=s.created_at.strftime('%F')%></span>
           </div>
-          <%if current_user == @user%>
-            <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" } do%>
-              <i class="fa fa-trash pull-right"></i>
-            <%end%>
-            <%=link_to edit_song_path(s) do%>
-              <i class="fa fa-pencil-square pull-right"></i>
-            <%end%>
-          <%end%>
-        </div>
-        <div class="clearfix"></div>
-        <% if s.last_teacher_video_comment%>
-          <div class="panel-title comment-footer">
-          老師評論
-            <div class="iframe-rwd">
-              <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
-              </iframe>
+          <div class="link-word">
+            <i class="fa fa-microphone"></i> <%=@user.profile.username%>
+          </div>
+
+          <div class="pull-left" id="like-btn">
+            <h4>
+              <% if s.display == "hide"%>
+                <%= link_to song_path(s) do%>
+                  <span class="fa fa-lock">不公開</span>
+                <%end%>
+              <%else%>
+                <%= link_to song_path(s) do%>
+                  <span class="fa fa-headphones"><%= s.view_counts %></span>
+                <%end%>
+              <%end%>
+
+              <%= link_to song_path(s) do%>
+                <span class="fa fa-commenting-o"><%= s.comments.size %></span>
+              <%end%>
+              <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
+                <span id ="like_number-<%=s.id%>" class ="hvr-pulse-grow <%=song_like_class(s)%> "><%= s.like_users.size %></span>
+              <% end %>
+            </h4>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="song-control">
+            <div class="dropdown pull-left col-md-4" id="user-upload-dropdown">
+              <div class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <%= render :partial => "/songs/song_usage", :locals => { :@song=>s}%>
+
+                <span class="caret"></span>
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li>
+                  <%= link_to song_path(s, :song => {:use =>"study"}), :method =>"PATCH" do%>
+                    <i class="fa fa-star"></i> 教學用
+                  <%end%>
+                </li>
+                <li>
+                  <%= link_to song_path(s, :song => {:use =>"hide"}), :method =>"PATCH" do%>
+                    <i class="fa fa-suitcase"></i> 留存紀念  
+                  <%end%>
+                </li>
+              </ul>
             </div>
+            <%if current_user == @user%>
+              <div class="pull-right">
+                <%=link_to edit_song_path(s) do%>
+                  <i class="fa fa-pencil-square" data-toggle="tooltip" data-placement="bottom" title="編輯歌曲內容"></i>
+                <%end%>
+                <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" }, :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"刪除歌曲" do%>
+                  <i class="fa fa-trash "></i>
+                <%end%>
+              </div>
+            <%end%>
+          </div>
+        </div>
+
+        <% if s.last_teacher_video_comment%>
+          <div class="iframe-rwd col-md-2">
+            <iframe src="https://www.youtube.com/embed/<%=s.last_teacher_video_comment.link%>" frameborder="0">
+            </iframe>
           </div>
         <%end%>
       </div>

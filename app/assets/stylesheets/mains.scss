@@ -270,6 +270,22 @@ width: 100%;
 height: 100%;
 }
 
+// user-upload-card iframe
+#user-upload-card .iframe-rwd  {
+position: relative;
+padding-bottom: 38%;
+padding-top: 30px;
+height: 0;
+overflow: hidden;
+}
+#user-upload-card .iframe-rwd iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 50%;
+}
+
 .navbar{
   margin: 0;
   background-color: #eee;
