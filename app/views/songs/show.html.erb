@@ -139,7 +139,7 @@
           </div>
           <div class="col-md-8">
             <h3><%=link_to @song_user.profile.username, user_path(@song_user)%></h3>
-            <% if @song_user.profile.about.size > 50 %>
+            <% if @song_user.profile.about && @song_user.profile.about.size > 50 %>
               <div><%=@song_user.profile.about[0,50]%>...</div>
             <%else%>
               <div><%=@song_user.profile.about%></div>
