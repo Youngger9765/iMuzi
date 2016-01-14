@@ -139,17 +139,32 @@
           </div>
           <div class="col-md-8">
             <h3><%=link_to @song_user.profile.username, user_path(@song_user)%></h3>
-            <div><%=@song_user.about%></div>
+            <% if @song_user.profile.about && @song_user.profile.about.size > 50 %>
+              <div><%=@song_user.profile.about[0,50]%>...</div>
+            <%else%>
+              <div><%=@song_user.profile.about%></div>
+            <%end%>
+            
           </div>
         </div>  
       </div>
     </div>
 
     <div class="row">
-      <h3>
-        <div>歌曲名稱:<%=@song.name%></div>
-        <div>原唱歌手:<%=@song.singer%></div>
-      </h3> 
+      <div>
+        <h3>歌曲名稱:<%=@song.name%></h3>
+        <h3>原唱歌手:<%=@song.singer%></h3>
+        <%if current_user == @song.user%>
+          <div class="pull-right" id="song-control">
+            <%=link_to edit_song_path(@song) do%>
+              <i class="fa fa-pencil-square" data-toggle="tooltip" data-placement="bottom" title="編輯歌曲內容"></i>
+            <%end%>
+            <%=link_to song_path(@song), method:"delete",data: { confirm: "確定刪除?" }, :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"刪除歌曲" do%>
+              <i class="fa fa-trash "></i>
+            <%end%>
+          </div>
+        <%end%>
+      </div> 
     </div>
     
     <br>
@@ -160,13 +175,13 @@
             <i class="fa fa-headphones"> <%= @song.view_counts %></i>
           </span>
         </div>
-        <hr>
+        <br>
         <%= link_to '#comment-discuss-area', :id =>"comment-discuss-area-btn", :class => " tip hvr-box-shadow-outset " do %>
           <span data-tooltip="點擊前往留言">
             <i class="fa fa-commenting-o"> <%= @song.comments.size %></i> 
           </span>
         <% end %>
-        <hr>
+        <br>
         <%= link_to like_song_path(@song), :remote => true, :id => "like-btn-#{@song.id}" do %>
           <span id ="like_number-<%=@song.id%>" class="hvr-pulse-grow <%=song_like_class(@song)%> "> <%= @song.like_users.size %> </span>
         <% end %>

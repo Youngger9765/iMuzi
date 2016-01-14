@@ -9,7 +9,9 @@
 
 $border :#E9E9E9;
 
+
 body {
+  font-family: "Helvetica Neue", "微軟正黑體", "Microsoft JhengHei";
   background-color:#eee;
   min-height: 2000px;
   padding-top: 70px;
@@ -49,6 +51,11 @@ a {
   &:hover {
     text-decoration: none;
   }
+}
+
+#user-song .song{
+  width: 100%;
+  height: 200px;
 }
 
 /* Carousel base class */
@@ -573,6 +580,38 @@ height: 50%;
   #profile-detail{
     display: none;
   }
+  // user-upload-card iframe
+  #user-upload-card .iframe-rwd  {
+    position: relative;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    height: 200px;
+    overflow: hidden;
+    top: 10px;
+    width: 90%;
+  }
+  #user-upload-card .iframe-rwd iframe {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 94%;
+    height: 100%;
+  }
+  #user-song .song{
+    width: 90%;
+    height: 700px;
+  }
+  .clearfix{
+    height:0px;
+  }
+  .song-control{
+    width: 100%;
+    display: inline-block;
+  }
+  .panel-title{
+    display: inline-block;
+    width: 100%;
+  }
 }
 @media (max-width: 350px) {
   #want-to-learn {
@@ -613,6 +652,32 @@ height: 50%;
   #profile-detail{
     display: none;
   }
+  // user-upload-card iframe
+  #user-upload-card .iframe-rwd  {
+    position: relative;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    height: 200px;
+    overflow: hidden;
+    top: 10px;
+    width: 90%;
+  }
+  #user-upload-card .iframe-rwd iframe {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 94%;
+    height: 100%;
+  }
+  #user-song .song{
+    width: 95%;
+    height: 700px;
+  }
+  .panel-title{
+    display: inline-block;
+    width: 100%;
+  }
+
 
 }
 

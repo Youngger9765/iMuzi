@@ -14,11 +14,35 @@
 }
 
 #song-fa-img{
-  font-size: 40px;
+  font-size: 30px;
   a {
-    font-size: 40px;
+    font-size: 30px;
     text-decoration: none;
     margin-right: 20px;
+  }
+}
+
+#song-control{
+  .fa-pencil-square{
+    font-size: 30px;
+    color: blue;
+  }
+  .fa-trash{
+    font-size: 30px;
+    color: red;
+  }
+}
+
+#user-upload-card {
+  a{
+    text-decoration: none;
+    color:  #337ab7;
+  }
+  h4{
+    font-size: 26px;
+  }
+  .song{
+    margin: 10px;
   }
 }
 
@@ -79,6 +103,8 @@
 
 #song-user-image img{
   width: 100px;
+  margin-top: 10px;
+  border-radius: 5px;
 }
 
 li{
