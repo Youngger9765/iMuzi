@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song
+  
   after_create :create_profile
   after_create :create_user_star_record
 

@@ -2,8 +2,13 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get "/register" => "mains#register"
+  get "/team_members" => "mains#team_members"
 
-  resources :mains
+  resources :mains do
+    collection do 
+      get :team_members
+    end
+  end
 
   resources :users do
     collection do 
