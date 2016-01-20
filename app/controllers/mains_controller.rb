@@ -1,6 +1,6 @@
 class MainsController < ApplicationController
 
-  layout "landingpage"
+  layout "landingpage", :only=>[:index, :register]
 
   def index
     if current_user
@@ -9,6 +9,10 @@ class MainsController < ApplicationController
   end
 
   def register
+  end
+
+  def team_members
+    
   end
 
 end
