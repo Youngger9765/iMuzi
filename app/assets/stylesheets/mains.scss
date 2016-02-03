@@ -13,8 +13,11 @@ $border :#E9E9E9;
 body {
   font-family: "Helvetica Neue", "微軟正黑體", "Microsoft JhengHei";
   background-color:white;
-  min-height: 2000px;
   padding-top: 70px;
+}
+
+.fa-angle-double-down{
+  font-size: 80px;
 }
 
 .container-fluid{
@@ -45,6 +48,16 @@ body {
   padding: 30px;
 }
 
+#welcome-find, #show, #interact{
+  a {
+    color: #E15B47;
+    &:hover {
+      color: orange;
+    }
+  }
+}
+  
+
 a {
   font-size: 20px;
   text-decoration: none;
@@ -53,9 +66,15 @@ a {
   }
 }
 
-#user-song .song{
-  width: 100%;
-  height: 200px;
+#user-song {
+  .song{
+    width: 100%;
+    height: 200px;
+  }
+  .song-footer{
+    height: 200px;
+    overflow: scroll;
+  }
 }
 
 /* Carousel base class */

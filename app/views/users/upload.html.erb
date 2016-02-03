@@ -57,12 +57,12 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li>
                   <%= link_to song_path(s, :song => {:use =>"study"}), :method =>"PATCH" do%>
-                    <i class="fa fa-star"></i> 教學用
+                    <i class="fa fa-star"></i> 請老師講評
                   <%end%>
                 </li>
                 <li>
                   <%= link_to song_path(s, :song => {:use =>"hide"}), :method =>"PATCH" do%>
-                    <i class="fa fa-suitcase"></i> 留存紀念  
+                    <i class="fa fa-suitcase"></i> 隱藏不公開  
                   <%end%>
                 </li>
               </ul>
@@ -72,8 +72,8 @@
                 <%=link_to edit_song_path(s) do%>
                   <i class="fa fa-pencil-square" data-toggle="tooltip" data-placement="bottom" title="編輯歌曲內容"></i>
                 <%end%>
-                <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" }, :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"刪除歌曲" do%>
-                  <i class="fa fa-trash "></i>
+                <%=link_to song_path(s), method:"delete",data: { confirm: "確定刪除?" } do%>
+                  <i class="fa fa-trash " data-toggle="tooltip" data-placement="bottom" title="刪除歌曲"></i>
                 <%end%>
               </div>
             <%end%>
@@ -90,3 +90,4 @@
     <%end%>
   </div>
 </div>
+

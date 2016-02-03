@@ -3,6 +3,18 @@
 <div id="masonry-container" class="transitions-enabled infinite-scroll centered clearfix">
   <%@songs.each do |s|%>
     <div class="box col2 hvr-grow">
+      <div>  
+        <%= image_tag (s.user.photo), style: "width: 40px; height: 40px; display: inline; margin: 10px;" %>
+        <% if s.user.profile.username.size > 10 %>
+          <span class="h4"><%= s.user.profile.username[0,10]%>...</span>
+        <%else%>
+          <span class="h4"><%= s.user.profile.username%> 
+            <small class="pull-right">
+              <%= time_ago_in_words(s.created_at) %>
+            </small>
+          </span>
+        <%end%>
+      </div>
       <div class="iframe-rwd">
         <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
         </iframe>
@@ -11,12 +23,6 @@
         <%=link_to song_path(s) do%>
           <div class="link-word">
             <%= s.name %>
-          </div>
-          <div class="link-word">
-            <small>by</small> <%=s.user.profile.username%>
-          </div>
-          <div class="pull-right">
-            <%= time_ago_in_words(s.created_at) %> ago.
           </div>
         <%end%>
         <div class="clearfix"></div>
