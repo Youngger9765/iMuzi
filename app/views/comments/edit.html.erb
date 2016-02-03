@@ -37,13 +37,14 @@
               <label for="radio2">公開給所有學生</label>
             </div>
             <br>
+            <br>
             <div>
               <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"
               <%if @comment.display == "hide"%>
                 checked="checked"
               <%end%>
               />
-              <label for="radio1">除了此學生，不公開給其他學生</label>
+              <label for="radio1">除了此學生，不公開給其他學生觀看</label>
             </div>
           <%end%>
           
