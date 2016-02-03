@@ -158,6 +158,19 @@ class SongsController < ApplicationController
   def battle
     @songs = Song.where(:use =>"battle").order("created_at DESC")
 
+    if params[:order]
+      if params[:order] == 'popular'
+        sort_by = 'likings_count'
+      elsif params[:order] == 'updated'
+        sort_by = 'updated_at'
+      else
+        sort_by = 'created_at'
+      end
+      
+      sort_by = sort_by + " DESC"
+      @songs = Song.where(:use =>"study").order(sort_by)
+    end
+
     if current_user
       @comment = current_user.comments.build
     end
@@ -165,6 +178,19 @@ class SongsController < ApplicationController
 
   def dojo
     @songs = Song.where(:use =>"study").order("created_at DESC")
+
+    if params[:order]
+      if params[:order] == 'popular'
+        sort_by = 'likings_count'
+      elsif params[:order] == 'updated'
+        sort_by = 'updated_at'
+      else
+        sort_by = 'created_at'
+      end
+      
+      sort_by = sort_by + " DESC"
+      @songs = Song.where(:use =>"study").order(sort_by)
+    end
 
     if current_user
       @comment = current_user.comments.build

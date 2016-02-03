@@ -1,4 +1,7 @@
 <h2><i class="fa fa-graduation-cap">教學區</i></h2>
+<%=link_to "最熱門", dojo_songs_path(:order => "popular"),:class =>"btn btn-danger"%>
+<%=link_to "最近更新", dojo_songs_path(:order => "updated"),:class =>"btn btn-info"%>
+<%=link_to "最新建立", dojo_songs_path(:order => "created_at"),:class =>"btn btn-success"%>
 <hr>
 
 <div id="masonry-container" class="transitions-enabled infinite-scroll centered clearfix">
