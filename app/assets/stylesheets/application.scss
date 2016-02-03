@@ -98,14 +98,24 @@ label{
 
 //-----------navbar-findcond-------------
 nav.navbar-findcond { background: #fff; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
-nav.navbar-findcond a { color: #f14444; }
+nav.navbar-findcond a { color: black; }
 nav.navbar-findcond ul.navbar-nav {margin-top: 4px;}
-nav.navbar-findcond ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
-nav.navbar-findcond ul.navbar-nav a.link_active { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #f14444; }
+nav.navbar-findcond ul.navbar-nav a { color:black; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
+nav.navbar-findcond ul.navbar-nav a.link_active { 
+  color: white; 
+  padding: 5px;
+  background-color: #f14444;
+  border-radius: 5px;
+  margin-top: 10px;   
+}
 nav.navbar-findcond ul.navbar-nav a:hover,
-nav.navbar-findcond ul.navbar-nav a:visited,
-nav.navbar-findcond ul.navbar-nav a:focus,
-nav.navbar-findcond ul.navbar-nav a:active { background: #fff; }
+nav.navbar-findcond ul.navbar-nav a:active { 
+  color: white; 
+  padding: 15px;
+  background-color: #f14444;
+  border-radius: 5px;
+  margin-top: 10px; 
+}
 nav.navbar-findcond ul.navbar-nav a:hover { border-color: #f14444; }
 
 nav.navbar-findcond li.divider { background: #ccc; }
@@ -119,6 +129,43 @@ nav.navbar-findcond span.badge { background: #f14444; font-weight: normal; font-
 nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #fff; }
 nav.navbar-findcond input {margin-bottom: 0px; }
 
+#dropdown-logout a:hover{ 
+  background: white; 
+  color: black;
+  padding: 0px;
+  margin-left:20px;
+  border-width:0px;
+}
+
+.navbar-right .dropdown-menu{
+  top:30px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 
 
