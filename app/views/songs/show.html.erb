@@ -53,7 +53,7 @@
 
               
 
-              <%if c.display == "public" || current_user == c.user || current_user == @song.user%>
+              <%if c.display == "public" || current_user == c.user || current_user == @song.user || current_user.role == 'teacher'%>
                 <div class="col-md-offset-2"><%=c.comment%></div>
                 
                 <%if c.link%>
@@ -121,10 +121,21 @@
             <br>  
             <div>
               <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
-              <label for="radio1">除了此學生，不公開給其他學生</label>
+              <label for="radio1">除了此學生，不公開給其他學生觀看</label>
+            </div>
+
+          <%elsif role = "student"%>
+            <div>
+              <input  type="radio" id="radio2" name="comment[display]" class="switch" value="public" checked="checked"/>
+              <label for="radio2">公開給所有人</label>
+            </div>
+            <br>
+            <br>  
+            <div>
+              <input  type="radio" id="radio1" name="comment[display]" class="switch" value="hide"/>
+              <label for="radio1">不公開，除了老師之外，其他人看不到</label>
             </div>
           <%end%>
-          
           <br>
           <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
         <% end %>
