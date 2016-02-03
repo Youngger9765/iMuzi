@@ -21,9 +21,6 @@
   <%= f.label :introduction, "作品介紹-選此首歌的意義或想問的問題(必填)"  %>
   <%= f.text_area :introduction, class: 'form-control' , :rows=>"5"%>
 
-  <%= f.label :study_target, "想學的歌手或唱腔" %>
-  <%= f.text_field :study_target, class: 'form-control' %>
-
   <%#= f.label :picture, "封面圖片200x200" %>
   <%#= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'form-control'  %>
 
@@ -34,7 +31,7 @@
               checked="checked"
             <%end%>
       />
-      <label for="radio1">我還沒想到用途，先留存紀念吧</label>
+      <label for="radio1">我還沒想到用途，先隱藏不公開吧</label>
     </div>
     <br>
     <br>  
@@ -47,7 +44,7 @@
           checked="checked"
         <%end%>
       />
-      <label for="radio2">請老師幫忙評比並上傳教學區 (請先確認星星數充足，目前可用星星數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）
+      <label for="radio2">請老師幫忙評比並上傳教學區 (目前可提供評比數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）
       </label>
     </div>
     <br>
