@@ -166,7 +166,7 @@
       <div>
         <h3>歌曲名稱:<%=@song.name%></h3>
         <h3>原唱歌手:<%=@song.singer%></h3>
-        <%if current_user == @song.user%>
+        <%if current_user == @song.user || current_user.admin?%>
           <div class="pull-right" id="song-control">
             <%=link_to edit_song_path(@song) do%>
               <i class="fa fa-pencil-square" data-toggle="tooltip" data-placement="bottom" title="編輯歌曲內容"></i>
