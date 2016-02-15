@@ -121,9 +121,11 @@ class SongsController < ApplicationController
     elsif @song.use == "study" && @song.teacher_comments?
       flash[:alert] = "此首歌曲已點評無法刪除，但可選擇隱藏或公開!"
       redirect_to upload_user_path(@user) 
-    end
-
     
+    else
+      @song.destroy
+      redirect_to upload_user_path(@user)
+    end
   end
 
   def like
