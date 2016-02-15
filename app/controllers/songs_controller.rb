@@ -116,16 +116,20 @@ class SongsController < ApplicationController
     if @song.use == "study" && !@song.teacher_comments?
       restore_star
       @song.destroy
-      redirect_to upload_user_path(@user) 
 
     elsif @song.use == "study" && @song.teacher_comments?
-      flash[:alert] = "此首歌曲已點評無法刪除，但可選擇隱藏或公開!"
-      redirect_to upload_user_path(@user) 
-    
+      if current_user.admin?
+        restore_star
+        @song.destroy
+      else  
+        flash[:alert] = "此首歌曲已點評無法刪除，但可選擇隱藏或公開!"
+      end  
+
     else
       @song.destroy
-      redirect_to upload_user_path(@user)
     end
+
+    redirect_to upload_user_path(@user) 
   end
 
   def like
