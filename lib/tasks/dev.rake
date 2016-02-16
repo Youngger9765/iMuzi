@@ -36,7 +36,7 @@ namespace :dev do
       if u.id%2 ==0
         use = "study"
         if u.id%3 ==0
-          teacher = "小龍老師"
+          teacher = "偉誌老師"
         else
           teacher = "小九老師"
         end

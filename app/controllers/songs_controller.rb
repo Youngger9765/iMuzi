@@ -43,7 +43,7 @@ class SongsController < ApplicationController
       end
 
       if @song.user.id.to_i % 4 == 0
-        @song.teacher_choice = "小龍老師"
+        @song.teacher_choice = "偉誌老師"
         @song.save!
       else
         @song.teacher_choice = "小九老師"
