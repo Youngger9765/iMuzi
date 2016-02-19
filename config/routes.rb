@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do 
       get :contact
+      post :send_mail
       get :clause
     end
 

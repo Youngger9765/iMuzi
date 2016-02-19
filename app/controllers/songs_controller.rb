@@ -60,7 +60,7 @@ class SongsController < ApplicationController
         @song.save
       end
 
-      flash[:success] = "上傳成功!"
+      flash[:notice] = "上傳成功!"
       redirect_to upload_user_path(@user)
     else
       if params[:song][:name].blank?
@@ -115,7 +115,7 @@ class SongsController < ApplicationController
         restore_star
       end
 
-      flash[:success] = "編輯成功!"
+      flash[:notice] = "編輯成功!"
       redirect_to upload_user_path(@user)
     else
       render "new"

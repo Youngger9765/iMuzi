@@ -25,7 +25,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
      @user.destroy
-     flash[:success] = "刪除成功!"
+     flash[:notice] = "刪除成功!"
      redirect_to admin_users_path
   end
 
