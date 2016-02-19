@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :mains do
     collection do 
       get :team_members
+      get :guide
     end
   end
 
