@@ -49,7 +49,12 @@ class UsersController < ApplicationController
   end
 
   def contact
-    @mail = Mailbox.new
+    if current_user
+      @user = current_user
+      @mail = Mailbox.new(:user_email => @user.email)
+    else
+      @mail = Mailbox.new
+    end
   end
 
   def send_mail
