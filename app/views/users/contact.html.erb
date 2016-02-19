@@ -7,6 +7,32 @@
   </h1>
   <h3>若您在使用體驗上有任何問題，麻煩不吝提供意見</h3>
 
-  <h3>iMuzi的客服團隊聯絡資訊如下，感謝您寶貴的意見回饋</h3> 
-  <h3><i class="fa fa-envelope">  imuziservice@gmail.com</i></h3>
+  <div class="col-md-12 ">
+    <%=form_for @mail, :url => send_mail_users_path do |f| %>
+      <% if @mail.errors.any? %>
+        <ul>
+          <% @mail.errors.messages.each do |m| %>
+            <div class="alert alert-danger" role="alert">
+              <%= m[1][0] %>
+            </div>
+          <% end %>
+        </ul>
+      <% end %>
+
+
+      <%= f.label :title, "主題" %>
+      <%= f.text_field :title, class: 'form-control' %>
+
+      <%= f.label :user_email, "使用者信箱" %>
+      <%= f.text_field :user_email, class: 'form-control' %>
+
+      <%= f.label :content, "內容" %>
+      <%= f.text_area :content, class: 'form-control' %>
+
+      <%= f.submit "寄送", class: "btn btn-primary form-control" %>
+    <%end%>
+  </div>
+
+
+
 </div>

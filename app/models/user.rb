@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   after_create :create_profile
   after_create :create_user_star_record
 
+  has_many :mailboxs, dependent: :destroy
+
   def create_profile
     self.build_profile
     self.profile.username = self.name || self.email.split("@")[0]

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   layout "application"
 
   before_action :correct_user, only: [:edit, :update]
-  before_action :authenticate_user!, except: [:index, :contact, :clause]
+  before_action :authenticate_user!, except: [:index, :clause, :contact, :send_mail]
   before_action :find_user, only: [:show, :edit, :update, :upload]
 
   impressionist
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
 
-      flash[:success] = "更新成功!"
+      flash[:notice] = "更新成功!"
       redirect_to edit_user_path(@user)
     else
       render "new"
@@ -49,6 +49,33 @@ class UsersController < ApplicationController
   end
 
   def contact
+    if current_user
+      @user = current_user
+      @mail = Mailbox.new(:user_email => @user.email)
+    else
+      @mail = Mailbox.new
+    end
+  end
+
+  def send_mail
+    if current_user
+      @user = current_user
+      @mail = @user.mailboxs.create(mail_params)
+    else
+      @mail = Mailbox.create(mail_params)
+    end
+    
+
+    
+    if @mail.save
+      flash[:notice] = "信件已成功寄出，iMuzi團隊將儘速回覆您！"
+      redirect_to contact_users_path
+
+    else
+      render "contact"      
+    end
+
+
   end
 
   def clause
@@ -57,7 +84,7 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find_by_id(params[:id])
   end
 
   def user_params
@@ -96,6 +123,10 @@ class UsersController < ApplicationController
       user_star_record.action = "add_monthly_star"
       user_star_record.save!
     end
+  end
+
+  def mail_params
+    params.require(:mailbox).permit(:title, :user_email, :content)
   end
 
 end

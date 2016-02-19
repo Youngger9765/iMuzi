@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do 
       get :contact
+      post :send_mail
       get :clause
     end
 
@@ -38,7 +39,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    
+    resources :users do
+      collection do
+        get :mailbox
+      end
+    end
     resources :songs
     resources :comments
   end

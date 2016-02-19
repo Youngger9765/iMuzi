@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
     @comment.song = @song
     if @comment.save
-      flash[:success] = "更新成功!"
+      flash[:notice] = "更新成功!"
       redirect_to :back
     else
       flash[:alert] = "文字，Youtube連結，照片 請擇一! 或檢查 Youtube 連結格式"
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
       end
       @comment.save!
 
-      flash[:success] = "更新成功!"
+      flash[:notice] = "更新成功!"
       redirect_to song_path(@comment.song)
     else
       render "new"

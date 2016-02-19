@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
 
     if @profile.update(profile_params)
 
-      flash[:success] = "更新成功!"
+      flash[:notice] = "更新成功!"
       redirect_to edit_profile_path(@user,@user)
     else
       render "new"
