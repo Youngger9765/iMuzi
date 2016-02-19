@@ -36,8 +36,14 @@
         </li> 
 
         <li>
-          <%=link_to team_members_mains_path, :class=>( (current_page?(team_members_mains_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"我們的成員"  do%>
+          <%=link_to team_members_mains_path, :class=>( (current_page?(team_members_mains_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"是誰指導你的歌藝？"  do%>
             <i class="fa fa-users"> 師資介紹</i>
+          <%end%>
+        </li> 
+
+        <li>
+          <%=link_to guide_mains_path, :class=>( (current_page?(guide_mains_path))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"網站怎麼使用呢？"  do%>
+            <i class="fa fa-info-circle">使用指南</i>
           <%end%>
         </li> 
         

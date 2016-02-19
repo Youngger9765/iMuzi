@@ -15,4 +15,8 @@ class MainsController < ApplicationController
     
   end
 
+  def guide
+    
+  end
+
 end
