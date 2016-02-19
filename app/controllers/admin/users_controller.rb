@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
 
-  before_action :find_user, :only => [:update]
+  before_action :find_user, :only => [:update, :destroy]
 
   def index
     @users = User.all
@@ -21,6 +21,12 @@ class Admin::UsersController < ApplicationController
     end
     
     redirect_to admin_users_path
+  end
+
+  def destroy
+     @user.destroy
+     flash[:success] = "刪除成功!"
+     redirect_to admin_users_path
   end
 
   private

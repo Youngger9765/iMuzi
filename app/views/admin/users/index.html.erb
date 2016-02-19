@@ -1,10 +1,11 @@
-admin users
+<h1>admin users</h1>
 
 <table class="table">
   <tr>
     <td>User Name</td>
     <td>Email</td>
     <td>Role</td>
+    <td>刪除</td>
   </tr>
   <%@users.each do |u|%>
     <tr>
@@ -23,6 +24,9 @@ admin users
             </div>
           </div>
         <%end%>
+      </td>
+      <td>
+        <%=link_to "刪除", admin_user_path(u), :method=>"delete", data: { confirm: "Are you sure?" }, :class=>"btn btn-danger btn-xs"%>
       </td>
     </tr>
   <%end%>
