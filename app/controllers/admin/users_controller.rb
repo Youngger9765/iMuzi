@@ -29,6 +29,10 @@ class Admin::UsersController < ApplicationController
      redirect_to admin_users_path
   end
 
+  def mailbox
+    @mails = Mailbox.all
+  end
+
   private
 
   def find_user
