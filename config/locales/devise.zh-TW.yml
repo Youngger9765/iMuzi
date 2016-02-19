@@ -65,6 +65,7 @@ zh-TW:
       unlocked: "您的帳號已被解鎖，現在已經登入。"
   errors:
     messages:
+      record_invalid: "record_invalid"
       already_confirmed: "已經驗證，請直接登入。"
       confirmation_period_expired: "必須在 %{period} 內驗證，請重新申請。"
       expired: "已經過期，請重新申請。"
