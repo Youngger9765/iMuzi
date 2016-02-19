@@ -7,9 +7,21 @@
   <%= f.text_field :singer, class: 'form-control' %>
 
   <%= f.label :link, "youtube連結(必填)" %>
-  <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@song.link}", :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
-  <h4>請貼上youtube整段連結，範例:
-    <span style="color:red">https://www.youtube.com/watch?v=v4yHXWvIMqM</span>
+
+  <%if @song.id.nil?%>
+    <%= f.text_field :link, :value => "#{@song.link}", :placeholder => "請貼上 Youtube 連結", class: 'form-control' %>
+
+  <%elsif @song.link.nil?%>
+    <%= f.text_field :link, :value => "", :placeholder => "請貼上 Youtube 連結", class: 'form-control' %>
+
+  <%else%>
+    <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@song.link}", :placeholder => "請貼上 Youtube 連結", class: 'form-control' %>
+  <%end%>
+
+ 
+  <h4>請貼上youtube整段連結，範例: <br>  
+    <span style="color:red">https://www.youtube.com/watch?v=</span>v4yHXWvIMqM<br>
+    <span style="color:red">https://youtu.be/</span>v4yHXWvIMqM
   </h4>
   <br>
   <%= link_to "點我看教學", youtube_teach_songs_path, :class => "btn btn-info", :remote => true%>

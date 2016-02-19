@@ -19,11 +19,21 @@ class SongsController < ApplicationController
 
   def create
     @song = @user.songs.new(song_params)
+
     if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
       @song.link = song_params[:link][32,100]
+      @song.save
+
+    elsif song_params[:link][0,17] == "https://youtu.be/"
+      @song.link = song_params[:link][17,100]
+      @song.save
+
+    else
+      flash[:alert] = "上傳失敗! 請檢查 'youtube連結' 格式"
     end
 
-    if @song.save
+    if !@song.id.nil?
+
       if @song.use == "study" 
         user_star_record = @current_user.star_records.new(  :free_star_count => @user.star_records.last.free_star_count,  
                                                             :money_star_count =>@user.star_records.last.money_star_count,
@@ -44,19 +54,19 @@ class SongsController < ApplicationController
 
       if @song.user.id.to_i % 4 == 0
         @song.teacher_choice = "偉誌老師"
-        @song.save!
+        @song.save
       else
         @song.teacher_choice = "小九老師"
-        @song.save!
+        @song.save
       end
 
       flash[:success] = "上傳成功!"
       redirect_to upload_user_path(@user)
     else
-      if @song.introduction.blank?
+      if params[:song][:name].blank?
+        flash[:alert] = "上傳失敗! 請檢查 '歌曲名稱' 為必填"
+      elsif params[:song][:introduction].blank?
         flash[:alert] = "上傳失敗! 請簡單敘述 作品簡介 或 明確的問題"
-      else  
-        flash[:alert] = "上傳失敗! 請檢查 '歌曲名稱' 及 'youtube連結' 為必填"
       end
 
       render "new"
