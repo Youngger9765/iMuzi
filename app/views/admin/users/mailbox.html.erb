@@ -24,7 +24,7 @@
       </td> 
       <td><%=mail.user_email%></td>
       <td>
-        <%=simple_format(mail.content)%>
+        <%= raw mail.content%>
       </td> 
     </tr>
   <%end%>
