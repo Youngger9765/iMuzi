@@ -193,6 +193,8 @@ class SongsController < ApplicationController
   end
 
   def dojo
+    check_user_go_to_guide?
+    
     @songs = Song.where(:use =>"study").order("created_at DESC")
 
     if params[:order]
@@ -258,5 +260,11 @@ class SongsController < ApplicationController
       redirect_to :back
     end
     user_star_record.save!
+  end
+
+  def check_user_go_to_guide?
+    if current_user && current_user.sign_in_count < 5
+      redirect_to guide_mains_path
+    end
   end
 end
