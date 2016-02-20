@@ -20,8 +20,8 @@
       <% end %>
 
 
-      <%= f.label :title, "主題" %>
-      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.label :mail_title_id, "主題" %>
+      <%= f.select :mail_title_id, MailTitle.all.map{|x| [x.name,x.id]}, class: 'form-control' %>
 
       <%= f.label :user_email, "使用者信箱" %>
       <%= f.text_field :user_email, class: 'form-control' %>

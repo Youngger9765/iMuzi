@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    
+    resources :mail_titles
     resources :users do
       collection do
         get :mailbox

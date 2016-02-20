@@ -2,8 +2,8 @@ class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
   before_action :check_admin
-
   before_action :find_user, :only => [:update, :destroy]
+  layout "admin"
 
   def index
     @users = User.all
