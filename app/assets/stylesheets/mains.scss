@@ -28,19 +28,31 @@ body {
 }
 
 #want-to-learn-start1,
-  #want-to-learn-start2,
-  #want-to-learn-start3{
-    img{
-      width: 45%;
-      height: 100%; 
-      display: block; 
-      border-radius: 30px; 
-      position: relative; 
-      left: 10px; 
-      margin-right:10px;     
-      margin: auto;
-    }
+#want-to-learn-start2{
+  img{
+    width: 45%;
+    height: 100%; 
+    display: block; 
+    border-radius: 30px; 
+    position: relative; 
+    left: 10px; 
+    margin-right:10px;     
+    margin: auto;
   }
+}
+
+#want-to-learn-start3{
+  img{
+    width: 40%;
+    height: 100%; 
+    display: block; 
+    border-radius: 30px; 
+    position: relative; 
+    left: 10px; 
+    margin-right:10px;     
+    margin: auto;
+  }
+}
 
 .container-fluid{
   border: 10px;
@@ -391,6 +403,32 @@ height: 50%;
 
 
 @media (max-width: 1000px) {
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3,
+  #welcome-find,
+  #show,
+  #interact {
+    .fa-angle-double-down{
+      display: none;
+    }
+  }
+  
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3{
+    img{
+      width: 90%;
+      height: 100%; 
+      display: block; 
+      border-radius: 30px; 
+      position: relative; 
+      left: 10px; 
+      margin-right:10px;     
+      margin: auto;
+    }
+  }
+
   p{
     font-size: 20px;
   }
@@ -407,7 +445,7 @@ height: 50%;
     display: block;
     align-items: center;
     text-align: left;
-    height: 60vh;
+    height: 100%;
     color: #E15B47;
     img {
       width: 100%;
@@ -444,9 +482,44 @@ height: 50%;
       margin: 0 auto;
     }
   }
+
+  #sign-up {
+    margin-top:400px; 
+    margin: 10px auto;
+    height: 100%;
+    .col-sm-6 {
+      margin: 20px auto;
+    }
+  }
 }
 
 @media (max-width: 768px) {
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3,
+  #welcome-find,
+  #show,
+  #interact {
+    .fa-angle-double-down{
+      display: none;
+    }
+  }
+  
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3{
+    img{
+      width: 100%;
+      height: 100%; 
+      display: block; 
+      border-radius: 30px; 
+      position: relative; 
+      left: 10px; 
+      margin-right:10px;     
+      margin: auto;
+    }
+  }
+
   p{
     font-size: 18px;
   }
@@ -489,10 +562,8 @@ height: 50%;
   }
 
   #sign-up {
-    margin-top: 200px;
-    .fb-page {
-      width: 200px; height: 200;
-    }
+    margin-top: 20px;
+    height: 100%;
   }
 
   #about {
@@ -638,6 +709,7 @@ height: 50%;
     img {
       margin: 10px;
       width: 280px;
+      margin-top: 10px;
       display: block;
     }
   }
@@ -728,8 +800,8 @@ height: 50%;
     height:200%;
     img {
       margin: 10px;
-      width: 200px;
-      height: 200px;
+      width: 100%;
+      margin-top: 10px;
       display: block;
     }
     p{
@@ -746,9 +818,7 @@ height: 50%;
   #navbar .navbar-nav li a {
     font-size: 24px;
   }
-  #welcome-find img{
-    margin-top:200px; 
-  }
+
   #profile-detail{
     display: none;
   }
