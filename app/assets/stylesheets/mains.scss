@@ -16,9 +16,19 @@ body {
   padding-top: 70px;
 }
 
-.fa-angle-double-down{
-  font-size: 80px;
+#want-to-learn-start1,
+#want-to-learn-start2,
+#want-to-learn-start3,
+#welcome-find,
+#show,
+#interact {
+  .fa-angle-double-down{
+    font-size: 80px;
+  }
 }
+
+
+
 
 .container-fluid{
   border: 10px;
