@@ -20,19 +20,29 @@
       <% end %>
 
 
-      <%= f.label :title, "主題" %>
-      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.label :mail_title_id, "主題" %>
+      <%= f.select :mail_title_id, MailTitle.all.map{|x| [x.name,x.id]}, class: 'form-control' %>
 
       <%= f.label :user_email, "使用者信箱" %>
       <%= f.text_field :user_email, class: 'form-control' %>
 
-      <%= f.label :content, "內容" %>
-      <%= f.text_area :content, class: 'form-control' %>
+      <div class="form-group">
+        <%= f.label :content, "內容(提供編輯器，必要時可使用附圖或影片功能佐助)" %>
+        <%= f.text_area :content, :class =>"froala-editor"%>
+      </div>
 
       <%= f.submit "寄送", class: "btn btn-primary form-control" %>
     <%end%>
   </div>
 
-
+<script>
+  $(function() {
+    $('.froala-editor').froalaEditor({
+      imageUploadURL: '/attachment/upload.json',
+      imageUploadMethod: 'POST',
+      placeholderText: '請輸入您的內容',
+    });
+  });
+</script>
 
 </div>

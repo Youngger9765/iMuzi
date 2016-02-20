@@ -1,13 +1,9 @@
-<h1>後台管理</h1>
-<%=link_to "管理使用者", admin_users_path, :class => "btn btn-info btn-lg"%>
-<%=link_to "管理信箱", mailbox_admin_users_path, :class => "btn btn-warning btn-lg"%>
-<br>
-<br>
-
 <table class="table">
   <tr>
     <td>user</td>
+    <td>主題</td>
     <td>信箱</td> 
+    <td>時間</td>
     <td>內容</td>
   </tr>
   
@@ -20,9 +16,17 @@
           匿名
         <%end%>
       </td>
-      <td><%=mail.user_email%></td>
       <td>
-        <%=simple_format(mail.content)%>
+        <%if mail.mail_title%>
+          <%=mail.mail_title.name%>
+        <%else%>
+          No title
+        <%end%>
+      </td> 
+      <td><%=mail.user_email%></td>
+      <td><%=mail.created_at%></td>
+      <td>
+        <%= raw mail.content%>
       </td> 
     </tr>
   <%end%>

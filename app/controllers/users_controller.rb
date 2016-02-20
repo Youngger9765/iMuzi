@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   def send_mail
     if current_user
       @user = current_user
-      @mail = @user.mailboxs.create(mail_params)
+      @mail = @user.mailboxes.create(mail_params)
     else
       @mail = Mailbox.create(mail_params)
     end
@@ -126,7 +126,7 @@ class UsersController < ApplicationController
   end
 
   def mail_params
-    params.require(:mailbox).permit(:title, :user_email, :content)
+    params.require(:mailbox).permit(:mail_title_id, :user_email, :content)
   end
 
 end

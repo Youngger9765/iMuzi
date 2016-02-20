@@ -1,0 +1,18 @@
+<div class="col-md-12 ">
+  <%= form_for [:admin, @title]  do |f| %>
+    <% if @title.errors.any? %>
+      <ul>
+        <% @title.errors.messages.each do |m| %>
+          <div class="alert alert-danger" role="alert">
+            <%= m[1][0] %>
+          </div>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= f.label :name, "主題名稱" %>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <%= f.submit "送出", class: "btn btn-primary form-control" %>
+  <%end%>
+</div>

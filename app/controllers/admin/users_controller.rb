@@ -2,8 +2,8 @@ class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
   before_action :check_admin
-
   before_action :find_user, :only => [:update, :destroy]
+  layout "admin"
 
   def index
     @users = User.all
@@ -30,7 +30,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def mailbox
-    @mails = Mailbox.all
+    @mails = Mailbox.all.order("created_at DESC")
   end
 
   private
