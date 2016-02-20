@@ -27,8 +27,20 @@ body {
   }
 }
 
-
-
+#want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3{
+    img{
+      width: 45%;
+      height: 100%; 
+      display: block; 
+      border-radius: 30px; 
+      position: relative; 
+      left: 10px; 
+      margin-right:10px;     
+      margin: auto;
+    }
+  }
 
 .container-fluid{
   border: 10px;
@@ -507,8 +519,35 @@ height: 50%;
 }
 
 @media (max-width: 520px) {
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3,
+  #welcome-find,
+  #show,
+  #interact {
+    .fa-angle-double-down{
+      display: none;
+    }
+  }
+
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3{
+    img{
+      width: 100%;
+      height: 100%; 
+      display: block; 
+      border-radius: 30px; 
+      position: relative; 
+      left: 10px; 
+      margin-right:10px;     
+      margin: auto;
+    }
+  }
+
   .container-fluid{
     margin: 20px;
+    margin-top: 150px;
   }
   h1 {
     font-size: 24px;
@@ -523,7 +562,8 @@ height: 50%;
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
     z-index: 10;
-    margin-top:300px; 
+    margin-top:10px; 
+    bottom: 0;
   }
 
   /* Declare heights because of positioning of img element */
@@ -638,6 +678,42 @@ height: 50%;
   }
 }
 @media (max-width: 350px) {
+  head{
+    margin-top: 100px;
+  }
+
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3,
+  #welcome-find,
+  #show,
+  #interact {
+    .fa-angle-double-down{
+      display: none;
+    }
+  }
+  
+  #want-to-learn-start1,
+  #want-to-learn-start2,
+  #want-to-learn-start3{
+    img{
+      width: 100%;
+      height: 100%; 
+      display: block; 
+      border-radius: 30px; 
+      position: relative; 
+      left: 10px; 
+      margin-right:10px;     
+      margin: auto;
+    }
+  }
+
+  .carousel-caption {
+    z-index: 10;
+    margin-top:10px; 
+    bottom: 0;
+  }
+
   #want-to-learn {
     height: 350px;
     img {
