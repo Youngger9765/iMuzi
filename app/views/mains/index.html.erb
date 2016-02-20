@@ -52,6 +52,40 @@
     </div>
   </div>
 </div>
+
+<div id="want-to-learn-start1">\
+<br>
+<br>
+  <%= image_tag ("land1.png") , style: "width: 45%; height: 100%; display: block; border-radius: 30px; position: relative; left: 10px; margin-right:10px;     margin: auto;"%>
+  <div class="row text-center">
+    <%= link_to '#', :id=> "go-to-learn-start2" do%>
+      <i class="fa fa-angle-double-down"></i>
+    <%end%>
+  </div>
+</div>
+
+<div id="want-to-learn-start2">
+<br>
+<br>
+  <%= image_tag ("land2.png") , style: "width: 45%; height: 100%; display: block; border-radius: 30px; position: relative; left: 10px; margin-right:10px;     margin: auto;"%>
+  <div class="row text-center">
+    <%= link_to '#', :id=> "go-to-learn-start3" do%>
+      <i class="fa fa-angle-double-down"></i>
+    <%end%>
+  </div>
+</div>
+
+<div id="want-to-learn-start3">
+<br>
+<br>
+  <%= image_tag ("land3.png") , style: "width: 40%; height: 100%; display: block; border-radius: 30px; position: relative; left: 10px; margin-right:10px;     margin: auto;"%>
+  <div class="row text-center">
+    <%= link_to '#', :id=> "go-welcome-find" do%>
+      <i class="fa fa-angle-double-down"></i>
+    <%end%>
+  </div>
+</div>
+
 <div class="container-fluid" id="want-to-learn">
 </div>
 
@@ -167,7 +201,10 @@
 
 <script>
      $('#go-to-button').click(function(){ $('html,body').animate({scrollTop:$('#sign-up').offset().top}, 1000); });
-     $('#how-to-use-btn').click(function(){ $('html,body').animate({scrollTop:$('#want-to-learn').offset().top}, 1000); });
+     $('#how-to-use-btn').click(function(){ $('html,body').animate({scrollTop:$('#want-to-learn-start1').offset().top}, 1000); });
+     $('#go-to-learn-start2').click(function(){ $('html,body').animate({scrollTop:$('#want-to-learn-start2').offset().top}, 1000); });
+     $('#go-to-learn-start3').click(function(){ $('html,body').animate({scrollTop:$('#want-to-learn-start3').offset().top}, 1000); });
+     $('#go-welcome-find').click(function(){ $('html,body').animate({scrollTop:$('#welcome-find').offset().top}, 1000); });
      $('#go-to-show').click(function(){ $('html,body').animate({scrollTop:$('#show').offset().top}, 1000); });
      $('#go-to-interact').click(function(){ $('html,body').animate({scrollTop:$('#interact').offset().top}, 1000); });
      $('#go-to-sign-up').click(function(){ $('html,body').animate({scrollTop:$('#sign-up').offset().top}, 1000); });
