@@ -30,7 +30,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def mailbox
-    @mails = Mailbox.all
+    @mails = Mailbox.all.order("created_at DESC")
   end
 
   private

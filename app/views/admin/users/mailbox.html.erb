@@ -3,6 +3,7 @@
     <td>user</td>
     <td>主題</td>
     <td>信箱</td> 
+    <td>時間</td>
     <td>內容</td>
   </tr>
   
@@ -23,6 +24,7 @@
         <%end%>
       </td> 
       <td><%=mail.user_email%></td>
+      <td><%=mail.created_at%></td>
       <td>
         <%= raw mail.content%>
       </td> 
