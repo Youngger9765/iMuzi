@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get "/register" => "mains#register"
   get "/team_members" => "mains#team_members"
+  post 'attachment/upload' => 'attachments#upload'
 
   resources :mains do
     collection do 
