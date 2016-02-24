@@ -19,4 +19,24 @@ module UsersHelper
       end  
     end
   end
+
+  def mail_alert
+
+    if current_user
+      
+      mails = Mailbox.all
+      last_mail_record = mails.last
+      last_mail_record_time = last_mail_record.created_at
+
+      last_read_mail_record = Impression.where("user_id=? AND controller_name=? AND action_name=?", current_user.id, "users","mailbox").last
+      last_read_mail_record_time = last_read_mail_record.created_at
+
+      if last_mail_record_time > last_read_mail_record_time
+        un_read_mails = mails.where("updated_at >= ?", last_read_mail_record_time)
+        un_read_mails.count
+      else
+        0
+      end  
+    end
+  end
 end

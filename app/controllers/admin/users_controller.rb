@@ -5,6 +5,8 @@ class Admin::UsersController < ApplicationController
   before_action :find_user, :only => [:update, :destroy]
   layout "admin"
 
+  impressionist :actions=>[:mailbox]
+
   def index
     @users = User.all
   end

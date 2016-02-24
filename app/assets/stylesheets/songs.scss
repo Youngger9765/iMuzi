@@ -116,9 +116,19 @@ li{
   position: absolute;
   padding: 0;
   margin: 0;
-  width: 20px;
+  width: 30px;
   border-radius: 30px;
   top: 5px;
+}
+
+#mail-alert{
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  border-radius: 30px;
+  top: 5px;
+  left: -230px;
 }
 
 .hvr-grow {
