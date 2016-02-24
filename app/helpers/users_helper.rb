@@ -26,12 +26,18 @@ module UsersHelper
       
       mails = Mailbox.all
       last_mail_record = mails.last
-      last_mail_record_time = last_mail_record.created_at
+      
+      if last_mail_record
+        last_mail_record_time = last_mail_record.created_at
+      end
 
       last_read_mail_record = Impression.where("user_id=? AND controller_name=? AND action_name=?", current_user.id, "users","mailbox").last
-      last_read_mail_record_time = last_read_mail_record.created_at
+      
+      if last_read_mail_record
+        last_read_mail_record_time = last_read_mail_record.created_at
+      end
 
-      if last_mail_record_time > last_read_mail_record_time
+      if last_mail_record_time && last_read_mail_record_time && (last_mail_record_time > last_read_mail_record_time)
         un_read_mails = mails.where("updated_at >= ?", last_read_mail_record_time)
         un_read_mails.count
       else
