@@ -1,8 +1,8 @@
 <div class="container" id="team-page">
-  <h1><i class="fa fa-users"> 師資介紹</i></h1>
+  <h1><i class="fa fa-users" id="aa"> 師資介紹</i></h1>
   <hr>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" >
       <div class="col-md-4 text-center">
         <%= image_tag ("teacher1.png") , style: "width: 70%; height: 70%; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;"%>
       </div>
@@ -30,12 +30,32 @@
         </h4>
       </div>
     </div>
+    <p class="gst"><b class="qScrollTop result"></b></p>
     
     <div class="clearfix"></div>
     <br>
     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <div class="col-md-12">
+    
+    <div id="teacher2">
+      <p>.</p>
+      <br>
+      <br>
+      <br>
+      <p class="gst"><b class="qScrollTop result"></b></p>
+    </div>
+
+    <div class="col-md-12" >
       <div class="col-md-4 text-center">
         <%= image_tag ("teacher2.jpg") , style: "width: 70%; height: 70%; display: inline; border-radius: 30px; position: relative; left: 10px; margin-right:10px;"%>
       </div>
@@ -61,3 +81,22 @@
     </div>
   </div>
 </div>
+<p class="gst"><b class="qScrollTop result" id="use-btn" ></b></p>
+
+
+<script>
+  $(function(){
+    $(window).scroll(function(){
+      var scrollVal = $(this).scrollTop();
+      $(".qScrollTop").text("");
+      if (scrollVal > 420 && scrollVal < 440) {
+        scrollVal = 1200
+        $('html,body').animate({scrollTop:$('#use-btn').offset().top});
+      };
+      if (scrollVal > 980 && scrollVal < 1000) {
+        scrollVal = 0
+        $('html,body').animate({scrollTop:$('#aa').offset().top});
+      };
+    });
+  });
+</script>
