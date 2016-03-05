@@ -85,19 +85,3 @@
 <p class="gst"><b class="qScrollTop result" id="use-btn" ></b></p>
 
 
-<script>
-  $(function(){
-    $(window).scroll(function(){
-      var scrollVal = $(this).scrollTop();
-      $(".qScrollTop").text("");
-      if (scrollVal > 420 && scrollVal < 440) {
-        scrollVal = 1200
-        $('html,body').animate({scrollTop:$('#use-btn').offset().top});
-      };
-      if (scrollVal > 980 && scrollVal < 1000) {
-        scrollVal = 0
-        $('html,body').animate({scrollTop:$('#aa').offset().top});
-      };
-    });
-  });
-</script>
