@@ -52,7 +52,7 @@ class SongsController < ApplicationController
         user_star_record.save!
       end
 
-      if @song.user.id.to_i % 4 == 0
+      if @song.user.id.to_i % 2 == 0
         @song.teacher_choice = "偉誌老師"
         @song.save
       else
@@ -115,8 +115,15 @@ class SongsController < ApplicationController
         restore_star
       end
 
-      flash[:notice] = "編輯成功!"
-      redirect_to upload_user_path(@user)
+      if params[:admin] == "1"
+        flash[:notice] = "編輯成功!"
+        redirect_to admin_songs_path
+
+      else
+        flash[:notice] = "編輯成功!"
+        redirect_to upload_user_path(@user)
+      end
+      
     else
       render "new"
     end
