@@ -21,11 +21,11 @@ class SongsController < ApplicationController
     @song = @user.songs.new(song_params)
 
     if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
-      @song.link = song_params[:link][32,100]
+      @song.link = song_params[:link][32,11]
       @song.save
 
     elsif song_params[:link][0,17] == "https://youtu.be/"
-      @song.link = song_params[:link][17,100]
+      @song.link = song_params[:link][17,11]
       @song.save
 
     else
@@ -103,7 +103,7 @@ class SongsController < ApplicationController
     elsif @song.update(song_params)
 
       if song_params[:link] && song_params[:link][0,32] == "https://www.youtube.com/watch?v="
-        @song.link = song_params[:link][32,100]
+        @song.link = song_params[:link][32,11]
         @song.save!
       end
 

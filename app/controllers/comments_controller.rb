@@ -12,9 +12,9 @@ class CommentsController < ApplicationController
     end
 
     if comment_params[:link][0,32] == "https://www.youtube.com/watch?v="
-      @comment.link = comment_params[:link][32,100]
+      @comment.link = comment_params[:link][32,11]
     elsif comment_params[:link][0,17] == "https://youtu.be/"
-      @comment.link = comment_params[:link][17,100]
+      @comment.link = comment_params[:link][17,11]
     else
       @comment.link = nil
     end
@@ -44,9 +44,9 @@ class CommentsController < ApplicationController
 
     if @comment.update(comment_params)
       if comment_params[:link][0,32] == "https://www.youtube.com/watch?v="
-        @comment.link = comment_params[:link][32,100]
+        @comment.link = comment_params[:link][32,11]
       elsif comment_params[:link][0,17] == "https://youtu.be/"
-        @comment.link = comment_params[:link][17,100]
+        @comment.link = comment_params[:link][17,11]
       else
         @comment.link = nil
       end
