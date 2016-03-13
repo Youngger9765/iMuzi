@@ -200,8 +200,6 @@ class SongsController < ApplicationController
   end
 
   def dojo
-    check_user_go_to_guide?
-    
     @songs = Song.where(:use =>"study").order("created_at DESC")
 
     if params[:order]
@@ -270,6 +268,8 @@ class SongsController < ApplicationController
   end
 
   def check_user_go_to_guide?
+    last_dojo_time = Impression.where(:user_id => current_user).where(:action_name => "dojo").last.created_at
+
     if current_user && current_user.sign_in_count < 5
       redirect_to guide_mains_path
     end
