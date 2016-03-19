@@ -79,13 +79,11 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'www.imuzi.co', port: 80 }
   config.action_mailer.delivery_method = :smtp
-
-  email_config = YAML.load(File.read("#{Rails.root}/config/email.yml"))[Rails.env]
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    user_name: email_config["user_name"],
-    password: email_config["password"],
+    user_name: ENV['SENDEMAIL_USERNAME'],
+    password: ENV['SENDEMAIL_PASSWORD'],,
     authentication: 'plain',
     enable_starttls_auto: true
 }
