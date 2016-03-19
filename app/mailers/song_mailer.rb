@@ -10,7 +10,7 @@ class SongMailer < ApplicationMailer
       @user = user
       @song = song
       mail(:to => "purpleice9765@msn.com", :subject => "iMuzi New Song is Upload")
-      mail(:to => "raikkonlin@gmail.com", :subject => "iMuzi New Song is Upload")
+      #mail(:to => "raikkonlin@gmail.com", :subject => "iMuzi New Song is Upload")
   end
 
 end
