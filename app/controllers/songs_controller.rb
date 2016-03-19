@@ -60,6 +60,8 @@ class SongsController < ApplicationController
         @song.save
       end
 
+      SongMailer.notify_song(@user,@song).deliver_now!
+
       flash[:notice] = "上傳成功!"
       redirect_to upload_user_path(@user)
     else

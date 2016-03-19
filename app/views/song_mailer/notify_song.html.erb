@@ -1,5 +1,10 @@
-<h1>SongMailer#notify_song</h1>
+<h1>iMuzi user already upload a song, please check</h1>
+
 
 <p>
-  <%= @greeting %>, find me in app/views/song_mailer/notify_song.html.erb
+  user: <%= @user.name || @user.email%>
 </p>
+<p>
+  song: <%= @song.name%>
+</p>
+
