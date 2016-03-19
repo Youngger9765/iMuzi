@@ -9,8 +9,8 @@ class SongMailer < ApplicationMailer
   def notify_song(user,song)
       @user = user
       @song = song
-      mail(:to => "purpleice9765@msn.com", :subject => "iMuzi New Song is Upload")
-      #mail(:to => "raikkonlin@gmail.com", :subject => "iMuzi New Song is Upload")
+      #mail(:to => "purpleice9765@msn.com", :subject => "iMuzi New Song is Upload")
+      mail(:to => "raikkonlin@gmail.com", :subject => "iMuzi New Song is Upload")
   end
 
 end
