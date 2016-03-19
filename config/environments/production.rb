@@ -77,7 +77,16 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  email_config = YAML.load(File.read("#{Rails.root}/config/email.yml"))[Rails.env]
   config.action_mailer.default_url_options = { host: 'www.imuzi.co', port: 80 }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => "587",
+    :domain => "gmail.com",
+    :authentication => "plain",
+    :user_name => email_config["user_name"],
+    :password => email_config["password"],
+    :enable_starttls_auto => true
+  }
 end
