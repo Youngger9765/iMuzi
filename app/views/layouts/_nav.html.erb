@@ -16,7 +16,7 @@
         <% if current_user %>
           <li>
             <%=link_to upload_user_path(current_user), :class=>( (current_page?(upload_user_path(current_user)))? "link_active" : "link"), :"data-toggle"=>"tooltip", :"data-placement"=>"bottom" , :title=>"快速上傳自己的歌曲" do %>
-              <i class="fa fa-upload">上傳</i>
+              <i class="fa fa-upload" >上傳</i>
             <%end%>
             <%if teacher_comment_alert > 0 %>
               <div class="btn btn-warning btn-xs" id="btn-alert">
