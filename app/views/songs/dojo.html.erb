@@ -27,18 +27,23 @@
       <div class="song-footer">
         <%=link_to song_path(s) do%>
           <div class="link-word">
-            <%= s.name %>
+            <span><%= s.name %></span>
           </div>
         <%end%>
+        <span class="fb-share-button pull-left" data-href="http://www.imuzi.co/songs/<%=s.id%>" data-layout="button"></span>
+
         <div class="clearfix"></div>
         <div class="pull-right" id="like-btn">
           <h4>
+            
             <%= link_to song_path(s) do%>
               <span class=""><i class="fa fa-headphones"></i> <%= s.view_counts %></span>
             <%end%>
+            
             <%= link_to song_path(s) do%>
               <span class="fa fa-commenting-o"><%= s.comments.size %></span>
             <%end%>
+            
             <%= link_to like_song_path(s), :remote => true, :id => "like-btn-#{s.id}" do %>
               <span id ="like_number-<%=s.id%>" class="hvr-pulse-grow <%=song_like_class(s)%> "> <%= s.like_users.size %> </span>
             <% end %>
