@@ -49,13 +49,6 @@
             <i class="fa fa-info-circle">使用指南</i>
           <%end%>
         </li> 
-
-        <li>
-          <%= link_to "https://www.facebook.com/imuzico", :id =>"nav-fanpage-link", :class => "btn" do %>
-            <i class="fa fa-facebook-square">粉絲專頁</i>
-          <%end%>
-
-        </li>
         
         <% if current_user && current_user.admin?%>
           <li>
