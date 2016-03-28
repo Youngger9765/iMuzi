@@ -45,7 +45,7 @@
       <div id="navbar" class=" col-md-10 ">
         <div id="navbar-btn">
           <%#= link_to '不登入，先看看', guide_mains_path, class: " btn btn-now btn-lg", style: "visibility:hidden"%>
-          <%= link_to '使用指南', 'https://drive.google.com/open?id=0B_KtMLtbdJhGbGItV3FmcUZsTjg', class: " btn btn-default btn-lg", :target => '_blank'%>
+          <%= link_to '使用指南', lp_guide_mains_path, class: " btn btn-default btn-lg", :target => '_blank'%>
           <%= link_to user_omniauth_authorize_path(:facebook), class: "btn btn-lg", :id => "btn-fb-login" do%>
             <i class="fa fa-facebook-square"> 登入</i>
           <%end%>

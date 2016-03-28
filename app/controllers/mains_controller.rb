@@ -22,4 +22,8 @@ class MainsController < ApplicationController
     
   end
 
+  def lp_guide
+    
+  end
+
 end

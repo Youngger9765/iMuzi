@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do 
       get :team_members
       get :guide
+      get :lp_guide
     end
   end
 

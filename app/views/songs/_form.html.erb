@@ -6,16 +6,16 @@
   <%= f.label :singer, "原唱歌手" %>
   <%= f.text_field :singer, class: 'form-control' %>
 
-  <%= f.label :link, "youtube連結(必填)" %>
+  <%= f.label :link, "作品連結(必填)" %>
 
   <%if @song.id.nil?%>
-    <%= f.text_field :link, :value => "#{@song.link}", :placeholder => "請貼上 Youtube 連結", class: 'form-control' %>
+    <%= f.text_field :link, :value => "#{@song.link}", :placeholder => "請貼上作品連結", class: 'form-control' %>
 
   <%elsif @song.link.nil?%>
-    <%= f.text_field :link, :value => "", :placeholder => "請貼上 Youtube 連結", class: 'form-control' %>
+    <%= f.text_field :link, :value => "", :placeholder => "請貼上作品連結", class: 'form-control' %>
 
   <%else%>
-    <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@song.link}", :placeholder => "請貼上 Youtube 連結", class: 'form-control' %>
+    <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@song.link}", :placeholder => "請貼上作品連結", class: 'form-control' %>
   <%end%>
 
  

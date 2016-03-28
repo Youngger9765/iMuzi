@@ -1,0 +1,468 @@
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<style>
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+
+#guide_ul {
+  margin: 0;
+  width:70%;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* -------------------------------- 
+
+Main components 
+
+-------------------------------- */
+
+
+@media only screen and (min-width: 810px) {
+  .cd-faq-group > li {
+    background: #ffffff;
+    margin-bottom: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    -webkit-transition: box-shadow 0.2s;
+    -moz-transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s;
+  }
+}
+
+.cd-faq-trigger {
+  position: relative;
+  display: block;
+  margin: 1.6em 0 .4em;
+  line-height: 1.2;
+}
+@media only screen and (min-width: 810px) {
+  .cd-faq-trigger {
+    font-size: 24px;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 24px 72px 24px 24px;
+  }
+  .cd-faq-trigger::before, .cd-faq-trigger::after {
+    /* arrow icon on the right */
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    height: 2px;
+    width: 13px;
+    background: #44619d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+  }
+  .cd-faq-trigger::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    right: 32px;
+    content: '';
+  }
+  .cd-faq-trigger::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    content: '';
+  }
+  .content-visible .cd-faq-trigger::before {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .content-visible .cd-faq-trigger::after {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+.cd-faq-content p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #6c7d8e;
+}
+@media only screen and (min-width: 768px) {
+  .cd-faq-content {
+    display: none;
+    padding: 0 24px 30px;
+  }
+  .cd-faq-content p {
+    line-height: 1.6;
+  }
+  .no-js .cd-faq-content {
+    display: block;
+  }
+  </style>
+  
+<script>
+jQuery(document).ready(function($){
+  //update these values if you change these breakpoints in the style.css file (or _layout.scss if you use SASS)
+  var MqM= 768,
+    MqL = 1024;
+
+  var faqsSections = $('.cd-faq-group'),
+    faqTrigger = $('.cd-faq-trigger'),
+    faqsContainer = $('.cd-faq-items'),
+    faqsCategoriesContainer = $('.cd-faq-categories'),
+    faqsCategories = faqsCategoriesContainer.find('a'),
+    closeFaqsContainer = $('.cd-close-panel');
+  
+  //select a faq section 
+  faqsCategories.on('click', function(event){
+    event.preventDefault();
+    var selectedHref = $(this).attr('href'),
+      target= $(selectedHref);
+    if( $(window).width() < MqM) {
+      faqsContainer.scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(selectedHref).addClass('selected');
+      closeFaqsContainer.addClass('move-left');
+      $('body').addClass('cd-overlay');
+    } else {
+          $('body,html').animate({ 'scrollTop': target.offset().top - 19}, 200); 
+    }
+  });
+
+  //close faq lateral panel - mobile only
+  $('body').bind('click touchstart', function(event){
+    if( $(event.target).is('body.cd-overlay') || $(event.target).is('.cd-close-panel')) { 
+      closePanel(event);
+    }
+  });
+  faqsContainer.on('swiperight', function(event){
+    closePanel(event);
+  });
+
+  //show faq content clicking on faqTrigger
+  faqTrigger.on('click', function(event){
+    event.preventDefault();
+    $(this).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+  });
+
+  //update category sidebar while scrolling
+  $(window).on('scroll', function(){
+    if ( $(window).width() > MqL ) {
+      (!window.requestAnimationFrame) ? updateCategory() : window.requestAnimationFrame(updateCategory); 
+    }
+  });
+
+  $(window).on('resize', function(){
+    if($(window).width() <= MqL) {
+      faqsCategoriesContainer.removeClass('is-fixed').css({
+        '-moz-transform': 'translateY(0)',
+          '-webkit-transform': 'translateY(0)',
+        '-ms-transform': 'translateY(0)',
+        '-o-transform': 'translateY(0)',
+        'transform': 'translateY(0)',
+      });
+    } 
+    if( faqsCategoriesContainer.hasClass('is-fixed') ) {
+      faqsCategoriesContainer.css({
+        'left': faqsContainer.offset().left,
+      });
+    }
+  });
+
+  function closePanel(e) {
+    e.preventDefault();
+    faqsContainer.removeClass('slide-in').find('li').show();
+    closeFaqsContainer.removeClass('move-left');
+    $('body').removeClass('cd-overlay');
+  }
+
+  function updateCategory(){
+    updateCategoryPosition();
+    updateSelectedCategory();
+  }
+
+  function updateCategoryPosition() {
+    var top = $('.cd-faq').offset().top,
+      height = jQuery('.cd-faq').height() - jQuery('.cd-faq-categories').height(),
+      margin = 20;
+    if( top - margin <= $(window).scrollTop() && top - margin + height > $(window).scrollTop() ) {
+      var leftValue = faqsCategoriesContainer.offset().left,
+        widthValue = faqsCategoriesContainer.width();
+      faqsCategoriesContainer.addClass('is-fixed').css({
+        'left': leftValue,
+        'top': margin,
+        '-moz-transform': 'translateZ(0)',
+          '-webkit-transform': 'translateZ(0)',
+        '-ms-transform': 'translateZ(0)',
+        '-o-transform': 'translateZ(0)',
+        'transform': 'translateZ(0)',
+      });
+    } else if( top - margin + height <= $(window).scrollTop()) {
+      var delta = top - margin + height - $(window).scrollTop();
+      faqsCategoriesContainer.css({
+        '-moz-transform': 'translateZ(0) translateY('+delta+'px)',
+          '-webkit-transform': 'translateZ(0) translateY('+delta+'px)',
+        '-ms-transform': 'translateZ(0) translateY('+delta+'px)',
+        '-o-transform': 'translateZ(0) translateY('+delta+'px)',
+        'transform': 'translateZ(0) translateY('+delta+'px)',
+      });
+    } else { 
+      faqsCategoriesContainer.removeClass('is-fixed').css({
+        'left': 0,
+        'top': 0,
+      });
+    }
+  }
+
+  function updateSelectedCategory() {
+    faqsSections.each(function(){
+      var actual = $(this),
+        margin = parseInt($('.cd-faq-title').eq(1).css('marginTop').replace('px', '')),
+        activeCategory = $('.cd-faq-categories a[href="#'+actual.attr('id')+'"]'),
+        topSection = (activeCategory.parent('li').is(':first-child')) ? 0 : Math.round(actual.offset().top);
+      
+      if ( ( topSection - 20 <= $(window).scrollTop() ) && ( Math.round(actual.offset().top) + actual.height() + margin - 20 > $(window).scrollTop() ) ) {
+        activeCategory.addClass('selected');
+      }else {
+        activeCategory.removeClass('selected');
+      }
+    });
+  }
+});</script>
+
+   <style>
+body { width:810px; margin:0 auto;}
+    #content {font-family: "Open Sans", sans-serif; min-height:780px; padding:10px; background-color: #f3f3f5;}
+    #content a {color:44619d;}
+    #content a:visited { text-decoration:none;color:#44619d;}
+    #content a:link { text-decoration:none;color:#44619d;}
+    ol, ul {
+      list-style: none;
+    }
+    .cd-faq-trigger {font-size:15pt;}
+</style>
+
+</head>
+
+<body>
+      
+   <ul id="guide_ul">
+        <li>
+          <h1 style="font-family:Microsoft JhengHei;">iMuzi網站宗旨及使用方法：</h1>
+          
+          <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+                  <span style= "color:#405c9d;">☆</span> 每個人都喜歡唱歌，但是到底自己唱歌的水準到底在那邊呢??遑論能更了解目前自身的不足而能更上層樓呢? 本網站的主要目的就是針對每個人的唱歌問題及技巧提供快速進步的技巧教學及歌藝講評，迅速提升唱歌水平，並更進一步推昇極限，更本著<span style= "color:#f4423e">發掘及栽培未來華人圈實力派唱將目的為本網站及本經紀公司畢生宗旨與依歸</span>。   
+          </h3>
+          
+          
+          <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+          <span style= "color:#405c9d;">☆</span> 每位新註冊的使用者有三次免費的 <span style= "color:#f4423e;">“請老師講評”</span> 額度。
+          </h3>
+          
+          <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+          <span style= "color:#405c9d;">☆ 推薦使用電腦以獲得最佳體驗。</span>  </h3>
+          
+          <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+          <span style= "color:#405c9d;">☆</span> 建議上傳<span style= "color:#405c9d;">“ 1 ”</span>分鐘的清唱影片(有個人影像更好，可以針對唱歌嘴型、肌肉等進行調整建議)到個人的YouTube帳號，將連結貼到本網站的個人頁面上，再選取“請老師講評”，老師就會針對上傳影片及所問問題做講評及教學。</h3>
+          
+          
+           <!-- 下拉式說明--> 
+          <div class="cd-faq-items">
+          
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">YouTube上傳影片及獲取作品連結網址教學:(推薦使用電腦以獲得最佳體驗) </a>
+                <div class="cd-faq-content">
+                    <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIaFZPaFZzRWxKQ1E" style="width: 100%; height: auto"/>
+                        <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBId25vWkwwaGlZR00" style="width: 100%; height: auto"/>
+                        <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIYzV6TmR2XzNLcnc" style="width: 100%; height: auto"/>
+                        </div>
+
+              </li>
+      
+          
+    </div> 
+    
+        
+        <!-- 下拉式說明--> 
+          <div class="cd-faq-items">
+  
+      
+              <li id="5852272848273408">
+                  <a class="cd-faq-trigger" href="#" style="margin-left:-24px;">
+                <h3 style="font-family:Microsoft JhengHei;">
+                     <span style= "color:#405c9d;">☆</span> iMuzi官網個人頁面上傳及收藏教學:<span style= "color:#f4423e;">(使用可電腦獲得最佳體驗)</span>  
+                        
+                     </h3>  
+                </a> 
+                
+                <div class="cd-faq-content">
+   <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIb1V4Y0UyajA4ZFE" style="width: 100%; height: auto"/>
+   <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIeTRuVlRNeWREOVU" style="width: 100%; height: auto"/>
+   <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIdU1IYWIyQkJzclU" style="width: 100%; height: auto"/>
+   <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIeWxHRkd6UFVTaXM" style="width: 100%; height: auto"/>
+                     </div>
+
+              </li>
+      
+    </div>      
+          
+          <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+          <span style= "color:#405c9d;">☆</span> 歡歌、歡唱、唱唱使用者可直接使用已上傳歌曲連結再將連結複製到本網站個人上傳頁面即可針對個人進行專業的講評及教學。
+          </h3>
+
+      
+
+          <!-- 下拉式說明--> 
+          <div class="cd-faq-items">
+    
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">如何查詢 <span style= "color:#f4423e;">歡歌</span> 作品連結網址!</a>
+                <div class="cd-faq-content">
+                    <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBId3Mzd2NOdnFlbUE" style="width: 100%; height: auto"/>
+                        <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIbUVoME04YmxxQlk" style="width: 100%; height: auto"/>
+                        </div>
+
+              </li>
+      
+            
+    </div> 
+    
+    <!-- 下拉式說明--> 
+          <div class="cd-faq-items">
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">如何查詢 <span style= "color:#f4423e;">歡唱</span>  作品連結網址!</a>
+                <div class="cd-faq-content">
+                     <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIRE43emw5OTgyYWs" style="width: 100%; height: auto"/>
+                        
+                     </div>
+
+              </li>
+          
+    </div> 
+      
+      <!-- 下拉式說明--> 
+          <div class="cd-faq-items">
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">如何查詢 <span style= "color:#f4423e;">唱唱</span>  作品連結網址!</a>
+                <div class="cd-faq-content">
+   <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBILV83bGNSbzlQMFE" style="width: 100%; height: auto"/>
+  <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIVmdoNGI1bi1qVm8" style="width: 100%; height: auto"/>
+  
+       
+                   </div>
+
+              </li>
+        
+    </div> 
+      
+      <!--
+      
+          <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+          <span style= "color:blue;">☆</span> Google雲端硬碟、百度雲、微盤的雲端歌曲也只要將連結複製到本網站個人上傳頁面即可針對個人進行專業的講評及教學。
+          </h3>
+        </li>
+        
+        
+          <div class="cd-faq-items">
+            <ul id="basics" class="cd-faq-group">
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">如何查詢 <span style= "color:red;">Google雲端硬碟</span> 作品連結網址!</a>
+                <div class="cd-faq-content">
+                    <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBId3Mzd2NOdnFlbUE" style="width: 100%; height: auto"/>
+                        <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIbUVoME04YmxxQlk" style="width: 100%; height: auto"/>
+                        </div>
+
+              </li>
+      
+            </ul>
+    </div> 
+    
+
+          <div class="cd-faq-items">
+            <ul id="basics" class="cd-faq-group">
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">如何查詢 <span style= "colo#f4423eed;">百度雲</span>  作品連結網址!</a>
+                <div class="cd-faq-content">
+                     <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIRE43emw5OTgyYWs" style="width: 100%; height: auto"/>/div>
+
+              </li>
+      
+            </ul>
+    </div> 
+        
+   
+          <div class="cd-faq-items">
+            <ul id="basics" class="cd-faq-group">
+      
+              <li id="5852272848273408">
+      
+                <a class="cd-faq-trigger" href="#">如何查詢 <span style= "color:red;"#f4423e>微盤</span>  作品連結網址!</a>
+                <div class="cd-faq-content">
+                     <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIRE43emw5OTgyYWs" style="width: 100%; height: auto"/>/div>
+
+              </li>
+      
+            </ul>
+    </div>  
+     --> 
+        
+   <!-- 下拉式說明--> 
+          <div class="cd-faq-items">
+           
+      
+              <li id="5852272848273408">
+                  <a class="cd-faq-trigger" href="#" style="margin-left:-24px;">
+                <h3 style="font-family:Microsoft JhengHei;line-height:1.5em;">
+                <span style= "color:#405c9d;">☆</span>   
+                <span style="color:black;">如何查看使用者所問問題及老師講評教學指導: </span>
+                </h3> 
+                </a> 
+                
+                <div class="cd-faq-content">
+                     <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIRjVldHBsNVM0RkE" style="width: 100%; height: auto"/>
+   <img src="https://drive.google.com/uc?export=view&id=0B7scDc5bzIBIQkFlQlRHWm1vb0E" style="width: 100%; height: auto"/>
+      
+                     </div>
+
+              </li>
+      
+          
+    </div>      
+   
+   </ul>
+ 
+</body>
+
+</html>
