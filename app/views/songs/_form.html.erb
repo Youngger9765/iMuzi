@@ -9,7 +9,7 @@
   <%= f.label :link, "作品連結(必填)" %>
 
   <%if @song.id.nil?%>
-    <%= f.text_field :link, :value => "#{@song.link}", :placeholder => "請貼上作品連結", class: 'form-control' %>
+    <%= f.text_field :link, :value => "#{@song.link}", :placeholder => "請貼上作品連結（作品權限請設定為公開）", class: 'form-control' %>
 
   <%elsif @song.link.nil?%>
     <%= f.text_field :link, :value => "", :placeholder => "請貼上作品連結", class: 'form-control' %>
