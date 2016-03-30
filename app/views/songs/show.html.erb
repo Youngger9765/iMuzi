@@ -1,8 +1,14 @@
 <div class="row">
   <div class="col-md-8">
     <div class="iframe-rwd">
-      <iframe src="https://www.youtube.com/embed/<%=@song.link%>" frameborder="0">
-      </iframe>
+      
+      <%if @song.source == "youtube"%>
+        <iframe src="https://www.youtube.com/embed/<%=@song.link%>" frameborder="0"></iframe>
+
+      <%elsif @song.source == "17sing"%>
+        <iframe src="http://17sing.tw/song/<%=@song.link%>" frameborder="0"></iframe>
+      <%end%>
+      
     </div>
     <h3>歌曲名稱:<%=@song.name%></h3>
     <h3>原唱歌手:<%=@song.singer%></h3>
@@ -98,8 +104,8 @@
           <%= f.label :comment, "文字內容" %>
           <%= f.text_area :comment, class: 'form-control' %>
 
-          <%= f.label :link, "Youtube" %>
-          <%= f.text_field :link, :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+          <%= f.label :link, "影音連結" %>
+          <%= f.text_field :link, :placeholder => "請貼上 影音完整連結", class: 'form-control' %>
 
           <div class="form-group">
             <%=f.label :logo, "LOGO"%>

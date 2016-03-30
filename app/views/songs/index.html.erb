@@ -3,8 +3,13 @@
   <%@songs.each do |s|%>
     <div class="col-md-3 song hvr-grow">
       <div class="iframe-rwd">
-        <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0">
-        </iframe>
+
+        <%if s.source == "youtube"%>
+          <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0"></iframe>
+
+        <%elsif s.source == "17sing"%>
+          <iframe src="http://17sing.tw/song/<%=s.link%>" frameborder="0"></iframe>
+        <%end%>
       </div>
       
       <div class="song-footer">

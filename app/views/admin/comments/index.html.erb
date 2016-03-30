@@ -14,7 +14,7 @@
       <td><%= c.comment%></td>
       <td>
         <% if c.link%>
-          <%= link_to "youtube", c.link_url, :target =>"blank"%>
+          <%= link_to "評語連結", c.link_url, :target =>"blank"%>
         <%end%>
       </td>
       <td><%= link_to c.song.name, song_path(c.song), :target =>"blank"%></td> 

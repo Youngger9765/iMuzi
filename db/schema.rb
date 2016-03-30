@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220075938) do
+ActiveRecord::Schema.define(version: 20160329054751) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "picture",    limit: 255
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160220075938) do
     t.string   "teacher_choice", limit: 255
     t.string   "display",        limit: 255,   default: "public"
     t.string   "study_target",   limit: 255
+    t.string   "source",         limit: 255
   end
 
   add_index "songs", ["user_id"], name: "index_songs_on_user_id", using: :btree

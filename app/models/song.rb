@@ -31,6 +31,15 @@ class Song < ActiveRecord::Base
     self.comments.where(:status => "professional", :role => "teacher").size > 0
   end
 
+  def source_url
+    if self.source == "youtube"
+      "https://www.youtube.com/watch?v="
+
+    elsif self.source == "17sing"
+      "http://17sing.tw/song/"
+    end
+  end
+
   private
   def picture_size
     if picture.size > 5.megabytes

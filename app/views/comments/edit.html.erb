@@ -14,8 +14,8 @@
           <%= f.label :comment, "文字內容" %>
           <%= f.text_area :comment, class: 'form-control' %>
 
-          <%= f.label :link, "Youtube" %>
-          <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@comment.link}", :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+          <%= f.label :link, "影像連結" %>
+          <%= f.text_field :link, :value => "https://www.youtube.com/watch?v=#{@comment.link}", :placeholder => "請貼上 影像完整連結", class: 'form-control' %>
 
           <div class="form-group">
             <%=f.label :logo, "LOGO"%>

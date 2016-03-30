@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
 
   def comment_or_link_or_logo
     if comment.blank? && link.blank? && logo_file_name.nil?
-       errors[:base] << "文字，Youtube連結，照片 請擇一"
+       errors[:base] << "文字，作品連結，照片 請擇一"
     end
   end
 
