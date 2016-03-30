@@ -116,23 +116,21 @@ class SongsController < ApplicationController
 
     elsif @song.update(song_params)
 
-      if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
+      if song_params[:link] && song_params[:link][0,32] == "https://www.youtube.com/watch?v="
         @song.link = song_params[:link][32,11]
         @song.source = "youtube"
         @song.save
 
-      elsif song_params[:link][0,17] == "https://youtu.be/"
+      elsif song_params[:link] && song_params[:link][0,17] == "https://youtu.be/"
         @song.link = song_params[:link][17,11]
         @song.source = "youtube"
         @song.save
 
-      elsif song_params[:link][0,22] == "http://17sing.tw/song/"
+      elsif song_params[:link] && song_params[:link][0,22] == "http://17sing.tw/song/"
         @song.link = song_params[:link][22,20]
         @song.source = "17sing"
         @song.save
 
-      else
-        flash[:alert] = "上傳失敗! 請檢查 '作品連結' 格式"
       end
 
       if before_use != "study" && @song.use == "study"
@@ -153,6 +151,7 @@ class SongsController < ApplicationController
       end
       
     else
+      flash[:alert] = "上傳失敗! 請檢查 '作品連結' 格式"
       render "new"
     end
   end
