@@ -7,8 +7,8 @@
   <%end%>
 
   <%= form_for @comment, :url => comments_path(song: @song, role: role) do |f| %>
-    <%= f.label :link, "Youtube 老師評論" %>
-    <%= f.text_field :link, :placeholder => "請貼上 Youtube 完整連結", class: 'form-control' %>
+    <%= f.label :link, "老師評論連結" %>
+    <%= f.text_field :link, :placeholder => "請貼上 影音完整連結", class: 'form-control' %>
     
     <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
   <% end %>

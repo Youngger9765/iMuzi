@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "更新成功!"
       redirect_to :back
     else
-      flash[:alert] = "文字，Youtube連結，照片 請擇一! 或檢查 Youtube 連結格式"
+      flash[:alert] = "文字，作品連結，照片 請擇一! 或檢查 作品連結格式"
       redirect_to :back
     end
   end
