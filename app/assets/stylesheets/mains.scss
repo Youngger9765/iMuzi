@@ -325,35 +325,47 @@ input {
 
 // iframe
 .iframe-rwd  {
-position: relative;
-padding-bottom: 56.25%;
-padding-top: 30px;
-height: 0;
-overflow: hidden;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
 }
 .iframe-rwd iframe {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 // user-upload-card iframe
 #user-upload-card .iframe-rwd  {
-position: relative;
-padding-bottom: 38%;
-padding-top: 30px;
-height: 0;
-overflow: hidden;
+  position: relative;
+  padding-bottom: 38%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
 }
 #user-upload-card .iframe-rwd iframe {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
 }
+
+
+//guide_page iframe
+
+#guide_page iframe{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2000px;
+}
+
 
 .navbar{
   margin: 0;
