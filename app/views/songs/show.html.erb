@@ -7,6 +7,13 @@
 
       <%elsif @song.source == "17sing"%>
         <iframe src="http://17sing.tw/song/<%=@song.link%>" frameborder="0"></iframe>
+
+      <%elsif @song.source == "happychang"%>
+        <iframe src="http://www.happychang.net/Audition.aspx?workId=<%=@song.link%>" frameborder="0"></iframe>
+
+      <%elsif @song.source == "rcsing"%>
+        <iframe src="http://rcsing.com/view/song/?id=<%=@song.link%>" frameborder="0"></iframe>
+
       <%end%>
       
     </div>

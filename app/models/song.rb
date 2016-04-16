@@ -37,7 +37,14 @@ class Song < ActiveRecord::Base
 
     elsif self.source == "17sing"
       "http://17sing.tw/song/"
+
+    elsif self.source == "happychang"
+      "http://www.happychang.net/Audition.aspx?workId="
+
+    elsif self.source == "rcsing"
+      "http://rcsing.com/view/song/?id="
     end
+    
   end
 
   private

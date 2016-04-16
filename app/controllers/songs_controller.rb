@@ -20,29 +20,7 @@ class SongsController < ApplicationController
   def create
     @song = @user.songs.new(song_params)
 
-    if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
-      @song.link = song_params[:link][32,11]
-      @song.source = "youtube"
-      @song.save
-
-    elsif song_params[:link][0,17] == "https://youtu.be/"
-      @song.link = song_params[:link][17,11]
-      @song.source = "youtube"
-      @song.save
-
-    elsif song_params[:link][0,27] == "http://17sing.tw/song/sid="
-      @song.link = song_params[:link][27,15]
-      @song.source = "17sing"
-      @song.save
-
-    elsif song_params[:link][0,22] == "http://17sing.tw/song/"
-      @song.link = song_params[:link][22,15]
-      @song.source = "17sing"
-      @song.save
-
-    else
-      flash[:alert] = "上傳失敗! 請檢查 '作品連結' 格式"
-    end
+    song_save_by_params
 
     if !@song.id.nil?
 
@@ -116,22 +94,7 @@ class SongsController < ApplicationController
 
     elsif @song.update(song_params)
 
-      if song_params[:link] && song_params[:link][0,32] == "https://www.youtube.com/watch?v="
-        @song.link = song_params[:link][32,11]
-        @song.source = "youtube"
-        @song.save
-
-      elsif song_params[:link] && song_params[:link][0,17] == "https://youtu.be/"
-        @song.link = song_params[:link][17,11]
-        @song.source = "youtube"
-        @song.save
-
-      elsif song_params[:link] && song_params[:link][0,22] == "http://17sing.tw/song/"
-        @song.link = song_params[:link][22,20]
-        @song.source = "17sing"
-        @song.save
-
-      end
+      song_save_by_params
 
       if before_use != "study" && @song.use == "study"
         use_star
@@ -299,6 +262,52 @@ class SongsController < ApplicationController
 
     if current_user && current_user.sign_in_count < 5
       redirect_to guide_mains_path
+    end
+  end
+
+  def song_save_by_params
+    if song_params[:link][0,32] == "https://www.youtube.com/watch?v="
+      @song.link = song_params[:link][32,11]
+      @song.source = "youtube"
+      @song.save
+
+    elsif song_params[:link][0,17] == "https://youtu.be/"
+      @song.link = song_params[:link][17,11]
+      @song.source = "youtube"
+      @song.save
+
+    elsif song_params[:link][0,27] == "http://17sing.tw/song/sid="
+      @song.link = song_params[:link][27,15]
+      @song.source = "17sing"
+      @song.save
+
+    elsif song_params[:link][0,22] == "http://17sing.tw/song/"
+      @song.link = song_params[:link][22,15]
+      @song.source = "17sing"
+      @song.save
+
+    elsif song_params[:link][0,47] == "http://www.happychang.net/Audition.aspx?workId="
+      @song.link = song_params[:link][47,15]
+      @song.source = "happychang"
+      @song.save
+
+    elsif song_params[:link][0,26] == "http://www.happychang.net/"
+      @song.link = song_params[:link][26,15]
+      @song.source = "happychang"
+      @song.save
+
+    elsif song_params[:link][0,32] == "http://rcsing.com/view/song/?id="
+      @song.link = song_params[:link][32,15]
+      @song.source = "rcsing"
+      @song.save
+
+    elsif song_params[:link][0,23] == "http://rcsing.com/song/"
+      @song.link = song_params[:link][23,15]
+      @song.source = "rcsing"
+      @song.save
+
+    else
+      flash[:alert] = "上傳失敗! 請檢查 '作品連結' 格式"
     end
   end
 end
