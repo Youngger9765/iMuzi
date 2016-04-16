@@ -780,6 +780,12 @@ input {
     top: 10px;
     width: 90%;
   }
+
+  .iframe-rwd  {
+    padding-bottom: 100%;
+  }
+
+
   #user-upload-card .iframe-rwd iframe {
     position: absolute;
     top: 10px;
@@ -936,6 +942,9 @@ input {
     left: 0;
     width: 94%;
     height: 100%;
+  }
+  .iframe-rwd  {
+    padding-bottom: 100%;
   }
   #user-song .song{
     width: 95%;
