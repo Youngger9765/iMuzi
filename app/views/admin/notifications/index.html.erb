@@ -1,4 +1,4 @@
-<h3>推播通知首頁</h3>
+<h3>推播通知首頁    <%=link_to "建立推播", new_admin_notification_path, :class => 'btn btn-success'%></h3>
 
 <table class="table">
   <tr>
@@ -7,6 +7,8 @@
     <td>主題</td>
     <td>時間</td>
     <td>內容</td>
+    <td>已讀？</td>
+    <td>刪除</td>
   </tr>
   
   <% @notifications.each do |notification|%>
@@ -34,6 +36,20 @@
       <td>
         <%=notification.content%>
       </td> 
+      <td>
+        <%if notification.user%>
+          <%if notification.checked%>
+            已讀
+          <%else%>
+            未讀
+          <%end%>
+        <%else%>
+          N/A
+        <%end%>
+      </td>
+      <td>
+        <%=link_to "delete", admin_notification_path(notification), :method =>"delete", :class => "btn btn-danger btn-sm"%>
+      </td>
     </tr>
   <%end%>
 </table>

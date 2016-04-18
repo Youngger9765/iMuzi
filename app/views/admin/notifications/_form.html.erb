@@ -1,0 +1,15 @@
+<h3>編輯推播</h3>
+<%= form_for([:admin,@notification], html: { multipart: true }) do |f| %>
+
+  <%= f.label :user_id, "User ID" %>
+  <%= f.number_field :user_id, :placeholder => "請填數字，如果要全域發出則不用填", class: 'form-control' %>
+
+  <%= f.label :title, "主題" %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :content, "內容" %>
+  <%= f.text_area :content, class: 'form-control' %>
+
+  <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
+
+<% end %>
