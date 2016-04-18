@@ -1,0 +1,39 @@
+<h3>推播通知首頁</h3>
+
+<table class="table">
+  <tr>
+    <td>user_id</td>
+    <td>user_name</td>
+    <td>主題</td>
+    <td>時間</td>
+    <td>內容</td>
+  </tr>
+  
+  <% @notifications.each do |notification|%>
+    <tr>
+      <td>
+        <%if notification.user%>
+          <%=notification.user.id%>
+        <%else%>
+          All
+        <%end%>
+      </td>
+      <td>
+        <%if notification.user%>
+          <%=notification.user.name%>
+        <%else%>
+          All
+        <%end%>
+      </td>
+      <td>
+        <%=notification.title%>
+      </td> 
+      <td>
+        <%=notification.created_at%>
+      </td>
+      <td>
+        <%=notification.content%>
+      </td> 
+    </tr>
+  <%end%>
+</table>

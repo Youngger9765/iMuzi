@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :star_records, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   has_many :likings, dependent: :destroy
   has_many :like_songs, :through => :likings, :source => :song

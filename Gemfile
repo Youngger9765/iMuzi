@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'carrierwave'
 gem "wysiwyg-rails"
 gem 'masonry-rails'
 gem 'bootstrap-datepicker-rails'
