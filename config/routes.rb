@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :team_members
       get :guide
       get :lp_guide
+      post :notification_click
     end
   end
 

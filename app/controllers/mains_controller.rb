@@ -26,4 +26,11 @@ class MainsController < ApplicationController
     
   end
 
+  def notification_click
+    respond_to do |format|
+      format.html{ redirect_to :back}
+      format.js
+    end
+  end
+
 end

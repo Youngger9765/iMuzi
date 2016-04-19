@@ -55,9 +55,16 @@
             <i class="fa fa-facebook-square"> 粉絲專頁</i>
           <%end%>
         </li>
+        <li>
+          <%=link_to notification_click_mains_path, :class=>( (current_page?(notification_click_mains_path))? "link_active" : "link"),:remote => true, :method => :post  do%>
+            <h3>test</h3> 
+
+          <%end%>
+          
+        </li>
 
         <li id="dropdown-notification">
-          <%=link_to '#', :class=>( (current_page?('#'))? "link_active" : "link")  do%>
+          <%=link_to notification_click_mains_path, :class=>( (current_page?(notification_click_mains_path))? "link_active" : "link"),:remote => true, :method => :post  do%>
               <div class="dropdown" >
                 <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
                   <i class="fa fa-bullhorn"></i>
