@@ -285,6 +285,18 @@ a {
   font-size: 26px;
 }
 
+#dropdown-notification #notification-alert{
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  border-radius: 30px;
+  margin: 0;
+  left: -15px;
+}
+
+
+
 /* forms */
 
 input, textarea, select, .uneditable-input {

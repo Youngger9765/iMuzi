@@ -27,6 +27,13 @@ class MainsController < ApplicationController
   end
 
   def notification_click
+
+    if current_user
+      user = current_user
+      user.notification_click_time = Time.now
+      user.save!
+    end
+
     respond_to do |format|
       format.html{ redirect_to :back}
       format.js

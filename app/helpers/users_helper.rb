@@ -20,6 +20,23 @@ module UsersHelper
     end
   end
 
+  def notification_alert
+    alert_number = 0
+    
+    if current_user
+      @notifications = Notification.all.order("created_at DESC").limit(5)
+      alert_number = 0
+      
+      @notifications.each do |notification|
+        if notification.created_at > current_user.notification_click_time
+          alert_number += 1
+        end
+      end
+
+      alert_number
+    end
+  end
+
   def mail_alert
 
     if current_user
