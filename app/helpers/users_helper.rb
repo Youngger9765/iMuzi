@@ -22,9 +22,9 @@ module UsersHelper
 
   def notification_alert
     alert_number = 0
-    
+
     if current_user
-      @notifications = Notification.all.order("created_at DESC").limit(5)
+      @notifications = Notification.where(:user_id => nil).order("created_at DESC").limit(5)
       alert_number = 0
       
       @notifications.each do |notification|
