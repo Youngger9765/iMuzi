@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :contact
       post :send_mail
       get :clause
+      get :notifications
     end
 
     member do

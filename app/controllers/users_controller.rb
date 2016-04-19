@@ -81,6 +81,10 @@ class UsersController < ApplicationController
   def clause
   end
 
+  def notifications
+    
+  end
+
   private
 
   def find_user

@@ -118,6 +118,7 @@ nav.navbar-findcond ul.navbar-nav a:active {
   border-radius: 5px;
   margin-top: 10px; 
 }
+
 nav.navbar-findcond ul.navbar-nav a:hover { border-color: #f14444; }
 
 nav.navbar-findcond li.divider { background: #ccc; }
@@ -130,6 +131,11 @@ nav.navbar-findcond ul.dropdown-menu > li > a:hover { background: #f14444; color
 nav.navbar-findcond span.badge { background: #f14444; font-weight: normal; font-size: 11px; margin: 0 4px; }
 nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #fff; }
 nav.navbar-findcond input {margin-bottom: 0px; }
+
+#dropdown-notification a:active,
+#dropdown-notification a:hover {
+  color: black;
+}
 
 #dropdown-logout a:hover{ 
   background: white; 

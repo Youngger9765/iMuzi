@@ -55,6 +55,26 @@
             <i class="fa fa-facebook-square"> 粉絲專頁</i>
           <%end%>
         </li>
+
+        <li id="dropdown-notification">
+          <%=link_to '#', :class=>( (current_page?('#'))? "link_active" : "link")  do%>
+              <div class="dropdown" >
+                <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                  <i class="fa fa-bullhorn"></i>
+                </div>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  <% notifications.each do |notification|%>
+                    <li>
+                      【<%= notification.title %>】 <%= notification.content %>
+                      <%= time_ago_in_words(notification.created_at) %> 前
+                    </li>
+                    <hr>
+                  <%end%>
+                </ul>
+              </div>
+          <%end%>
+        </li>
         
         <% if current_user && current_user.admin?%>
           <li>
@@ -95,7 +115,6 @@
           
             <li id="nav-dropdown" class="dropdown">
               <div href="#" id="nav-dropdown-a" class="dropdown-btn">
-              
                 <%= image_tag (current_user.photo), style: "width: 40px; height: 40px; display: inline; border-radius: 20px;" %>
                 <% if current_user.profile.username.size > 10 %>
                   <%=current_user.profile.username[0,10]%>...
