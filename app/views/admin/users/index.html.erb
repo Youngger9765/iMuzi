@@ -1,5 +1,6 @@
 <table class="table">
   <tr>
+    <td>User ID</td>
     <td>User Name</td>
     <td>Email</td>
     <td>Role</td>
@@ -7,6 +8,7 @@
   </tr>
   <%@users.each do |u|%>
     <tr>
+      <td><%= u.id%></td>
       <td><%= u.name%></td>
       <td><%= u.email%></td>
       <td>

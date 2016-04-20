@@ -61,7 +61,7 @@
             <div class="dropdown" >
               <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
                 <i class="fa fa-bullhorn"></i>
-                <%if notification_alert > 0 %>
+                <%if notification_alert && notification_alert > 0 %>
                   <div class="btn btn-warning btn-xs" id="notification-alert">
                     <%=notification_alert%>
                   </div> 
@@ -71,7 +71,7 @@
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <% notifications.each do |notification|%>
                   <li>
-                    <%if notification.user_id == current_user.id%>
+                    <%if notification.user_id && notification.user_id == current_user.id%>
                       【私人：<%= notification.title %>】 <%= notification.content %> <br>
                       <%= time_ago_in_words(notification.created_at) %> 前
                     <%else%>

@@ -24,11 +24,12 @@ module UsersHelper
     alert_number = 0
 
     if current_user
-      @notifications = Notification.where(:user_id => nil).order("created_at DESC").limit(5)
+      user = current_user
+      @notifications = Notification.where("user_id IS NULL || user_id =?", user.id).order("created_at DESC").limit(5)
       alert_number = 0
       
       @notifications.each do |notification|
-        if notification.created_at > current_user.notification_click_time
+        if notification.created_at > user.notification_click_time
           alert_number += 1
         end
       end
