@@ -71,8 +71,14 @@
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                 <% notifications.each do |notification|%>
                   <li>
-                    【<%= notification.title %>】 <%= notification.content %>
-                    <%= time_ago_in_words(notification.created_at) %> 前
+                    <%if notification.user_id == current_user.id%>
+                      【私人：<%= notification.title %>】 <%= notification.content %> <br>
+                      <%= time_ago_in_words(notification.created_at) %> 前
+                    <%else%>
+                      【公告：<%= notification.title %>】 <%= notification.content %><br>
+                      <%= time_ago_in_words(notification.created_at) %> 前
+                    <%end%>
+                    
                   </li>
                   <hr>
                 <%end%>
