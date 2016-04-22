@@ -58,7 +58,7 @@
           checked="checked"
         <%end%>
       />
-      <label for="radio2">請老師幫忙評比並上傳教學區 (目前可提供評比數目：<%=current_user.star_records.last.free_star_count+current_user.star_records.last.money_star_count%>）
+      <label for="radio2">請老師幫忙評比並上傳教學區 (目前可提供評比數目：<%=@song.user.star_records.last.free_star_count+@song.user.star_records.last.money_star_count%>）
       </label>
     </div>
     <br>
