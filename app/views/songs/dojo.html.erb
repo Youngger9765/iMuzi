@@ -26,7 +26,9 @@
           <iframe src="https://www.youtube.com/embed/<%=s.link%>" frameborder="0"></iframe>
 
         <%elsif s.source == "17sing"%>
-          <iframe src="http://17sing.tw/song/<%=s.link%>" frameborder="0"></iframe>
+          <%=link_to song_path(s) do%>
+            <%= image_tag ("tape_blue.png"), style: "display: inline-block;" %>
+          <%end%>
 
         <%elsif s.source == "happychang" %>
           <%=link_to song_path(s) do%>
