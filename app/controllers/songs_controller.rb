@@ -88,7 +88,15 @@ class SongsController < ApplicationController
   def update
     before_use = @song.use
 
-    if @song.use == "study" && @song.teacher_comments?
+    if params[:role] == "teacher" && params[:add_tag] == "yes"
+      tags = song_params[:tag_list]
+      @song.tag_list.remove(@song.tag_list)
+      @song.tag_list.add(tags)
+      @song.save
+      flash[:notice] = "tag 成功！"
+      redirect_to :back
+
+    elsif @song.use == "study" && @song.teacher_comments?
       flash[:alert] = "此作品已受點評，無法編輯!"
       redirect_to upload_user_path(@user)
 
