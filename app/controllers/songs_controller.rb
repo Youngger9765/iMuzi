@@ -69,10 +69,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @song_user = @song.user
 
-    tag_options = []
-    ActsAsTaggableOn::Tag.all.each do |tag|
-      tag_options.push(tag.name)
-    end
+    @tags = @song.tags
 
     if current_user
       @comment = current_user.comments.build

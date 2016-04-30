@@ -228,8 +228,11 @@
         <% end %>
 
         <div id="teacher-tag">
-          <h3>老師提供的標籤：</h3>
-          
+          <h3>老師的提醒：</h3>
+          <% @tags.each do |tag|%>
+            <%= link_to tag.name, '#', :class => "btn btn-primary btn-xs"%>
+            
+          <%end%>
         </div>
         
       </div>
