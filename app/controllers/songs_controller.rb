@@ -69,6 +69,11 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @song_user = @song.user
 
+    tag_options = []
+    ActsAsTaggableOn::Tag.all.each do |tag|
+      tag_options.push(tag.name)
+    end
+
     if current_user
       @comment = current_user.comments.build
     end
@@ -89,9 +94,14 @@ class SongsController < ApplicationController
     before_use = @song.use
 
     if params[:role] == "teacher" && params[:add_tag] == "yes"
-      tags = song_params[:tag_list]
       @song.tag_list.remove(@song.tag_list)
-      @song.tag_list.add(tags)
+
+      tags = song_params[:tag_list].split(",")
+
+      tags.each do |tag|
+        @song.tag_list.add(tag)
+      end
+
       @song.save
       flash[:notice] = "tag 成功！"
       redirect_to :back

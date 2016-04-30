@@ -1,0 +1,21 @@
+var tag_name = <%= ActsAsTaggableOn::Tag.all.map{ |t| { name: t.name} }.to_json %>;
+$(document).on("page:change", function () {
+    $("input[name=\"song[tag_list]\"]").selectize({
+    plugins: ['remove_button'],
+    valueField: 'name',
+    labelField: 'name',
+    searchField: ['name'],
+    options: tag_name,
+    delimiter: ',',
+    persist: false,
+    create: true,
+    create: function (input) {
+        return {
+            name: input,
+            text: input
+        };
+    },
+    hideSelected: true,
+    openOnFocus: false
+    });
+});

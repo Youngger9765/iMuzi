@@ -158,12 +158,16 @@
           <%if role == "teacher"%>
             <div class="form-group">
               <%= f.label :tag_list, "標籤" %>
-              <%= f.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","), class: 'form-control' %>
+              <%= f.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","),id: "input-tags", class: 'demo-default selectized' %>
             </div>
             <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
 
           <%end%>
         <%end%>
+        <br>
+        <br>
+        <br>
+        <br>
       <%end%>
     </div>
   </div>
@@ -222,6 +226,12 @@
         <%= link_to like_song_path(@song), :remote => true, :id => "like-btn-#{@song.id}" do %>
           <span id ="like_number-<%=@song.id%>" class="hvr-pulse-grow <%=song_like_class(@song)%> "> <%= @song.like_users.size %> </span>
         <% end %>
+
+        <div id="teacher-tag">
+          <h3>老師提供的標籤：</h3>
+          
+        </div>
+        
       </div>
     </div>
   </div>
@@ -231,7 +241,11 @@
 
 <script>
   
-  $('#comment-discuss-area-btn').click(function(){ $('html,body').animate({scrollTop:$('#comment-discuss-area').offset().top}, 800); }); //代表一個完整的執行區塊
+  $('#comment-discuss-area-btn').click(function(){ $('html,body').animate({scrollTop:$('#comment-discuss-area').offset().top}, 800); 
+  }); //代表一個完整的執行區塊
+
+
+  
 
 </script>
 

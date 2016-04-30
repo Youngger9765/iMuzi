@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "selectize-rails"
 gem 'acts-as-taggable-on', '~> 3.4'
 gem "wysiwyg-rails"
 gem 'masonry-rails'
