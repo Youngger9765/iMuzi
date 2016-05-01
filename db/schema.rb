@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430170042) do
+ActiveRecord::Schema.define(version: 20160430222632) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "picture",    limit: 255
