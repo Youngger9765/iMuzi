@@ -43,6 +43,9 @@
         </ul>
       </div>
     </td>
+    <td>
+      標籤
+    </td>
   </tr>
   <% @songs.each do |s|%>
     <tr>
@@ -78,8 +81,11 @@
           <%end%>
         <%end%>
       </td>
+      <td>
+        <% s.tags.each do |tag|%>
+          <%= tag.name%>
+        <%end%>
+      </td>
     </tr>
   <%end%>
-
-
 </table>

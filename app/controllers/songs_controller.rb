@@ -69,6 +69,8 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @song_user = @song.user
 
+    @tags = @song.tags
+
     if current_user
       @comment = current_user.comments.build
     end
@@ -88,7 +90,20 @@ class SongsController < ApplicationController
   def update
     before_use = @song.use
 
-    if @song.use == "study" && @song.teacher_comments?
+    if params[:role] == "teacher" && params[:add_tag] == "yes"
+      @song.tag_list.remove(@song.tag_list)
+
+      tags = song_params[:tag_list].split(",")
+
+      tags.each do |tag|
+        @song.tag_list.add(tag)
+      end
+
+      @song.save
+      flash[:notice] = "tag 成功！"
+      redirect_to :back
+
+    elsif @song.use == "study" && @song.teacher_comments?
       flash[:alert] = "此作品已受點評，無法編輯!"
       redirect_to upload_user_path(@user)
 
