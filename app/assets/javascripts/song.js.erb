@@ -1,6 +1,7 @@
 var tag_name = <%= ActsAsTaggableOn::Tag.all.map{ |t| { name: t.name} }.to_json %>;
 
 $(document).on("page:change", function () {
+    console.log(tag_name);
     $("input[name=\"song[tag_list]\"]").selectize({
     plugins: ['remove_button'],
     valueField: 'name',
