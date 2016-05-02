@@ -90,7 +90,7 @@ class SongsController < ApplicationController
   def update
     before_use = @song.use
 
-    if params[:role] == "teacher" && params[:add_tag] == "yes"
+    if (params[:role] == "teacher" || params[:role] == "admin") && params[:add_tag] == "yes"
       @song.tag_list.remove(@song.tag_list)
 
       tags = song_params[:tag_list].split(",")

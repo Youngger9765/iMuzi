@@ -156,13 +156,8 @@
       <%end%>
       
       <%if current_user && (current_user.role == "teacher" || current_user.role == "admin")%>
-        <%if current_user && current_user == "admin"%>
-          <% role = "admin" %>
-        <%elsif current_user&& current_user.role == "teacher"%>
-          <% role = "teacher"%>
-        <%end%>
 
-        <%= form_for @song, :url => song_path(@song, role: role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |ff|%>
+        <%= form_for @song, :url => song_path(@song, role: current_user.role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |ff|%>
             <div class="form-group">
               <%= ff.label :tag_list, "標籤" %>
               <%= ff.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","),id: "input-tags", class: 'demo-default selectized' %>
