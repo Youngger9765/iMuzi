@@ -154,18 +154,23 @@
         <br>
         <br>
       <%end%>
-      標籤
-      <%= form_for @song, :url => song_path(@song, role: role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |ff|%>
-        <%if role == "teacher" || role == "admin"%>
-          <div class="form-group">
-            <%= ff.label :tag_list, "標籤" %>
-            <%= ff.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","),id: "input-tags", class: 'demo-default selectized' %>
-          </div>
-          <%= ff.submit "確認送出", class: "btn btn-primary form-control" %>
-
+      
+      <%if current_user && (current_user.role == "teacher" || current_user.role == "admin")%>
+        <%if current_user && current_user == "admin"%>
+          <% role = "admin" %>
+        <%elsif current_user&& current_user.role == "teacher"%>
+          <% role = "teacher"%>
         <%end%>
-        <br>
-        <br>
+
+        <%= form_for @song, :url => song_path(@song, role: role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |ff|%>
+            <div class="form-group">
+              <%= ff.label :tag_list, "標籤" %>
+              <%= ff.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","),id: "input-tags", class: 'demo-default selectized' %>
+            </div>
+            <%= ff.submit "確認送出", class: "btn btn-primary form-control" %>
+          <br>
+          <br>
+        <%end%>
       <%end%>
     </div>
   </div>
