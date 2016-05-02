@@ -154,6 +154,7 @@
         <br>
         <br>
       <%end%>
+      標籤
       <%= form_for @song, :url => song_path(@song, role: role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |f|%>
         <%if role == "teacher" || role == "admin"%>
           <div class="form-group">
