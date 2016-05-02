@@ -109,7 +109,10 @@ class SongsController < ApplicationController
 
     elsif @song.update(song_params)
 
-      song_save_by_params
+      if song_params[:link]
+        song_save_by_params
+      end
+     
 
       if before_use != "study" && @song.use == "study"
         use_star
