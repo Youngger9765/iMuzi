@@ -153,19 +153,16 @@
         <% end %>
         <br>
         <br>
+      <%end%>
+      <%= form_for @song, :url => song_path(@song, role: role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |f|%>
+        <%if role == "teacher" || role == "admin"%>
+          <div class="form-group">
+            <%= f.label :tag_list, "標籤" %>
+            <%= f.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","),id: "input-tags", class: 'demo-default selectized' %>
+          </div>
+          <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
 
-        <%= form_for @song, :url => song_path(@song, role: role, add_tag: "yes"), :method =>"PATCH", :class => "form" do |f|%>
-          <%if role == "teacher" || role == "admin"%>
-            <div class="form-group">
-              <%= f.label :tag_list, "標籤" %>
-              <%= f.text_field :tag_list, :placeholder => "請點擊選取或新增標籤", :value=> @song.tag_list.join(","),id: "input-tags", class: 'demo-default selectized' %>
-            </div>
-            <%= f.submit "確認送出", class: "btn btn-primary form-control" %>
-
-          <%end%>
         <%end%>
-        <br>
-        <br>
         <br>
         <br>
       <%end%>
