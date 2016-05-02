@@ -1,0 +1,17 @@
+<%= render "admin/teacher_nav" %>
+
+<table class="table">
+  <tr>
+    <td>tag name</td>
+    <td>使用次數</td> 
+    <td>刪除</td>
+  </tr>
+  <% @tags.each do |tag|%>
+    <tr>
+      <td><%= tag.name%></td>
+      <td><%= tag.taggings_count%></td>
+      <td><%=link_to "Delete", admin_tag_path(tag), method:"delete",data: { confirm: "確定刪除?" }, :class =>"btn btn-danger"%></td>
+    </tr>
+  <%end%>
+  
+</table>

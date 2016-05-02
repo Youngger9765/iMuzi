@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     end
     resources :songs
     resources :comments
+    resources :tags
     resources :notifications
   end
 
