@@ -4,7 +4,8 @@ class Admin::SongsController < ApplicationController
   before_action :check_admin_teacher
 
   def index
-    @songs = Song.all.where(:use =>"study")
+    sort_by = 'created_at DESC'
+    @songs = Song.all.where(:use =>"study").order(sort_by)
 
     if params[:order]
       if params[:order] == "created_at_latest"

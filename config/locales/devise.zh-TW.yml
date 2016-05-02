@@ -6,7 +6,7 @@ zh-TW:
     distance_in_words:
       x_days: "%{count} 天"
       about_x_months: "大約 %{count} 個月"
-      x_months: "%{count} 个月"
+      x_months: "%{count} 個月"
       about_x_hours: "大约 %{count} 小時"
       about_x_years: "大约 %{count} 年"
       almost_x_years: "接近 %{count} 年"
